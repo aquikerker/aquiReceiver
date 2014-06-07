@@ -41,7 +41,7 @@ window.onload = function() {
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
       //var new_comes_senderId = window.castReceiverManager.getSender(event.data).senderId;
-      var new_comes_senderId = event.data;
+      var new_comes_senderId = window.castReceiverManager.getSender(event.data).id;
       //cast.receiver.CastMessageBus.send(new_comes_senderId,myMenu);
       window.customerBus.send(new_comes_senderId, myMenu);
 
