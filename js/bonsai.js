@@ -81,7 +81,7 @@ window.onload = function() {
       displayText(event.data);
       // inform all senders on the CastMessageBus of the incoming message event
       // sender message listener will be invoked
-      window.messageBus.send(event.senderId, event.data);
+      window.customerBus.send(event.senderId, event.data);
     }
 
 
