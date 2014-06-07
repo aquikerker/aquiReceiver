@@ -1,20 +1,12 @@
-
-
 $(function(){
-	console.log(test1);
-	console.log(test1.HEAD);
-	console.log(test1.content);
+	console.log(myMenu);
+	console.log(myMenu.HEAD);
+	console.log(myMenu.content);
 	console.log(test2);
 
 });
 
-
-
-
-
-
-
-var test1 = {"HEAD": 'menuList', 
+var myMenu = {"HEAD": 'menuList', 
   "content": [{"dishID": 1, "name": '撒尿牛丸', "price": 200}, 
             {"dishID": 2, "name": '醬爆牛丸', "price": 99999}]
  };
@@ -27,6 +19,8 @@ var test2 = {"HEAD": 'order',
 
 window.onload = function() {
     cast.receiver.logger.setLevelValue(0);
+
+
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
     
@@ -40,6 +34,9 @@ window.onload = function() {
     castReceiverManager.onSenderConnected = function(event) {
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
+      var new_comes_senderId = window.castReceiverManager.getSender(event.data).senderId;
+      cast.receiver.CastMessageBus.send(new_comes_senderId,myMenu);
+
     };
     
     // handler for 'senderdisconnected' event
@@ -51,15 +48,16 @@ window.onload = function() {
     };
     
     // handler for 'systemvolumechanged' event
+    /*
     castReceiverManager.onSystemVolumeChanged = function(event) {
       console.log('Received System Volume Changed event: ' + event.data['level'] + ' ' +
           event.data['muted']);
-    };
+    };*/
 
     // create a CastMessageBus to handle messages for a custom namespace
-    window.messageBus =
-      window.castReceiverManager.getCastMessageBus(
-          'urn:x-cast:com.google.cast.sample.helloworld');
+    /*
+    window.messageBus = 
+    	window.castReceiverManager.getCastMessageBus('urn:x-cast:com.google.cast.sample.helloworld');
 
     // handler for the CastMessageBus message event
     window.messageBus.onMessage = function(event) {
@@ -69,11 +67,27 @@ window.onload = function() {
       // inform all senders on the CastMessageBus of the incoming message event
       // sender message listener will be invoked
       window.messageBus.send(event.senderId, event.data);
+    }*/
+
+    //For customer to order
+    window.customerBus = 
+    	window.castReceiverManager.getCastMessageBus('aqui-bonsai:customer');
+
+	// handler for the CastMessageBus message event
+    window.customerBus.onMessage = function(event) {
+      console.log('Message [' + event.senderId + ']: ' + event.data);
+      // display the message from the sender
+      displayText(event.data);
+      // inform all senders on the CastMessageBus of the incoming message event
+      // sender message listener will be invoked
+      window.messageBus.send(event.senderId, event.data);
     }
 
-    // initialize the CastReceiverManager with an application status message
+
+// initialize the CastReceiverManager with an application status message
     window.castReceiverManager.start({statusText: "Application is starting"});
     console.log('Receiver Manager started');
+
 };
   
   // utility function to display the text message in the input field
