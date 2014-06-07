@@ -1,0 +1,19 @@
+/* line 1, ../sass/myStyle.sass */
+body {
+  overflow: hidden;
+}
+
+/* line 4, ../sass/myStyle.sass */
+div {
+  height: 720PX;
+  width: 1280PX;
+  text-align: center;
+  border: 0px solid silver;
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+  background-color: black;
+  font-weight: bold;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 40px;
+}
