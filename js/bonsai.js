@@ -71,7 +71,7 @@ window.onload = function() {
 
     //For customer to order
     window.customerBus = 
-    	window.castReceiverManager.getCastMessageBus('aqui-bonsai:customer');
+    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:customer');
 
 	// handler for the CastMessageBus message event
     window.customerBus.onMessage = function(event) {
