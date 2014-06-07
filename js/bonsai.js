@@ -40,7 +40,8 @@ window.onload = function() {
     castReceiverManager.onSenderConnected = function(event) {
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
-      var new_comes_senderId = window.castReceiverManager.getSender(event.data).senderId;
+      //var new_comes_senderId = window.castReceiverManager.getSender(event.data).senderId;
+      var new_comes_senderId = event.data;
       //cast.receiver.CastMessageBus.send(new_comes_senderId,myMenu);
       window.customerBus.send(new_comes_senderId, myMenu);
 
@@ -84,7 +85,7 @@ window.onload = function() {
       displayText(event.data);
       // inform all senders on the CastMessageBus of the incoming message event
       // sender message listener will be invoked
-      window.customerBus.send(event.senderId, event.data);
+      //window.customerBus.send(event.senderId, event.data);
     }
 
 
