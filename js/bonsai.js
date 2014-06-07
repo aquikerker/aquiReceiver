@@ -16,10 +16,11 @@ var test2 = {"HEAD": 'order',
  "content": [1,2]
 }
 
+cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
+
 
 window.onload = function() {
     //cast.receiver.logger.setLevelValue(0);
-	cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
 
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
