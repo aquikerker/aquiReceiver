@@ -24,6 +24,11 @@ window.onload = function() {
 
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
+
+    //The channel for customer to order
+    window.customerBus = 
+    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:customer');
+
     
     // handler for the 'ready' event
     castReceiverManager.onReady = function(event) {
@@ -36,7 +41,8 @@ window.onload = function() {
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
       var new_comes_senderId = window.castReceiverManager.getSender(event.data).senderId;
-      cast.receiver.CastMessageBus.send(new_comes_senderId,myMenu);
+      //cast.receiver.CastMessageBus.send(new_comes_senderId,myMenu);
+      window.customerBus.send(new_comes_senderId, myMenu);
 
     };
     
@@ -70,9 +76,6 @@ window.onload = function() {
       window.messageBus.send(event.senderId, event.data);
     }*/
 
-    //For customer to order
-    window.customerBus = 
-    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:customer');
 
 	// handler for the CastMessageBus message event
     window.customerBus.onMessage = function(event) {
