@@ -112,11 +112,13 @@ function displayText(text) {
 };
 
 function appendOrderedDish(tableID, content){
-	var test = _.countBy(content, function(num) {
+	//Contert content into {dishID: count...}
+	var counted_content = _.countBy(content, function(num) {
 	  return num;
 	});	
-	console.log(test);
-	for(var key in content){
-
+	console.log(counted_content);
+	for(var dishID in counted_content){
+		var template = _.template($('#orderedQ-template').html(),
+						{tableID: tableID, dishID: dishID, count: counted_content[dishID]});
 	}
 }
