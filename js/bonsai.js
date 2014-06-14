@@ -56,7 +56,6 @@ window.onload = function() {
     //The channel for customer to order
     window.customerBus = 
     	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:customer');
-
     
     // handler for the 'ready' event
     castReceiverManager.onReady = function(event) {
@@ -68,11 +67,6 @@ window.onload = function() {
     castReceiverManager.onSenderConnected = function(event) {
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
-      //var new_comes_senderId = window.castReceiverManager.getSender(event.data).senderId;
-      //var new_comes_senderId = window.castReceiverManager.getSender(event.data).id;
-      //cast.receiver.CastMessageBus.send(new_comes_senderId,myMenu);
-      //window.customerBus.send(new_comes_senderId, myMenu);
-
     };
 
 	// handler for the CastMessageBus message event
@@ -82,7 +76,7 @@ window.onload = function() {
       console.log(event);
       console.log('=================================');
       var jsonObj = JSON.parse(event.data);
-      console.log(jsonObj);
+      //console.log(jsonObj);
       if(jsonObj.HEAD === 'requestMenu'){
       	window.customerBus.send(event.senderId, JSON.stringify(myMenu));
       }
@@ -91,9 +85,10 @@ window.onload = function() {
     // handler for 'senderdisconnected' event
     castReceiverManager.onSenderDisconnected = function(event) {
       console.log('Received Sender Disconnected event: ' + event.data);
+      console.log('Current connected sender number: ' + window.castReceiverManager.getSenders().length);
       if (window.castReceiverManager.getSenders().length == 0) {
-      window.close();
-    }
+	      window.close();
+	    }
     };
     
     // handler for 'systemvolumechanged' event
