@@ -1,10 +1,5 @@
-/* line 1, ../sass/myStyle.sass */
-body {
-  overflow: hidden;
-}
-
 /* line 4, ../sass/myStyle.sass */
-div {
+div, table {
   height: 720PX;
   width: 1280PX;
   text-align: center;

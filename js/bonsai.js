@@ -9,32 +9,32 @@ $(function(){
 var myMenu = {"HEAD": 'menuList', 
   "content": [{"dishID": 1, "name": '撒尿牛丸', "price": 200}, 
             {"dishID": 2, "name": '醬爆牛丸', "price": 99999},
-            {"dishID": 1, "name": '撒尿牛丸', "price": 200}, 
-            {"dishID": 2, "name": '醬爆羊丸', "price": 992119},
-            {"dishID": 1, "name": '撒尿羊丸', "price": 20550}, 
-            {"dishID": 2, "name": '醬爆豬丸', "price": 9999349},
-            {"dishID": 1, "name": '撒尿豬丸', "price": 203440}, 
-            {"dishID": 2, "name": '醬爆狗丸', "price": 99999232},
-            {"dishID": 1, "name": '撒尿狗丸', "price": 20023}, 
-            {"dishID": 2, "name": '醬爆雞丸', "price": 999343499},
-            {"dishID": 1, "name": '撒尿雞丸', "price": 44400}, 
-            {"dishID": 2, "name": '醬爆貓丸', "price": 9999559},
-            {"dishID": 1, "name": '撒尿貓丸', "price": 20340}, 
-            {"dishID": 2, "name": '醬爆牛丸', "price": 9999339},
-            {"dishID": 1, "name": '撒尿牛丸', "price": 200}, 
-            {"dishID": 2, "name": '醬爆牛丸', "price": 99999},
-            {"dishID": 1, "name": '撒尿牛丸', "price": 200}, 
-            {"dishID": 2, "name": '醬爆羊丸', "price": 992119},
-            {"dishID": 1, "name": '撒尿羊丸', "price": 20550}, 
-            {"dishID": 2, "name": '醬爆豬丸', "price": 9999349},
-            {"dishID": 1, "name": '撒尿豬丸', "price": 203440}, 
-            {"dishID": 2, "name": '醬爆狗丸', "price": 99999232},
-            {"dishID": 1, "name": '撒尿狗丸', "price": 20023}, 
-            {"dishID": 2, "name": '醬爆雞丸', "price": 999343499},
-            {"dishID": 1, "name": '撒尿雞丸', "price": 44400}, 
-            {"dishID": 2, "name": '醬爆貓丸', "price": 9999559},
-            {"dishID": 1, "name": '撒尿貓丸', "price": 20340}, 
-            {"dishID": 2, "name": '醬爆牛丸', "price": 9999339}]
+            {"dishID": 3, "name": '撒尿牛丸', "price": 200}, 
+            {"dishID": 4, "name": '醬爆羊丸', "price": 992119},
+            {"dishID": 5, "name": '撒尿羊丸', "price": 20550}, 
+            {"dishID": 6, "name": '醬爆豬丸', "price": 9999349},
+            {"dishID": 7, "name": '撒尿豬丸', "price": 203440}, 
+            {"dishID": 8, "name": '醬爆狗丸', "price": 99999232},
+            {"dishID": 9, "name": '撒尿狗丸', "price": 20023}, 
+            {"dishID": 10, "name": '醬爆雞丸', "price": 999343499},
+            {"dishID": 11, "name": '撒尿雞丸', "price": 44400}, 
+            {"dishID": 12, "name": '醬爆貓丸', "price": 9999559},
+            {"dishID": 13, "name": '撒尿貓丸', "price": 20340}, 
+            {"dishID": 14, "name": '醬爆牛丸', "price": 9999339},
+            {"dishID": 15, "name": '撒尿牛丸', "price": 200}, 
+            {"dishID": 16, "name": '醬爆牛丸', "price": 99999},
+            {"dishID": 17, "name": '撒尿牛丸', "price": 200}, 
+            {"dishID": 18, "name": '醬爆羊丸', "price": 992119},
+            {"dishID": 19, "name": '撒尿羊丸', "price": 20550}, 
+            {"dishID": 20, "name": '醬爆豬丸', "price": 9999349},
+            {"dishID": 21, "name": '撒尿豬丸', "price": 203440}, 
+            {"dishID": 22, "name": '醬爆狗丸', "price": 99999232},
+            {"dishID": 23, "name": '撒尿狗丸', "price": 20023}, 
+            {"dishID": 24, "name": '醬爆雞丸', "price": 999343499},
+            {"dishID": 25, "name": '撒尿雞丸', "price": 44400}, 
+            {"dishID": 26, "name": '醬爆貓丸', "price": 9999559},
+            {"dishID": 27, "name": '撒尿貓丸', "price": 20340}, 
+            {"dishID": 28, "name": '醬爆牛丸', "price": 9999339}]
  };
 
 var test2 = {"HEAD": 'order',
@@ -54,6 +54,7 @@ window.onload = function() {
     console.log('Starting Receiver Manager');
 
     //The channel for customer to order
+    // create a CastMessageBus to handle messages for a custom namespace
     window.customerBus = 
     	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:customer');
     
@@ -80,52 +81,31 @@ window.onload = function() {
       if(jsonObj.HEAD === 'requestMenu'){
       	window.customerBus.send(event.senderId, JSON.stringify(myMenu));
       }
+      if(jsonObj.HEAD === 'order'){
+      	
+      }
     }
     
     // handler for 'senderdisconnected' event
     castReceiverManager.onSenderDisconnected = function(event) {
       console.log('Received Sender Disconnected event: ' + event.data);
-      //console.log('Current connected sender number: ' + window.castReceiverManager.getSenders().length);
-      //if (window.castReceiverManager.getSenders().length == 0) {
-	  //    window.close();
-	  //  }
+      if (window.castReceiverManager.getSenders().length == 0) {
+	      window.close();
+	    }
     };
-    
-    // handler for 'systemvolumechanged' event
-    /*
-    castReceiverManager.onSystemVolumeChanged = function(event) {
-      console.log('Received System Volume Changed event: ' + event.data['level'] + ' ' +
-          event.data['muted']);
-    };*/
 
-    // create a CastMessageBus to handle messages for a custom namespace
-    /*
-    window.messageBus = 
-    	window.castReceiverManager.getCastMessageBus('urn:x-cast:com.google.cast.sample.helloworld');
-
-    // handler for the CastMessageBus message event
-    window.messageBus.onMessage = function(event) {
-      console.log('Message [' + event.senderId + ']: ' + event.data);
-      // display the message from the sender
-      displayText(event.data);
-      // inform all senders on the CastMessageBus of the incoming message event
-      // sender message listener will be invoked
-      window.messageBus.send(event.senderId, event.data);
-    }*/
-
-
-	
-
-
-// initialize the CastReceiverManager with an application status message
+	//initialize the CastReceiverManager with an application status message
     window.castReceiverManager.start({statusText: "Application is starting"});
     console.log('Receiver Manager started');
-
 };
   
-  // utility function to display the text message in the input field
-  function displayText(text) {
-    console.log(text);
-    document.getElementById("message").innerHTML=text;
-    window.castReceiverManager.setApplicationState(text);
-  };
+// utility function to display the text message in the input field
+function displayText(text) {
+  console.log(text);
+  document.getElementById("message").innerHTML=text;
+  window.castReceiverManager.setApplicationState(text);
+};
+
+function appendOrderedDish(data){
+
+}
