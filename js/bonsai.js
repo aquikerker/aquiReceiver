@@ -41,7 +41,8 @@ $(function(){
       		key: public_url,
       		simpleSheet: true,
             callback: function(data){
-      			window.customerBus.send(event.senderId, JSON.stringify(myMenu));
+            	var returnData = {'HEAD': 'menuList', 'content': data};
+      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
                 console.log(data);
             }
          });
