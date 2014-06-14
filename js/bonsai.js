@@ -53,7 +53,9 @@ window.onload = function() {
       console.log('===== Receiver onMessage ========');
       console.log(event);
       console.log('=================================');
-      if(event.data.HEAD === 'requestMenu'){
+      var jsonObj = JSON.parse(event.data);
+      console.log(jsonObj);
+      if(jsonObj.HEAD === 'requestMenu'){
       	window.customerBus.send(event.senderId, myMenu);
       }
     }
