@@ -1,5 +1,5 @@
 //var menu_google_url;
-
+var orderedList = {}; // {tableID: [{dishid: id, quantity: n}, ...]}
 $(function(){
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);
@@ -49,6 +49,15 @@ $(function(){
       }
       if(jsonObj.HEAD === 'order'){
       	appendOrderedDish(jsonObj.tableID, jsonObj.content);
+      	if(typeof orderedList[jsonObj.tableID] === 'undefined'){
+      		orderedList[jsonObj.tableID] = [];
+      		console.log('New table in, init the orderedList');
+      	}
+      	orderedList[jsonObj.tableID].push.apply(orderedList[jsonObj.tableID], jsonObj.content);
+      	console.log(orderedList[jsonObj.tableID]);
+      }
+      if(jsonObj.HEAD === 'requestOrdered'){
+
       }
     }
 
@@ -85,34 +94,34 @@ $(function(){
 });
 
 var myMenu = {"HEAD": 'menuList', 
-  "content": [{"dish_id": 1, "name": '超級宇宙戰艦霹靂無敵撒尿牛丸', "price": 200}, 
-            {"dish_id": 2, "name": '超級宇宙戰艦無敵醬爆牛丸', "price": 99999},
-            {"dish_id": 3, "name": '超級宇宙戰艦無敵撒尿牛丸', "price": 200}, 
-            {"dish_id": 4, "name": '超級宇宙戰艦無敵醬爆羊丸', "price": 992119},
-            {"dish_id": 5, "name": '超級宇宙戰艦無敵撒尿羊丸', "price": 20550}, 
-            {"dish_id": 6, "name": '醬爆豬丸', "price": 9999349},
-            {"dish_id": 7, "name": '撒尿豬丸', "price": 203440}, 
-            {"dish_id": 8, "name": '醬爆狗丸', "price": 99999232},
-            {"dish_id": 9, "name": '撒尿狗丸', "price": 20023}, 
-            {"dish_id": 10, "name": '醬爆雞丸', "price": 999343499},
-            {"dish_id": 11, "name": '撒尿雞丸', "price": 44400}, 
-            {"dish_id": 12, "name": '醬爆貓丸', "price": 9999559},
-            {"dish_id": 13, "name": '撒尿貓丸', "price": 20340}, 
-            {"dish_id": 14, "name": '醬爆牛丸', "price": 9999339},
-            {"dish_id": 15, "name": '撒尿牛丸', "price": 200}, 
-            {"dish_id": 16, "name": '醬爆牛丸', "price": 99999},
-            {"dish_id": 17, "name": '撒尿牛丸', "price": 200}, 
-            {"dish_id": 18, "name": '醬爆羊丸', "price": 992119},
-            {"dish_id": 19, "name": '撒尿羊丸', "price": 20550}, 
-            {"dish_id": 20, "name": '醬爆豬丸', "price": 9999349},
-            {"dish_id": 21, "name": '撒尿豬丸', "price": 203440}, 
-            {"dish_id": 22, "name": '醬爆狗丸', "price": 99999232},
-            {"dish_id": 23, "name": '撒尿狗丸', "price": 20023}, 
-            {"dish_id": 24, "name": '醬爆雞丸', "price": 999343499},
-            {"dish_id": 25, "name": '撒尿雞丸', "price": 44400}, 
-            {"dish_id": 26, "name": '醬爆貓丸', "price": 9999559},
-            {"dish_id": 27, "name": '撒尿貓丸', "price": 20340}, 
-            {"dish_id": 28, "name": '醬爆牛丸', "price": 9999339}]
+  "content": [{"dishid": 1, "name": '超級宇宙戰艦霹靂無敵撒尿牛丸', "price": 200}, 
+            {"dishid": 2, "name": '超級宇宙戰艦無敵醬爆牛丸', "price": 99999},
+            {"dishid": 3, "name": '超級宇宙戰艦無敵撒尿牛丸', "price": 200}, 
+            {"dishid": 4, "name": '超級宇宙戰艦無敵醬爆羊丸', "price": 992119},
+            {"dishid": 5, "name": '超級宇宙戰艦無敵撒尿羊丸', "price": 20550}, 
+            {"dishid": 6, "name": '醬爆豬丸', "price": 9999349},
+            {"dishid": 7, "name": '撒尿豬丸', "price": 203440}, 
+            {"dishid": 8, "name": '醬爆狗丸', "price": 99999232},
+            {"dishid": 9, "name": '撒尿狗丸', "price": 20023}, 
+            {"dishid": 10, "name": '醬爆雞丸', "price": 999343499},
+            {"dishid": 11, "name": '撒尿雞丸', "price": 44400}, 
+            {"dishid": 12, "name": '醬爆貓丸', "price": 9999559},
+            {"dishid": 13, "name": '撒尿貓丸', "price": 20340}, 
+            {"dishid": 14, "name": '醬爆牛丸', "price": 9999339},
+            {"dishid": 15, "name": '撒尿牛丸', "price": 200}, 
+            {"dishid": 16, "name": '醬爆牛丸', "price": 99999},
+            {"dishid": 17, "name": '撒尿牛丸', "price": 200}, 
+            {"dishid": 18, "name": '醬爆羊丸', "price": 992119},
+            {"dishid": 19, "name": '撒尿羊丸', "price": 20550}, 
+            {"dishid": 20, "name": '醬爆豬丸', "price": 9999349},
+            {"dishid": 21, "name": '撒尿豬丸', "price": 203440}, 
+            {"dishid": 22, "name": '醬爆狗丸', "price": 99999232},
+            {"dishid": 23, "name": '撒尿狗丸', "price": 20023}, 
+            {"dishid": 24, "name": '醬爆雞丸', "price": 999343499},
+            {"dishid": 25, "name": '撒尿雞丸', "price": 44400}, 
+            {"dishid": 26, "name": '醬爆貓丸', "price": 9999559},
+            {"dishid": 27, "name": '撒尿貓丸', "price": 20340}, 
+            {"dishid": 28, "name": '醬爆牛丸', "price": 9999339}]
  };
 
 
