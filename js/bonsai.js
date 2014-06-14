@@ -65,7 +65,7 @@ $(function(){
 });
 
 var myMenu = {"HEAD": 'menuList', 
-  "content": [{"dishID": 1, "name": '超級宇宙戰艦無敵撒尿牛丸', "price": 200}, 
+  "content": [{"dishID": 1, "name": '超級宇宙戰艦霹靂無敵南無釋迦摩尼佛耶穌基督撒尿牛丸', "price": 200}, 
             {"dishID": 2, "name": '超級宇宙戰艦無敵醬爆牛丸', "price": 99999},
             {"dishID": 3, "name": '超級宇宙戰艦無敵撒尿牛丸', "price": 200}, 
             {"dishID": 4, "name": '超級宇宙戰艦無敵醬爆羊丸', "price": 992119},
@@ -100,10 +100,6 @@ var test2 = {"HEAD": 'order',
  "content": [1,2,1,2]
 }
 
-window.onload = function() {
-	
-};
-  
 // utility function to display the text message in the input field
 function displayText(text) {
   console.log(text);
