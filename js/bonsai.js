@@ -49,12 +49,12 @@ window.onload = function() {
 
 	// handler for the CastMessageBus message event
     window.customerBus.onMessage = function(event) {
+      displayText(event.data);
       console.log('===== Receiver onMessage ========');
       console.log(event);
       console.log('=================================');
       //console.log('Message [' + event.senderId + ']: ' + event.data);
       // display the message from the sender
-      //displayText(event.data);
       // inform all senders on the CastMessageBus of the incoming message event
       // sender message listener will be invoked
       //window.customerBus.send(event.senderId, event.data);
