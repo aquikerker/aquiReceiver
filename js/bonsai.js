@@ -34,15 +34,14 @@ $(function(){
       var jsonObj = JSON.parse(event.data);
       console.log(jsonObj);
       if(jsonObj.HEAD === 'requestMenu'){
-      	var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-      	Tabletop.init({ key: public_url,
+      	//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
+      	Tabletop.init({ key: window.menu_google_url,
       					 simpleSheet: true,
                          callback: function(data){
       						window.customerBus.send(event.senderId, JSON.stringify(myMenu));
                          	console.log(data);
                          }
                       });
-//      	window.customerBus.send(event.senderId, JSON.stringify(myMenu));
       }
       if(jsonObj.HEAD === 'order'){
       	appendOrderedDish(jsonObj.tableID, jsonObj.content);
@@ -56,7 +55,10 @@ $(function(){
 
 	//@handler for the CastMessageBus message event [admin]
     adminBus.onMessage = function(event){
-
+    	var jsonObj = JSON.parse(event.data);
+    	if(jsonObj.HEAD === 'setMenuUrl'){
+    		window.menu_google_url = jsonObj.url;
+    	}
     }
 
 	//initialize the CastReceiverManager with an application status message
