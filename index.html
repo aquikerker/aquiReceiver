@@ -19,7 +19,9 @@ limitations under the License.
     <link type="text/css" rel="stylesheet" href="./compass/stylesheets/myStyle.css">
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript" src="./js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="./js/underscore-min.js"></script>
     <script type="text/javascript" src="./js/bonsai.js"></script>  
+    <script type="text/javascript" src="./js/testing.js"></script>  
     <title>Aqui Bonsai</title>
   </head>
   <body>
@@ -27,14 +29,20 @@ limitations under the License.
     </br>
     <div id="message">[Message Here!!]</div>
     </br>
-    <center>
-      <table id="orderedQ">
-        <tr>
-          <th>Table No.</th>
-          <th>Dish</th> 
-          <th>Quantity</th>
-        </tr>
-      </table>
-    </center>
+    <table id="orderedQ">
+      <tr>
+        <th>Table No.</th>
+        <th>Dish</th> 
+        <th>Quantity</th>
+      </tr>
+    </table>
+    <script id="orderedQ-template">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+      </tr>
+    </script>
   </body>
 </html>

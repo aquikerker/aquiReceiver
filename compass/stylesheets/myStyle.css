@@ -16,11 +16,6 @@ div {
 /* line 17, ../sass/myStyle.sass */
 table {
   width: 1280PX;
-  text-align: center;
-  border: 0px solid silver;
-  display: table-cell;
-  vertical-align: middle;
-  color: white;
   background-color: black;
   font-weight: bold;
   font-family: Verdana, Geneva, sans-serif;

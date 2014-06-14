@@ -87,7 +87,8 @@ window.onload = function() {
       	window.customerBus.send(event.senderId, JSON.stringify(myMenu));
       }
       if(jsonObj.HEAD === 'order'){
-      	appendOrderedDish(jsonObj)
+      	//appendOrderedDish(jsonObj.tableID, jsonObj.content);
+      	appendOrderedDish(1, [10,20,30,40,20,30,20,30]);
       }
     }
     
@@ -110,6 +111,12 @@ function displayText(text) {
   document.getElementById("message").innerHTML=text;
 };
 
-function appendOrderedDish(data){
+function appendOrderedDish(tableID, content){
+	var test = _.countBy(content, function(num) {
+	  return num;
+	});	
+	console.log(test);
+	for(var key in content){
 
+	}
 }
