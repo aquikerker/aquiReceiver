@@ -34,7 +34,7 @@ $(function(){
       var jsonObj = JSON.parse(event.data);
       console.log(jsonObj);
       if(jsonObj.HEAD === 'requestMenu'){
-      	var public_url = 'https://docs.google.com/spreadsheets/d/1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs/edit?usp=sharing';
+      	var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
       	Tabletop.init({ key: public_url,
       					 simpleSheet: true,
                          callback: function(data){
