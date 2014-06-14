@@ -44,9 +44,10 @@ var test2 = {"HEAD": 'order',
 
 //cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
 
+window.location.reload(true); 
+
 
 window.onload = function() {
-	window.location.reload(true); 
 
     cast.receiver.logger.setLevelValue(0);
 
