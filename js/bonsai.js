@@ -56,7 +56,7 @@ window.onload = function() {
       var jsonObj = JSON.parse(event.data);
       console.log(jsonObj);
       if(jsonObj.HEAD === 'requestMenu'){
-      	window.customerBus.send(event.senderId, JSON.stringify(myMenu););
+      	window.customerBus.send(event.senderId, JSON.stringify(myMenu));
       }
     }
     
