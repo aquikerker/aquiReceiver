@@ -50,10 +50,6 @@ window.onload = function() {
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
 
-	//initialize the CastReceiverManager with an application status message
-    window.castReceiverManager.start({statusText: "Application is starting"});
-    console.log('Receiver Manager started');
-
   	window.castReceiverManager.setApplicationState('Aqui 點菜系統！');
   
     //@handler for the 'ready' event
@@ -99,6 +95,9 @@ window.onload = function() {
 
     }
 
+	//initialize the CastReceiverManager with an application status message
+    window.castReceiverManager.start({statusText: "Application is starting"});
+    console.log('Receiver Manager started');
     
     //@handler for 'senderDisconnected' event
     castReceiverManager.onSenderDisconnected = function(event) {
