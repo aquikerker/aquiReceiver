@@ -87,8 +87,8 @@ window.onload = function() {
       	window.customerBus.send(event.senderId, JSON.stringify(myMenu));
       }
       if(jsonObj.HEAD === 'order'){
-      	//appendOrderedDish(jsonObj.tableID, jsonObj.content);
-      	appendOrderedDish(1, [10,20,30,40,20,30,20,30]);
+      	appendOrderedDish(jsonObj.tableID, jsonObj.content);
+      	//appendOrderedDish(1, [10,20,30,40,20,30,20,30]);
       }
     }
     
