@@ -42,12 +42,7 @@ var test2 = {"HEAD": 'order',
  "content": [1,2,1,2]
 }
 
-//cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
-
-
-
 window.onload = function() {
-
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);
 
@@ -55,28 +50,31 @@ window.onload = function() {
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
 
-  	window.castReceiverManager.setApplicationState('Aqui 點菜系統！');
+	//initialize the CastReceiverManager with an application status message
+    castReceiverManager.start({statusText: "Application is starting"});
+    console.log('Receiver Manager started');
 
-
-    //The channel for customer to order
-    // create a CastMessageBus to handle messages for a custom namespace
-    window.customerBus = 
-    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:customer');
-    
-    // handler for the 'ready' event
+  	castReceiverManager.setApplicationState('Aqui 點菜系統！');
+  
+    //@handler for the 'ready' event
     castReceiverManager.onReady = function(event) {
       console.log('Received Ready event: ' + JSON.stringify(event.data));
       window.castReceiverManager.setApplicationState("Application status is ready...");
     };
     
-    // handler for 'senderconnected' event
+    //@handler for 'senderConnected' event
     castReceiverManager.onSenderConnected = function(event) {
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
     };
 
-	// handler for the CastMessageBus message event
-    window.customerBus.onMessage = function(event) {
+   	//@The channel for customer to order
+    //@create a CastMessageBus to handle messages for a custom namespace
+    window.customerBus = 
+    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:customer');
+   
+	//@handler for the CastMessageBus message event [customer]
+    customerBus.onMessage = function(event) {
       displayText(event.data);
       console.log('===== Receiver onMessage ========');
       console.log(event);
@@ -88,27 +86,34 @@ window.onload = function() {
       }
       if(jsonObj.HEAD === 'order'){
       	appendOrderedDish(jsonObj.tableID, jsonObj.content);
-      	//appendOrderedDish(1, [10,20,30,40,20,30,20,30]);
       }
     }
+
+   	//@The channel for customer to order
+    //@create a CastMessageBus to handle messages for a custom namespace
+    window.adminBus = 
+    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:administrator');
+
+	//@handler for the CastMessageBus message event [admin]
+    adminBus.onMessage = function(event){
+
+    }
+
     
-    // handler for 'senderdisconnected' event
+    //@handler for 'senderDisconnected' event
     castReceiverManager.onSenderDisconnected = function(event) {
       console.log('Received Sender Disconnected event: ' + event.data);
       if (window.castReceiverManager.getSenders().length == 0) {
 	      window.close();
 	    }
     };
-
-	//initialize the CastReceiverManager with an application status message
-    window.castReceiverManager.start({statusText: "Application is starting"});
-    console.log('Receiver Manager started');
 };
   
 // utility function to display the text message in the input field
 function displayText(text) {
   console.log(text);
-  document.getElementById("message").innerHTML=text;
+  $('#message').html(text);
+  //document.getElementById("message").innerHTML=text;
 };
 
 function appendOrderedDish(tableID, content){
