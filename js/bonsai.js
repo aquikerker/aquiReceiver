@@ -48,12 +48,15 @@ var test2 = {"HEAD": 'order',
 
 window.onload = function() {
 
-  	window.castReceiverManager.setApplicationState('Aqui 點菜系統！');
-
+	//Debugger console
     cast.receiver.logger.setLevelValue(0);
 
+    //castReceiverMeg obj
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
+
+  	window.castReceiverManager.setApplicationState('Aqui 點菜系統！');
+
 
     //The channel for customer to order
     // create a CastMessageBus to handle messages for a custom namespace
