@@ -53,11 +53,9 @@ window.onload = function() {
       console.log('===== Receiver onMessage ========');
       console.log(event);
       console.log('=================================');
-      //console.log('Message [' + event.senderId + ']: ' + event.data);
-      // display the message from the sender
-      // inform all senders on the CastMessageBus of the incoming message event
-      // sender message listener will be invoked
-      //window.customerBus.send(event.senderId, event.data);
+      if(event.data.HEAD === 'requestMenu'){
+      	window.customerBus.send(event.senderId, myMenu);
+      }
     }
     
     // handler for 'senderdisconnected' event
