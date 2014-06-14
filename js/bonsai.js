@@ -51,10 +51,10 @@ window.onload = function() {
     console.log('Starting Receiver Manager');
 
 	//initialize the CastReceiverManager with an application status message
-    castReceiverManager.start({statusText: "Application is starting"});
+    window.castReceiverManager.start({statusText: "Application is starting"});
     console.log('Receiver Manager started');
 
-  	castReceiverManager.setApplicationState('Aqui 點菜系統！');
+  	window.castReceiverManager.setApplicationState('Aqui 點菜系統！');
   
     //@handler for the 'ready' event
     castReceiverManager.onReady = function(event) {
