@@ -39,7 +39,7 @@ var myMenu = {"HEAD": 'menuList',
 
 var test2 = {"HEAD": 'order',
  "tableID": 5,
- "content": [1,2]
+ "content": [1,2,1,2]
 }
 
 //cast.receiver.logger.setLevelValue(cast.receiver.LoggerLevel.DEBUG);
@@ -47,6 +47,8 @@ var test2 = {"HEAD": 'order',
 
 
 window.onload = function() {
+
+  	window.castReceiverManager.setApplicationState('Aqui 點菜系統！');
 
     cast.receiver.logger.setLevelValue(0);
 
@@ -77,12 +79,12 @@ window.onload = function() {
       console.log(event);
       console.log('=================================');
       var jsonObj = JSON.parse(event.data);
-      //console.log(jsonObj);
+      console.log(jsonObj);
       if(jsonObj.HEAD === 'requestMenu'){
       	window.customerBus.send(event.senderId, JSON.stringify(myMenu));
       }
       if(jsonObj.HEAD === 'order'){
-      	
+      	appendOrderedDish(jsonObj)
       }
     }
     
@@ -103,7 +105,6 @@ window.onload = function() {
 function displayText(text) {
   console.log(text);
   document.getElementById("message").innerHTML=text;
-  window.castReceiverManager.setApplicationState(text);
 };
 
 function appendOrderedDish(data){
