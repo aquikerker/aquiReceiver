@@ -1,6 +1,6 @@
 /* line 4, ../sass/myStyle.sass */
-div, table {
-  height: 720PX;
+div {
+  height: 100PX;
   width: 1280PX;
   text-align: center;
   border: 0px solid silver;
