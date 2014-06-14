@@ -85,10 +85,10 @@ window.onload = function() {
     // handler for 'senderdisconnected' event
     castReceiverManager.onSenderDisconnected = function(event) {
       console.log('Received Sender Disconnected event: ' + event.data);
-      console.log('Current connected sender number: ' + window.castReceiverManager.getSenders().length);
-      if (window.castReceiverManager.getSenders().length == 0) {
-	      window.close();
-	    }
+      //console.log('Current connected sender number: ' + window.castReceiverManager.getSenders().length);
+      //if (window.castReceiverManager.getSenders().length == 0) {
+	  //    window.close();
+	  //  }
     };
     
     // handler for 'systemvolumechanged' event
