@@ -41,11 +41,22 @@ window.onload = function() {
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
       //var new_comes_senderId = window.castReceiverManager.getSender(event.data).senderId;
-      var new_comes_senderId = window.castReceiverManager.getSender(event.data).id;
+      //var new_comes_senderId = window.castReceiverManager.getSender(event.data).id;
       //cast.receiver.CastMessageBus.send(new_comes_senderId,myMenu);
-      window.customerBus.send(new_comes_senderId, myMenu);
+      //window.customerBus.send(new_comes_senderId, myMenu);
 
     };
+
+	// handler for the CastMessageBus message event
+    window.customerBus.onMessage = function(event) {
+      console.log('Receiver onMessage:' event);
+      //console.log('Message [' + event.senderId + ']: ' + event.data);
+      // display the message from the sender
+      //displayText(event.data);
+      // inform all senders on the CastMessageBus of the incoming message event
+      // sender message listener will be invoked
+      //window.customerBus.send(event.senderId, event.data);
+    }
     
     // handler for 'senderdisconnected' event
     castReceiverManager.onSenderDisconnected = function(event) {
@@ -78,15 +89,7 @@ window.onload = function() {
     }*/
 
 
-	// handler for the CastMessageBus message event
-    window.customerBus.onMessage = function(event) {
-      console.log('Message [' + event.senderId + ']: ' + event.data);
-      // display the message from the sender
-      displayText(event.data);
-      // inform all senders on the CastMessageBus of the incoming message event
-      // sender message listener will be invoked
-      //window.customerBus.send(event.senderId, event.data);
-    }
+	
 
 
 // initialize the CastReceiverManager with an application status message
