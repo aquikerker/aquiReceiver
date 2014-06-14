@@ -1,3 +1,5 @@
+//var menu_google_url;
+
 $(function(){
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);
@@ -34,14 +36,15 @@ $(function(){
       var jsonObj = JSON.parse(event.data);
       console.log(jsonObj);
       if(jsonObj.HEAD === 'requestMenu'){
-      	//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-      	Tabletop.init({ key: window.menu_google_url,
-      					 simpleSheet: true,
-                         callback: function(data){
-      						window.customerBus.send(event.senderId, JSON.stringify(myMenu));
-                         	console.log(data);
-                         }
-                      });
+      	var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
+      	Tabletop.init({
+      		key: public_url,
+      		simpleSheet: true,
+            callback: function(data){
+      			window.customerBus.send(event.senderId, JSON.stringify(myMenu));
+                console.log(data);
+            }
+         });
       }
       if(jsonObj.HEAD === 'order'){
       	appendOrderedDish(jsonObj.tableID, jsonObj.content);
@@ -56,8 +59,14 @@ $(function(){
 	//@handler for the CastMessageBus message event [admin]
     adminBus.onMessage = function(event){
     	var jsonObj = JSON.parse(event.data);
-    	if(jsonObj.HEAD === 'setMenuUrl'){
-    		window.menu_google_url = jsonObj.url;
+    	if(jsonObj.HEAD === 'setMenuUrl'){/*
+    		Tabletop.init({ key: public_url,
+					simpleSheet: true,
+	             	callback: function(data){
+	             		console.log(data);
+	        		}
+	        });
+    		menu_google_url = jsonObj.url;*/
     	}
     }
 
@@ -105,10 +114,6 @@ var myMenu = {"HEAD": 'menuList',
             {"dish_id": 28, "name": '醬爆牛丸', "price": 9999339}]
  };
 
-var test2 = {"HEAD": 'order',
- "tableID": 5,
- "content": [1,2,1,2]
-}
 
 // utility function to display the text message in the input field
 function displayText(text) {
