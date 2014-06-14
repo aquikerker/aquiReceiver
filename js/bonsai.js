@@ -120,5 +120,6 @@ function appendOrderedDish(tableID, content){
 	for(var dishID in counted_content){
 		var template = _.template($('#orderedQ-template').html(),
 						{tableID: tableID, dishID: dishID, count: counted_content[dishID]});
+		$('#orderedQ').append(template);
 	}
 }
