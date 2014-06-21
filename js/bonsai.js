@@ -145,7 +145,8 @@ $(function(){
     	switch(jsonObj.HEAD){
     		case 'handShaking':
     			adminIDList.push(event.senderId);
-    			 
+    			console.log('=== current adminIDList ===');
+    			console.log(adminIDList)
     		case 'setMenuUrl':
     			menu_google_key = jsonObj.url;
 	    		Tabletop.init({ key: menu_google_key,
