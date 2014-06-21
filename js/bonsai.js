@@ -70,7 +70,7 @@ $(function(){
       		returnObj.content = mergeContent;
       		console.log('====== returnObj ============');
       		console.log(returnObj);
-      		var returnContent _.map(mergeContent, function(quantity, dishid){
+      		var returnContent = _.map(mergeContent, function(quantity, dishid){
       			return {'dishid': dishid, 'quantity': quantity};
       		});
       		console.log('====== returnContent =========');
