@@ -30,7 +30,7 @@ $(function(){
    
 	//@handler for the CastMessageBus message event [customer]
     customerBus.onMessage = function(event) {
-      displayText(event.data);
+      displayText(event.data,'customer');
       console.log('===== Receiver onMessage ========');
       console.log(event);
       console.log('=================================');
@@ -128,6 +128,8 @@ $(function(){
 
 	//@handler for the CastMessageBus message event [admin]
     adminBus.onMessage = function(event){
+      	displayText(event.data,'admin');
+
     	var jsonObj = JSON.parse(event.data);
     	switch(jsonObj.HEAD){
     		case 'setMenuUrl':
@@ -188,9 +190,16 @@ var myMenu = {"HEAD": 'menuList',
 
 
 // utility function to display the text message in the input field
-function displayText(text) {
+function displayText(text,target) {
   console.log(text);
-  $('#message').html(text);
+  switch(target){
+  	case 'customer':
+  		$('#message_customer').html(text);
+  		break;
+  	case 'admin':
+  		$('#message_admin').html(text);
+  		break;	
+  }
 };
 
 function appendOrderedDish(tableID, content){
