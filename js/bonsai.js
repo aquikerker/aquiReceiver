@@ -59,6 +59,9 @@ $(function(){
 	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
 	                console.log(data);
 	                console.log(typeof data);
+	                if(typeof data !== 'object'){
+	                	console.log('extract menu fail');
+	                }
 	            }
 	         });
 	  		break;
