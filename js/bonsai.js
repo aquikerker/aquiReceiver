@@ -2,8 +2,10 @@ var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...]}
 var hotTodayList = {};// {dishid: quantity, ...}
 var statusName = 'Aqui kerker System';
+var initByAdmin = false;
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
+
 $(function(){
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);
@@ -40,11 +42,18 @@ $(function(){
       console.log('=================================');
       var jsonObj = JSON.parse(event.data);
       console.log(jsonObj);
+      //Check whether init by admin
+      if(initByAdmin === false){
+
+      	return
+      }
+
       switch(jsonObj.HEAD){
       	case 'handShaking':
       		customerIDList.push(event.senderId);
       		console.log('=== current customerIDList ===');
       		console.log(customerIDList);
+      		break;
       	case 'requestMenu':
       		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 	      	Tabletop.init({
@@ -146,7 +155,9 @@ $(function(){
     		case 'handShaking':
     			adminIDList.push(event.senderId);
     			console.log('=== current adminIDList ===');
-    			console.log(adminIDList)
+    			console.log(adminIDList);
+    			initByAdmin = true;
+    			break;
     		case 'setMenuUrl':
     			menu_google_key = jsonObj.url;
 	    		Tabletop.init({ key: menu_google_key,
