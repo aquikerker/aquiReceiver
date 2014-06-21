@@ -170,14 +170,14 @@ $(function(){
 	  // clear the connected list
       var disconnectedID = event.senderId;	
 	  console.log('sender ID [ ' + disconnectedID + ' ] has disconnected');
-	  if(var idx = _.indexOf(adminIDList) >= 0){
+	  if(_.indexOf(adminIDList,disconnectedID) >= 0){
 
-	  	adminIDList.splice(idx);
+	  	adminIDList.splice(_.indexOf(adminIDList,disconnectedID));
 	  	console.log('It is an admin');
 	  	console.log(adminIDList);
 	  }
-	  if(var idx = _.indexOf(customerIDList) >= 0){
-	  	customerIDList.splice(idx);
+	  if(_.indexOf(customerIDList,disconnectedID) >= 0){
+	  	customerIDList.splice(_.indexOf(customerIDList,disconnectedID));
 	  	console.log('it is a customer')
 	  	console.log(customerIDList);
 	  }	  
