@@ -180,12 +180,12 @@ $(function(){
 	  console.log(_.indexOf(customerIDList,disconnectedID));
 	  if(_.indexOf(adminIDList,disconnectedID) >= 0){
 
-	  	adminIDList.splice(_.indexOf(adminIDList,disconnectedID));
+	  	adminIDList.splice(_.indexOf(adminIDList,disconnectedID),1);
 	  	console.log('It is an admin');
 	  	console.log(adminIDList);
 	  }
 	  if(_.indexOf(customerIDList,disconnectedID) >= 0){
-	  	customerIDList.splice(_.indexOf(customerIDList,disconnectedID));
+	  	customerIDList.splice(_.indexOf(customerIDList,disconnectedID),1);
 	  	console.log('it is a customer')
 	  	console.log(customerIDList);
 	  }	  
