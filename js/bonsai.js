@@ -52,7 +52,7 @@ $(function(){
 	      	var menu_url = 'https://docs.google.com/spreadsheets/d/'+ menu_google_key +'/pubhtml';
 	      	$.ajax({
 	      		url: menu_url,
-	      		success: function(){
+	      		xhr: function(){
 			      	Tabletop.init({
 			      		key: menu_google_key,
 			      		simpleSheet: true,
