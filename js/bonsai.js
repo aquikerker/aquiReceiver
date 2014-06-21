@@ -108,13 +108,13 @@ $(function(){
       		}
       		console.log('====== returnContent =========== ');
       		console.log(returnContent);
-      		// Sort by quantity;
+      		/* Sort by quantity;
       		returnContent.sort(function(a,b){
-      			return a.quantity - b.quantity;
+      			return b.quantity - a.quantity;
       		});
       		console.log('====== returnContent sorted =========== ');
       		console.log(returnContent);
-
+			*/
       		break;	
       	default:
       		console.warn('unknown request HEAD!!');
