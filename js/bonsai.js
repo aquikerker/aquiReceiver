@@ -65,6 +65,7 @@ $(function(){
 			            }		
 			        },
 			    error: function(){
+			    	console.log('===== The menu url does not exist! ====')
 			    	var returnData = {'HEAD': 'ErrorMsg', 'content': 'noMenu'};
 			      	window.customerBus.send(event.senderId, JSON.stringify(returnData));
 			    }    
