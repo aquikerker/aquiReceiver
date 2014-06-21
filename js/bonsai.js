@@ -2,6 +2,8 @@ var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...]}
 var hotTodayList = {};// {dishid: quantity, ...}
 var statusName = 'Aqui kerker System';
+var adminIDList = []; // connecting admin ID list
+var customerIDList = []; // connecting customer ID list
 $(function(){
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);
@@ -10,19 +12,19 @@ $(function(){
     window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
 
-  	//window.castReceiverManager.setApplicationState('Aqui hahaha！');
+  	window.castReceiverManager.setApplicationState('Aqui hahaha！');
   
     //@handler for the 'ready' event
     castReceiverManager.onReady = function(event) {
       console.log('Received Ready event: ' + JSON.stringify(event.data));
+      window.castReceiverManager.setApplicationState(statusName);
+    
     };
     
     //@handler for 'senderConnected' event
     castReceiverManager.onSenderConnected = function(event) {
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
-      window.castReceiverManager.setApplicationState(statusName);
-
     };
 
    	//@The channel for customer to order
@@ -39,6 +41,8 @@ $(function(){
       var jsonObj = JSON.parse(event.data);
       console.log(jsonObj);
       switch(jsonObj.HEAD){
+      	case 'handShaking':
+      		customerIDList.push(event.senderId);
       	case 'requestMenu':
       		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 	      	Tabletop.init({
@@ -126,8 +130,8 @@ $(function(){
       }
     }
 
-   	//@The channel for customer to order
-    //@create a CastMessageBus to handle messages for a custom namespace
+   	//@The channel for admin
+    //@create a CastMessageBus to handle messages for a admin namespace
     window.adminBus = 
     	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-diarrhea');
 
@@ -137,6 +141,9 @@ $(function(){
 
     	var jsonObj = JSON.parse(event.data);
     	switch(jsonObj.HEAD){
+    		case 'handShaking':
+    			adminIDList.push(event.senderId);
+    			 
     		case 'setMenuUrl':
     			menu_google_key = jsonObj.url;
 	    		Tabletop.init({ key: menu_google_key,
@@ -154,17 +161,32 @@ $(function(){
     	}
     }
 
-	//initialize the CastReceiverManager with an application status message
-    window.castReceiverManager.start({statusText: "Application is starting"});
-    console.log('Receiver Manager started');
-    
-    //@handler for 'senderDisconnected' event
+  	//@handler for 'senderDisconnected' event
     castReceiverManager.onSenderDisconnected = function(event) {
       console.log('Received Sender Disconnected event: ' + event.data);
       if (window.castReceiverManager.getSenders().length == 0) {
 	      window.close();
 	    }
+	  // clear the connected list
+      var disconnectedID = event.senderId;	
+	  console.log('sender ID [ ' + disconnectedID + ' ] has disconnected');
+	  if(var idx = _.indexOf(adminIDList) >= 0){
+
+	  	adminIDList.splice(idx);
+	  	console.log('It is an admin');
+	  	console.log(adminIDList);
+	  }
+	  if(var idx = _.indexOf(customerIDList) >= 0){
+	  	customerIDList.splice(idx);
+	  	console.log('it is a customer')
+	  	console.log(customerIDList);
+	  }	  
     };
+
+	//initialize the CastReceiverManager with an application status message
+    window.castReceiverManager.start({statusText: "Application is starting"});
+    console.log('Receiver Manager started');
+    
 });
 
 // utility function to display the text message in the input field
@@ -192,34 +214,3 @@ function appendOrderedDish(tableNum, content){
 		$('#orderedQ').append(template);
 	}
 }
-
-var myMenu = {"HEAD": 'menuList', 
-  "content": [{"dishid": 1, "name": '超級宇宙戰艦霹靂無敵撒尿牛丸', "price": 200}, 
-            {"dishid": 2, "name": '超級宇宙戰艦無敵醬爆牛丸', "price": 99999},
-            {"dishid": 3, "name": '超級宇宙戰艦無敵撒尿牛丸', "price": 200}, 
-            {"dishid": 4, "name": '超級宇宙戰艦無敵醬爆羊丸', "price": 992119},
-            {"dishid": 5, "name": '超級宇宙戰艦無敵撒尿羊丸', "price": 20550}, 
-            {"dishid": 6, "name": '醬爆豬丸', "price": 9999349},
-            {"dishid": 7, "name": '撒尿豬丸', "price": 203440}, 
-            {"dishid": 8, "name": '醬爆狗丸', "price": 99999232},
-            {"dishid": 9, "name": '撒尿狗丸', "price": 20023}, 
-            {"dishid": 10, "name": '醬爆雞丸', "price": 999343499},
-            {"dishid": 11, "name": '撒尿雞丸', "price": 44400}, 
-            {"dishid": 12, "name": '醬爆貓丸', "price": 9999559},
-            {"dishid": 13, "name": '撒尿貓丸', "price": 20340}, 
-            {"dishid": 14, "name": '醬爆牛丸', "price": 9999339},
-            {"dishid": 15, "name": '撒尿牛丸', "price": 200}, 
-            {"dishid": 16, "name": '醬爆牛丸', "price": 99999},
-            {"dishid": 17, "name": '撒尿牛丸', "price": 200}, 
-            {"dishid": 18, "name": '醬爆羊丸', "price": 992119},
-            {"dishid": 19, "name": '撒尿羊丸', "price": 20550}, 
-            {"dishid": 20, "name": '醬爆豬丸', "price": 9999349},
-            {"dishid": 21, "name": '撒尿豬丸', "price": 203440}, 
-            {"dishid": 22, "name": '醬爆狗丸', "price": 99999232},
-            {"dishid": 23, "name": '撒尿狗丸', "price": 20023}, 
-            {"dishid": 24, "name": '醬爆雞丸', "price": 999343499},
-            {"dishid": 25, "name": '撒尿雞丸', "price": 44400}, 
-            {"dishid": 26, "name": '醬爆貓丸', "price": 9999559},
-            {"dishid": 27, "name": '撒尿貓丸', "price": 20340}, 
-            {"dishid": 28, "name": '醬爆牛丸', "price": 9999339}]
- };
