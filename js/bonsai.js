@@ -124,7 +124,7 @@ $(function(){
    	//@The channel for customer to order
     //@create a CastMessageBus to handle messages for a custom namespace
     window.adminBus = 
-    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:administrator');
+    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-diarrhea');
 
 	//@handler for the CastMessageBus message event [admin]
     adminBus.onMessage = function(event){
