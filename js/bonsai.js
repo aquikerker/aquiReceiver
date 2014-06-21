@@ -44,101 +44,100 @@ $(function(){
       console.log(jsonObj);
       //Check whether init by admin
       if(initByAdmin === false){
-
+      	var returnObj = {'HEAD': 'ErrorMsg', 'content': 'noMenu'}
+      	window.customerBus.send(event.senderId, JSON.stringify(returnObj));
       	return
       }
+      if(initByAdmin === true){
+ 		switch(jsonObj.HEAD){
+	      	case 'handShaking':
+	      		customerIDList.push(event.senderId);
+	      		console.log('=== current customerIDList ===');
+	      		console.log(customerIDList);
+	      		break;
+	      	case 'requestMenu':
+	      		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
+		      	Tabletop.init({
+		      		key: menu_google_key,
+		      		simpleSheet: true,
+		            callback: function(data){
+		            	var returnData = {'HEAD': 'menuList', 'content': data};
+		            	//Send menu to customer
+		      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
+		                console.log(data);
+		            }
+		         });
+	      		break;
+	      	case 'order':
+	      		appendOrderedDish(jsonObj.tableNum, jsonObj.content);
+		      	if(typeof orderedList[jsonObj.tableNum] === 'undefined'){
+		      		orderedList[jsonObj.tableNum] = [];
+		      		console.log('New table in, init the orderedList');
+		      	}
+		      	//append ordered dishes into orderedList
+		      	orderedList[jsonObj.tableNum].push.apply(orderedList[jsonObj.tableNum], jsonObj.content);
+		      	console.log(orderedList[jsonObj.tableNum]);
 
-      switch(jsonObj.HEAD){
-      	case 'handShaking':
-      		customerIDList.push(event.senderId);
-      		console.log('=== current customerIDList ===');
-      		console.log(customerIDList);
-      		break;
-      	case 'requestMenu':
-      		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-	      	Tabletop.init({
-	      		key: menu_google_key,
-	      		simpleSheet: true,
-	            callback: function(data){
-	            	var returnData = {'HEAD': 'menuList', 'content': data};
-	            	//Send menu to customer
-	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
-	                console.log(data);
-	            }
-	         });
-      		break;
-
-      	case 'order':
-      		appendOrderedDish(jsonObj.tableNum, jsonObj.content);
-	      	if(typeof orderedList[jsonObj.tableNum] === 'undefined'){
-	      		orderedList[jsonObj.tableNum] = [];
-	      		console.log('New table in, init the orderedList');
-	      	}
-	      	//append ordered dishes into orderedList
-	      	orderedList[jsonObj.tableNum].push.apply(orderedList[jsonObj.tableNum], jsonObj.content);
-	      	console.log(orderedList[jsonObj.tableNum]);
-
-	      	//append ordered dishes into hotTodayList
-	      	var counted_content = _.countBy(jsonObj.content,function(num){
-	      		return num;
-	      	});// {dishid: quantity ...}
-			for(var dishID in counted_content){
-				if(typeof hotTodayList[dishID] !== 'undefined'){
-					hotTodayList[dishID] += counted_content[dishID];
+		      	//append ordered dishes into hotTodayList
+		      	var counted_content = _.countBy(jsonObj.content,function(num){
+		      		return num;
+		      	});// {dishid: quantity ...}
+				for(var dishID in counted_content){
+					if(typeof hotTodayList[dishID] !== 'undefined'){
+						hotTodayList[dishID] += counted_content[dishID];
+					}
+					else{
+						hotTodayList[dishID] = counted_content[dishID];					
+					}
 				}
-				else{
-					hotTodayList[dishID] = counted_content[dishID];					
-				}
-			}
+	      		break;
+	      	case 'requestOrdered':
+	      		var returnObj = {'HEAD': 'responseOrdered', 'content': []};
+	      		var mergeContent = _.countBy(orderedList[jsonObj.tableNum],function(num){
+	      			return num;
+	      		}); // {dishid: quantity ...}
+	      		
+	      		var returnContent = _.map(mergeContent, function(quantity, dishid){
+	      			return {'dishid': parseInt(dishid), 'quantity': quantity};
+	      		}); // [{dishid: id, quantity: quantity}...]
+				returnObj.content = returnContent;
+		      	//Send ordered dishes to customer
+		      	window.customerBus.send(event.senderId, JSON.stringify(returnObj));
+	      		/*
+	      		console.log('===== mergeContent ===========');
+	      		console.log(mergeContent);
+	      		console.log('====== returnObj ============');
+	      		console.log(returnObj);
+	      		console.log('====== returnContent =========');
+	      		console.log(returnContent);
+	      		*/
+	      		break;
+	      	case 'HotToday':
+	      		var returnObj = {'HEAD': 'HotList', 'content': []};
+	      		var returnContent = [];
+	      		for (dishid in hotTodayList){
+	      			var contentEl = {};
+	      			contentEl.dishid = parseInt(dishid);
+	      			contentEl.quantity = hotTodayList[dishid];
+	      			returnContent.push(contentEl);
+	      		}
+	      		// Sort by quantity;
+	      		returnContent.sort(function(a,b){
+	      			return b.quantity - a.quantity;
+	      		});
+				returnObj.content = returnContent;
+				//Send today hot list to customer
+				window.customerBus.send(event.senderId, JSON.stringify(returnObj));      		
 
-      		break;
-
-      	case 'requestOrdered':
-      		var returnObj = {'HEAD': 'responseOrdered', 'content': []};
-      		var mergeContent = _.countBy(orderedList[jsonObj.tableNum],function(num){
-      			return num;
-      		}); // {dishid: quantity ...}
-      		
-      		var returnContent = _.map(mergeContent, function(quantity, dishid){
-      			return {'dishid': parseInt(dishid), 'quantity': quantity};
-      		}); // [{dishid: id, quantity: quantity}...]
-			returnObj.content = returnContent;
-	      	//Send ordered dishes to customer
-	      	window.customerBus.send(event.senderId, JSON.stringify(returnObj));
-      		/*
-      		console.log('===== mergeContent ===========');
-      		console.log(mergeContent);
-      		console.log('====== returnObj ============');
-      		console.log(returnObj);
-      		console.log('====== returnContent =========');
-      		console.log(returnContent);
-      		*/
-      		break;
-      	case 'HotToday':
-      		var returnObj = {'HEAD': 'HotList', 'content': []};
-      		var returnContent = [];
-      		for (dishid in hotTodayList){
-      			var contentEl = {};
-      			contentEl.dishid = parseInt(dishid);
-      			contentEl.quantity = hotTodayList[dishid];
-      			returnContent.push(contentEl);
-      		}
-      		// Sort by quantity;
-      		returnContent.sort(function(a,b){
-      			return b.quantity - a.quantity;
-      		});
-			returnObj.content = returnContent;
-			//Send today hot list to customer
-			window.customerBus.send(event.senderId, JSON.stringify(returnObj));      		
-
-      		/*
-      		console.log('====== returnContent sorted =========== ');
-      		console.log(returnContent);
-			*/
-      		break;	
-      	default:
-      		console.warn('[customer]:unknown request HEAD!!');
-      }
+	      		/*
+	      		console.log('====== returnContent sorted =========== ');
+	      		console.log(returnContent);
+				*/
+	      		break;	
+	      	default:
+	      		console.warn('[customer]:unknown request HEAD!!');
+	    }     	
+      }    
     }
 
    	//@The channel for admin
