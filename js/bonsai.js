@@ -106,15 +106,18 @@ $(function(){
       			contentEl.quantity = hotTodayList[dishid];
       			returnContent.push(contentEl);
       		}
-      		console.log('====== returnContent =========== ');
-      		console.log(returnContent);
       		// Sort by quantity;
       		returnContent.sort(function(a,b){
       			return b.quantity - a.quantity;
       		});
+			returnObj.content = returnContent;
+			//Send today hot list to customer
+			window.customerBus.send(event.senderId, JSON.stringify(returnObj));      		
+			
+      		/*
       		console.log('====== returnContent sorted =========== ');
       		console.log(returnContent);
-			
+			*/
       		break;	
       	default:
       		console.warn('unknown request HEAD!!');
