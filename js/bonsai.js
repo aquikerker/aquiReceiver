@@ -58,7 +58,8 @@ $(function(){
 	            	//Send menu to customer
 	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
 	                console.log(data);
-	                console.log(typeof data);
+	                console.log(_.isObject(data));
+	                console.log(_.isArray(data));
 	                if(typeof data !== 'object'){
 	                	console.log('extract menu fail');
 	                }
