@@ -63,15 +63,14 @@ $(function(){
 			      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
 			                console.log(data);
 			            }		
-			        },
+			        });
+			    },
 			    error: function(){
 			    	console.log('===== The menu url does not exist! ====')
 			    	var returnData = {'HEAD': 'ErrorMsg', 'content': 'noMenu'};
 			      	window.customerBus.send(event.senderId, JSON.stringify(returnData));
 			    }    
-	      	})
-	      	
-	         });
+	      	});	      	
 	  		break;
 	  	case 'order':
 	  		appendOrderedDish(jsonObj.tableNum, jsonObj.content);
