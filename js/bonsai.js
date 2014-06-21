@@ -26,7 +26,7 @@ $(function(){
    	//@The channel for customer to order
     //@create a CastMessageBus to handle messages for a custom namespace
     window.customerBus = 
-    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai:customer');
+    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai');
    
 	//@handler for the CastMessageBus message event [customer]
     customerBus.onMessage = function(event) {
@@ -160,6 +160,32 @@ $(function(){
     };
 });
 
+// utility function to display the text message in the input field
+function displayText(text,target) {
+  console.log(text);
+  switch(target){
+  	case 'customer':
+  		$('#message_customer').html(text);
+  		break;
+  	case 'admin':
+  		$('#message_admin').html(text);
+  		break;	
+  }
+};
+
+function appendOrderedDish(tableID, content){
+	//Contert content into {dishID: count...}
+	var counted_content = _.countBy(content, function(num) {
+	  return num;
+	});	
+	console.log(counted_content);
+	for(var dishID in counted_content){
+		var template = _.template($('#orderedQ-template').html(),
+						{tableID: tableID, dishID: dishID, count: counted_content[dishID]});
+		$('#orderedQ').append(template);
+	}
+}
+
 var myMenu = {"HEAD": 'menuList', 
   "content": [{"dishid": 1, "name": '超級宇宙戰艦霹靂無敵撒尿牛丸', "price": 200}, 
             {"dishid": 2, "name": '超級宇宙戰艦無敵醬爆牛丸', "price": 99999},
@@ -190,30 +216,3 @@ var myMenu = {"HEAD": 'menuList',
             {"dishid": 27, "name": '撒尿貓丸', "price": 20340}, 
             {"dishid": 28, "name": '醬爆牛丸', "price": 9999339}]
  };
-
-
-// utility function to display the text message in the input field
-function displayText(text,target) {
-  console.log(text);
-  switch(target){
-  	case 'customer':
-  		$('#message_customer').html(text);
-  		break;
-  	case 'admin':
-  		$('#message_admin').html(text);
-  		break;	
-  }
-};
-
-function appendOrderedDish(tableID, content){
-	//Contert content into {dishID: count...}
-	var counted_content = _.countBy(content, function(num) {
-	  return num;
-	});	
-	console.log(counted_content);
-	for(var dishID in counted_content){
-		var template = _.template($('#orderedQ-template').html(),
-						{tableID: tableID, dishID: dishID, count: counted_content[dishID]});
-		$('#orderedQ').append(template);
-	}
-}
