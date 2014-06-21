@@ -64,12 +64,17 @@ $(function(){
       		var returnObj = {'HEAD': 'responseOrdered', 'content': []};
       		var mergeContent = _.countBy(orderedList[jsonObj.tableID],function(num){
       			return num;
-      		});
+      		}); // {dishid: quantity ...}
       		console.log('===== mergeContent ===========');
       		console.log(mergeContent);
       		returnObj.content = mergeContent;
       		console.log('====== returnObj ============');
       		console.log(returnObj);
+      		var returnContent _.map(mergeContent, function(quantity, dishid){
+      			return {'dishid': dishid, 'quantity': quantity};
+      		});
+      		console.log('====== returnContent =========');
+      		console.log(returnContent);
       		break;	
       }
       /*
