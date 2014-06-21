@@ -108,36 +108,17 @@ $(function(){
       		}
       		console.log('====== returnContent =========== ');
       		console.log(returnContent);
+      		// Sort by quantity;
+      		returnContent.sort(function(a,b){
+      			return a.quantity - b.quantity;
+      		});
+      		console.log('====== returnContent sorted =========== ');
+      		console.log(returnContent);
+
       		break;	
       	default:
       		console.warn('unknown request HEAD!!');
       }
-      /*
-      if(jsonObj.HEAD === 'requestMenu'){
-      	var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-      	Tabletop.init({
-      		key: public_url,
-      		simpleSheet: true,
-            callback: function(data){
-            	var returnData = {'HEAD': 'menuList', 'content': data};
-      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
-                console.log(data);
-            }
-         });
-      }
-      if(jsonObj.HEAD === 'order'){
-      	appendOrderedDish(jsonObj.tableID, jsonObj.content);
-      	if(typeof orderedList[jsonObj.tableID] === 'undefined'){
-      		orderedList[jsonObj.tableID] = [];
-      		console.log('New table in, init the orderedList');
-      	}
-      	//append ordered dishes into orderedList
-      	orderedList[jsonObj.tableID].push.apply(orderedList[jsonObj.tableID], jsonObj.content);
-      	console.log(orderedList[jsonObj.tableID]);
-      }
-      if(jsonObj.HEAD === 'requestOrdered'){
-
-      }*/
     }
 
    	//@The channel for customer to order
@@ -159,10 +140,6 @@ $(function(){
 	    		menu_google_url = jsonObj.url;
     			break;
     	}
-    	/*
-    	if(jsonObj.HEAD === 'setMenuUrl'){
-    		
-    	}*/
     }
 
 	//initialize the CastReceiverManager with an application status message
