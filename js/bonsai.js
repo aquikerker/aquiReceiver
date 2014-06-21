@@ -1,4 +1,4 @@
-var menu_google_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
+var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...]}
 var hotTodayList = {};// {dishid: quantity, ...}
 $(function(){
@@ -40,7 +40,7 @@ $(function(){
       	case 'requestMenu':
       		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 	      	Tabletop.init({
-	      		key: menu_google_url,
+	      		key: menu_google_key,
 	      		simpleSheet: true,
 	            callback: function(data){
 	            	var returnData = {'HEAD': 'menuList', 'content': data};
@@ -120,7 +120,7 @@ $(function(){
 			*/
       		break;	
       	default:
-      		console.warn('unknown request HEAD!!');
+      		console.warn('[customer]:unknown request HEAD!!');
       }
     }
 
@@ -136,14 +136,19 @@ $(function(){
     	var jsonObj = JSON.parse(event.data);
     	switch(jsonObj.HEAD){
     		case 'setMenuUrl':
-	    		Tabletop.init({ key: public_url,
+    			menu_google_key = jsonObj.url;
+	    		Tabletop.init({ key: menu_google_key,
 						simpleSheet: true,
 		             	callback: function(data){
 		             		console.log(data);
 		        		}
 		        });
-	    		menu_google_url = jsonObj.url;
     			break;
+    		case 'clearOrderOneRow':
+    			$("#orderedQ").find('tr:nth-child(2)').remove();
+    			break;
+    		default:
+    			console.warn('[admin]:unknown request HEAD!!');
     	}
     }
 
