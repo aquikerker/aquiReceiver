@@ -43,6 +43,8 @@ $(function(){
       switch(jsonObj.HEAD){
       	case 'handShaking':
       		customerIDList.push(event.senderId);
+      		console.log('=== current customerIDList ===');
+      		console.log(customerIDList);
       	case 'requestMenu':
       		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 	      	Tabletop.init({
