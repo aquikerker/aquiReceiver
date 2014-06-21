@@ -170,6 +170,8 @@ $(function(){
 	  // clear the connected list
       var disconnectedID = event.senderId;	
 	  console.log('sender ID [ ' + disconnectedID + ' ] has disconnected');
+	  console.log(customerIDList);
+	  console.log(_.indexOf(customerIDList,disconnectedID));
 	  if(_.indexOf(adminIDList,disconnectedID) >= 0){
 
 	  	adminIDList.splice(_.indexOf(adminIDList,disconnectedID));
