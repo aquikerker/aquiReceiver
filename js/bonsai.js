@@ -49,20 +49,27 @@ $(function(){
 	  		break;
 	  	case 'requestMenu':
 	  		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-	      	Tabletop.init({
-	      		key: menu_google_key,
-	      		simpleSheet: true,
-	      		debug: true,
-	            callback: function(data){
-	            	var returnData = {'HEAD': 'menuList', 'content': data};
-	            	//Send menu to customer
-	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
-	                console.log(data);
-	                console.log(_.isArray(data));
-	                if(typeof data !== 'object'){
-	                	console.log('extract menu fail');
-	                }
-	            }
+	      	var menu_url = '//docs.google.com/spreadsheets/d/'+ menu_google_key +'/pubhtml';
+	      	$.ajax({
+	      		url: menu_url,
+	      		success: function(){
+			      	Tabletop.init({
+			      		key: menu_google_key,
+			      		simpleSheet: true,
+			      		debug: true,
+			            callback: function(data){
+			            	var returnData = {'HEAD': 'menuList', 'content': data};
+			            	//Send menu to customer
+			      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
+			                console.log(data);
+			            }		
+			        },
+			    error: function(){
+			    	var returnData = {'HEAD': 'ErrorMsg', 'content': 'noMenu'};
+			      	window.customerBus.send(event.senderId, JSON.stringify(returnData));
+			    }    
+	      	})
+	      	
 	         });
 	  		break;
 	  	case 'order':
