@@ -1,5 +1,5 @@
 var menu_google_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-var orderedList = {}; // {tableID: [{dishid: id, quantity: n}, ...]}
+var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...]}
 var hotTodayList = {};// {dishid: quantity, ...}
 $(function(){
 	//Debugger console
@@ -52,14 +52,14 @@ $(function(){
       		break;
 
       	case 'order':
-      		appendOrderedDish(jsonObj.tableID, jsonObj.content);
-	      	if(typeof orderedList[jsonObj.tableID] === 'undefined'){
-	      		orderedList[jsonObj.tableID] = [];
+      		appendOrderedDish(jsonObj.tableNum, jsonObj.content);
+	      	if(typeof orderedList[jsonObj.tableNum] === 'undefined'){
+	      		orderedList[jsonObj.tableNum] = [];
 	      		console.log('New table in, init the orderedList');
 	      	}
 	      	//append ordered dishes into orderedList
-	      	orderedList[jsonObj.tableID].push.apply(orderedList[jsonObj.tableID], jsonObj.content);
-	      	console.log(orderedList[jsonObj.tableID]);
+	      	orderedList[jsonObj.tableNum].push.apply(orderedList[jsonObj.tableNum], jsonObj.content);
+	      	console.log(orderedList[jsonObj.tableNum]);
 
 	      	//append ordered dishes into hotTodayList
 	      	var counted_content = _.countBy(jsonObj.content,function(num){
@@ -78,7 +78,7 @@ $(function(){
 
       	case 'requestOrdered':
       		var returnObj = {'HEAD': 'responseOrdered', 'content': []};
-      		var mergeContent = _.countBy(orderedList[jsonObj.tableID],function(num){
+      		var mergeContent = _.countBy(orderedList[jsonObj.tableNum],function(num){
       			return num;
       		}); // {dishid: quantity ...}
       		
@@ -173,7 +173,7 @@ function displayText(text,target) {
   }
 };
 
-function appendOrderedDish(tableID, content){
+function appendOrderedDish(tableNum, content){
 	//Contert content into {dishID: count...}
 	var counted_content = _.countBy(content, function(num) {
 	  return num;
@@ -181,7 +181,7 @@ function appendOrderedDish(tableID, content){
 	console.log(counted_content);
 	for(var dishID in counted_content){
 		var template = _.template($('#orderedQ-template').html(),
-						{tableID: tableID, dishID: dishID, count: counted_content[dishID]});
+						{tableNum: tableNum, dishID: dishID, count: counted_content[dishID]});
 		$('#orderedQ').append(template);
 	}
 }
