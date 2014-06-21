@@ -58,6 +58,7 @@ $(function(){
 	            	//Send menu to customer
 	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
 	                console.log(data);
+	                console.log(typeof data);
 	            }
 	         });
 	  		break;
