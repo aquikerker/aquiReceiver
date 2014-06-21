@@ -35,6 +35,44 @@ $(function(){
       console.log('=================================');
       var jsonObj = JSON.parse(event.data);
       console.log(jsonObj);
+      switch(jsonObj.HEAD){
+      	case 'requestMenu':
+      		var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
+	      	Tabletop.init({
+	      		key: public_url,
+	      		simpleSheet: true,
+	            callback: function(data){
+	            	var returnData = {'HEAD': 'menuList', 'content': data};
+	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
+	                console.log(data);
+	            }
+	         });
+      		break;
+
+      	case 'order':
+      		appendOrderedDish(jsonObj.tableID, jsonObj.content);
+	      	if(typeof orderedList[jsonObj.tableID] === 'undefined'){
+	      		orderedList[jsonObj.tableID] = [];
+	      		console.log('New table in, init the orderedList');
+	      	}
+	      	//append ordered dishes into orderedList
+	      	orderedList[jsonObj.tableID].push.apply(orderedList[jsonObj.tableID], jsonObj.content);
+	      	console.log(orderedList[jsonObj.tableID]);	
+      		break;
+
+      	case 'requestOrdered':
+      		var returnObj = {'HEAD': 'responseOrdered', 'content': []};
+      		var mergeContent = _.countBy(orderedList[jsonObj.tableID],function(num){
+      			return num;
+      		});
+      		console.log('===== mergeContent ===========');
+      		console.log(mergeContent);
+      		returnObj.content = mergeContent;
+      		console.log('====== returnObj ============');
+      		console.log(returnObj);
+      		break;	
+      }
+      /*
       if(jsonObj.HEAD === 'requestMenu'){
       	var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
       	Tabletop.init({
@@ -53,12 +91,13 @@ $(function(){
       		orderedList[jsonObj.tableID] = [];
       		console.log('New table in, init the orderedList');
       	}
+      	//append ordered dishes into orderedList
       	orderedList[jsonObj.tableID].push.apply(orderedList[jsonObj.tableID], jsonObj.content);
       	console.log(orderedList[jsonObj.tableID]);
       }
       if(jsonObj.HEAD === 'requestOrdered'){
 
-      }
+      }*/
     }
 
    	//@The channel for customer to order
@@ -69,15 +108,21 @@ $(function(){
 	//@handler for the CastMessageBus message event [admin]
     adminBus.onMessage = function(event){
     	var jsonObj = JSON.parse(event.data);
-    	if(jsonObj.HEAD === 'setMenuUrl'){/*
-    		Tabletop.init({ key: public_url,
-					simpleSheet: true,
-	             	callback: function(data){
-	             		console.log(data);
-	        		}
-	        });
-    		menu_google_url = jsonObj.url;*/
+    	switch(jsonObj.HEAD){
+    		case 'setMenuUrl':
+	    		Tabletop.init({ key: public_url,
+						simpleSheet: true,
+		             	callback: function(data){
+		             		console.log(data);
+		        		}
+		        });
+	    		menu_google_url = jsonObj.url;
+    			break;
     	}
+    	/*
+    	if(jsonObj.HEAD === 'setMenuUrl'){
+    		
+    	}*/
     }
 
 	//initialize the CastReceiverManager with an application status message
