@@ -67,14 +67,17 @@ $(function(){
       		}); // {dishid: quantity ...}
       		console.log('===== mergeContent ===========');
       		console.log(mergeContent);
-      		returnObj.content = mergeContent;
       		console.log('====== returnObj ============');
       		console.log(returnObj);
       		var returnContent = _.map(mergeContent, function(quantity, dishid){
-      			return {'dishid': dishid, 'quantity': quantity};
+      			return {'dishid': parseInt(dishid), 'quantity': quantity};
       		});
       		console.log('====== returnContent =========');
       		console.log(returnContent);
+      		returnObj.content = returnContent;
+	      	//Send results to customer
+	      	window.customerBus.send(event.senderId, JSON.stringify(returnObj));
+
       		break;	
       }
       /*
