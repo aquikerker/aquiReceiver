@@ -1,5 +1,6 @@
-//var menu_google_url;
+var menu_google_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 var orderedList = {}; // {tableID: [{dishid: id, quantity: n}, ...]}
+var hotTodayList = {};// {dishid: quantity, ...}
 $(function(){
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);
@@ -37,12 +38,13 @@ $(function(){
       console.log(jsonObj);
       switch(jsonObj.HEAD){
       	case 'requestMenu':
-      		var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
+      		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 	      	Tabletop.init({
-	      		key: public_url,
+	      		key: menu_google_url,
 	      		simpleSheet: true,
 	            callback: function(data){
 	            	var returnData = {'HEAD': 'menuList', 'content': data};
+	            	//Send menu to customer
 	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
 	                console.log(data);
 	            }
@@ -57,7 +59,21 @@ $(function(){
 	      	}
 	      	//append ordered dishes into orderedList
 	      	orderedList[jsonObj.tableID].push.apply(orderedList[jsonObj.tableID], jsonObj.content);
-	      	console.log(orderedList[jsonObj.tableID]);	
+	      	console.log(orderedList[jsonObj.tableID]);
+
+	      	//append ordered dishes into hotTodayList
+	      	var countOrdered = _.countBy(jsonObj.content,function(num){
+	      		return num;
+	      	});// {dishid: quantity ...}
+			for(var dishID in counted_content){
+				if(typeof hotTodayList[dishID] !== 'undefined'){
+					hotTodayList[dishID] += counted_content[dishID];
+				}
+				else{
+					hotTodayList[dishID] = counted_content[dishID];					
+				}
+			}
+
       		break;
 
       	case 'requestOrdered':
@@ -65,20 +81,36 @@ $(function(){
       		var mergeContent = _.countBy(orderedList[jsonObj.tableID],function(num){
       			return num;
       		}); // {dishid: quantity ...}
+      		
+      		var returnContent = _.map(mergeContent, function(quantity, dishid){
+      			return {'dishid': parseInt(dishid), 'quantity': quantity};
+      		}); // [{dishid: id, quantity: quantity}...]
+			returnObj.content = returnContent;
+	      	//Send ordered dishes to customer
+	      	window.customerBus.send(event.senderId, JSON.stringify(returnObj));
+      		/*
       		console.log('===== mergeContent ===========');
       		console.log(mergeContent);
       		console.log('====== returnObj ============');
       		console.log(returnObj);
-      		var returnContent = _.map(mergeContent, function(quantity, dishid){
-      			return {'dishid': parseInt(dishid), 'quantity': quantity};
-      		});
       		console.log('====== returnContent =========');
       		console.log(returnContent);
-      		returnObj.content = returnContent;
-	      	//Send results to customer
-	      	window.customerBus.send(event.senderId, JSON.stringify(returnObj));
-
+      		*/
+      		break;
+      	case 'HotToday':
+      		var returnObj = {'HEAD': 'HotList', 'content': []};
+      		var returnContent = [];
+      		for (dishid in hotTodayList){
+      			var contentEl = {};
+      			contentEl.dishid = dishid;
+      			contentEl.quantity = hotTodayList[dishid];
+      			returnContent.push(contentEl);
+      		}
+      		console.log('====== returnContent =========== ');
+      		console.log(returnContent);
       		break;	
+      	default:
+      		console.warn('unknown request HEAD!!');
       }
       /*
       if(jsonObj.HEAD === 'requestMenu'){
