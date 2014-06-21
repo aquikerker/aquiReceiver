@@ -49,7 +49,7 @@ $(function(){
 	  		break;
 	  	case 'requestMenu':
 	  		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-	      	var menu_url = 'google.com.tw';
+	      	var menu_url = '//google.com.tw';
 	      	$.ajax({
 	      		url: menu_url,
 	      		compelete: function(){
