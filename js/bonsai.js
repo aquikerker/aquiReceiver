@@ -145,7 +145,7 @@ $(function(){
 		        });
     			break;
     		case 'clearOrderOneRow':
-    			$("#orderedQ").find('tr:nth-child(2)').remove();
+    			$("#orderedQ").find('tr:nth-child(1)').remove();
     			break;
     		default:
     			console.warn('[admin]:unknown request HEAD!!');
