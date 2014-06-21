@@ -1,7 +1,7 @@
 var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...]}
 var hotTodayList = {};// {dishid: quantity, ...}
-var statusName = 'Aqui kerker System';
+var statusName = 'Aqui Kerker System';
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
 
@@ -52,6 +52,7 @@ $(function(){
 	      	var menu_url = '//google.com.tw';
 	      	$.ajax({
 	      		url: menu_url,
+	      		type: 'HEAD',
 	      		compelete: function(){
 			      	Tabletop.init({
 			      		key: menu_google_key,
