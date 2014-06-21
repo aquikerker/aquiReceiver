@@ -15,7 +15,7 @@ div {
 
 /* line 17, ../sass/myStyle.sass */
 table {
-  width: 1280PX;
+  width: 1280px;
   background-color: black;
   font-weight: bold;
   font-family: Verdana, Geneva, sans-serif;
@@ -27,7 +27,7 @@ table {
   color: white;
   background-color: black;
 }
-/* line 18, ../sass/myStyle.sass */
-table tbody {
-  width: 1280px;
+/* line 31, ../sass/myStyle.sass */
+table th, table td {
+  width: 425px;
 }
