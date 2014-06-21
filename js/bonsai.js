@@ -49,7 +49,7 @@ $(function(){
 	  		break;
 	  	case 'requestMenu':
 	  		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-	      	var menu_url = '//docs.google.com/spreadsheets/d/'+ menu_google_key +'/pubhtml';
+	      	var menu_url = 'https://docs.google.com/spreadsheets/d/'+ menu_google_key +'/pubhtml';
 	      	$.ajax({
 	      		url: menu_url,
 	      		success: function(){
