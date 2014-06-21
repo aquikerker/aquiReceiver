@@ -102,7 +102,7 @@ $(function(){
       		var returnContent = [];
       		for (dishid in hotTodayList){
       			var contentEl = {};
-      			contentEl.dishid = dishid;
+      			contentEl.dishid = parseInt(dishid);
       			contentEl.quantity = hotTodayList[dishid];
       			returnContent.push(contentEl);
       		}
@@ -113,7 +113,7 @@ $(function(){
 			returnObj.content = returnContent;
 			//Send today hot list to customer
 			window.customerBus.send(event.senderId, JSON.stringify(returnObj));      		
-			
+
       		/*
       		console.log('====== returnContent sorted =========== ');
       		console.log(returnContent);
