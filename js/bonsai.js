@@ -15,13 +15,14 @@ $(function(){
     //@handler for the 'ready' event
     castReceiverManager.onReady = function(event) {
       console.log('Received Ready event: ' + JSON.stringify(event.data));
-      window.castReceiverManager.setApplicationState(statusName);
     };
     
     //@handler for 'senderConnected' event
     castReceiverManager.onSenderConnected = function(event) {
       console.log('Received Sender Connected event: ' + event.data);
       console.log(window.castReceiverManager.getSender(event.data).userAgent);
+      window.castReceiverManager.setApplicationState(statusName);
+
     };
 
    	//@The channel for customer to order
