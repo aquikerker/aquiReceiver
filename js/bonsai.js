@@ -1,4 +1,4 @@
-var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
+var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs123';
 var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...]}
 var hotTodayList = {};// {dishid: quantity, ...}
 var statusName = 'Aqui kerker System';
@@ -58,7 +58,6 @@ $(function(){
 	            	//Send menu to customer
 	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
 	                console.log(data);
-	                console.log(_.isObject(data));
 	                console.log(_.isArray(data));
 	                if(typeof data !== 'object'){
 	                	console.log('extract menu fail');
