@@ -50,32 +50,18 @@ $(function(){
 	  	case 'requestMenu':
 	  		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 	      	var menu_url = '//google.com.tw';
-	      	$.get(menu_url,function(data){
-	      		console.log(data);
-	      	});
-	      	/*
-	      	$.ajax({
-	      		url: menu_url,
-	      		type: 'HEAD',
-	      		compelete: function(){
-			      	Tabletop.init({
-			      		key: menu_google_key,
-			      		simpleSheet: true,
-			      		debug: true,
-			            callback: function(data){
-			            	var returnData = {'HEAD': 'menuList', 'content': data};
-			            	//Send menu to customer
-			      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
-			                console.log(data);
-			            }		
-			        });
-			    },
-			    error: function(){
-			    	console.log('===== The menu url does not exist! ====')
-			    	var returnData = {'HEAD': 'ErrorMsg', 'content': 'noMenu'};
-			      	window.customerBus.send(event.senderId, JSON.stringify(returnData));
-			    }    
-	      	});	 */     	
+
+	      	Tabletop.init({
+	      		key: menu_google_key,
+	      		simpleSheet: true,
+	      		debug: true,
+	            callback: function(data){
+	            	var returnData = {'HEAD': 'menuList', 'content': data};
+	            	//Send menu to customer
+	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
+	                console.log(data);
+	            }		
+	        });  	
 	  		break;
 	  	case 'order':
 	  		appendOrderedDish(jsonObj.tableNum, jsonObj.content);
