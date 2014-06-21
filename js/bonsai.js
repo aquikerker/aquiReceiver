@@ -62,7 +62,7 @@ $(function(){
 	      	console.log(orderedList[jsonObj.tableID]);
 
 	      	//append ordered dishes into hotTodayList
-	      	var countOrdered = _.countBy(jsonObj.content,function(num){
+	      	var counted_content = _.countBy(jsonObj.content,function(num){
 	      		return num;
 	      	});// {dishid: quantity ...}
 			for(var dishID in counted_content){
