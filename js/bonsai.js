@@ -1,7 +1,7 @@
 var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...]}
+var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...],...}
 var hotTodayList = {};// {dishid: quantity, ...}
-var statusName = 'Aqui Kerker System';
+var statusName = 'Aquí Kerker System';
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
 
@@ -36,9 +36,6 @@ $(function(){
 	//@handler for the CastMessageBus message event [customer]
     customerBus.onMessage = function(event) {
 	    displayText(event.data,'customer');
-	    console.log('===== Receiver onMessage ========');
-	    console.log(event);
-	    console.log('=================================');
 	    var jsonObj = JSON.parse(event.data);
 	    console.log(jsonObj);
 		switch(jsonObj.HEAD){
@@ -48,9 +45,6 @@ $(function(){
 	  		console.log(customerIDList);
 	  		break;
 	  	case 'requestMenu':
-	  		//var public_url = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-	      	var menu_url = '//google.com.tw';
-
 	      	Tabletop.init({
 	      		key: menu_google_key,
 	      		simpleSheet: true,
@@ -175,11 +169,11 @@ $(function(){
 	    }
 	  // clear the connected list
       var disconnectedID = event.senderId;	
+	  /*
 	  console.log('sender ID [ ' + disconnectedID + ' ] has disconnected');
 	  console.log(customerIDList);
-	  console.log(_.indexOf(customerIDList,disconnectedID));
+	  console.log(_.indexOf(customerIDList,disconnectedID));*/
 	  if(_.indexOf(adminIDList,disconnectedID) >= 0){
-
 	  	adminIDList.splice(_.indexOf(adminIDList,disconnectedID),1);
 	  	console.log('It is an admin');
 	  	console.log(adminIDList);
