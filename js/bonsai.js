@@ -72,7 +72,7 @@ $(function(){
 		            	//init the dishID_dishNameMap
 		            	if(_.isEmpty(dishID_dishNameMap)){
 			            	for(eachDish in menuContent){
-			            		dishID_dishNameMap[eachDish.dishid] = eachDish.name;
+			            		dishID_dishNameMap[parseInt(eachDish.dishid)] = eachDish.name;
 			            	}
 			            	console.log(dishID_dishNameMap);	
 		            	}
