@@ -22,33 +22,42 @@ body {
   box-shadow: grey 0px 8px 15px;
 }
 
-/* line 35, ../sass/myStyle.sass */
+/* line 38, ../sass/myStyle.sass */
 #row-view-table {
   width: 100%;
   font-weight: bold;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 50px;
-  border: 0px solid silver;
+  border: none;
   vertical-align: middle;
   text-align: center;
   margin-top: 15px;
+  border: none;
 }
-/* line 39, ../sass/myStyle.sass */
+/* line 41, ../sass/myStyle.sass */
 #row-view-table thead {
   background: #668552;
   color: white;
-  border-color: white;
   -webkit-box-shadow: grey 0px 8px 15px;
   -moz-box-shadow: grey 0px 8px 15px;
   box-shadow: grey 0px 8px 15px;
 }
-/* line 47, ../sass/myStyle.sass */
-#row-view-table tbody th, #row-view-table tbody td {
+/* line 45, ../sass/myStyle.sass */
+#row-view-table thead tr {
+  height: 70px;
+}
+/* line 49, ../sass/myStyle.sass */
+#row-view-table tbody tr {
+  border-style: solid;
+  border-bottom: thick dotted red;
+}
+/* line 53, ../sass/myStyle.sass */
+#row-view-table tbody td {
   width: 425px;
   color: #183128;
 }
 
-/* line 52, ../sass/myStyle.sass */
+/* line 58, ../sass/myStyle.sass */
 #backround-img {
   position: absolute;
   z-index: -10;
@@ -57,7 +66,7 @@ body {
   width: 600px;
 }
 
-/* line 58, ../sass/myStyle.sass */
+/* line 64, ../sass/myStyle.sass */
 #title-img-left {
   position: absolute;
   z-index: 10;
@@ -65,7 +74,7 @@ body {
   left: 60px;
 }
 
-/* line 64, ../sass/myStyle.sass */
+/* line 70, ../sass/myStyle.sass */
 #title-img-right {
   position: absolute;
   z-index: 15;
@@ -74,7 +83,7 @@ body {
   top: 15px;
 }
 
-/* line 71, ../sass/myStyle.sass */
+/* line 77, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }

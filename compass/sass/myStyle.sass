@@ -27,24 +27,30 @@ body
 	font-weight: bold
 	font-family: Verdana, Geneva, sans-serif
 	font-size: 50px
-	border: 0px solid silver
+	//border: 0px solid silver
+	border: none
 	vertical-align: middle
 	text-align: center
 	margin-top: 15px
+	border: none
+
 
 #row-view-table
-
 	+table-base()
 	//display: table-cell
 	thead
 		background: #668552
 		color: white
-		border-color: white
-		//color: white
 		+box-shadow(grey 0px 8px 15px)
+		tr
+			height: 70px
 
 	tbody
-		th, td
+		tr
+			//border-bottom: 5px solid red
+			border-style: solid
+			border-bottom: thick dotted #ff0000
+		td
 			width: 425px
 			color: #183128
 
