@@ -42,8 +42,8 @@ body {
 #backround-img {
   position: absolute;
   z-index: -10;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=25);
-  opacity: 0.25;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=15);
+  opacity: 0.15;
   width: 600px;
 }
 
