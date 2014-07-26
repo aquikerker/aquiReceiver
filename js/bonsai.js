@@ -5,7 +5,7 @@ var hotTodayList = {};// {dishid: quantity, ...}
 var statusName = 'Quick Order Oh!';
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
-var menuContent = NaN;
+var menuContent = null;
 
 $(function(){
 	//Debugger console
@@ -56,7 +56,7 @@ $(function(){
 	  		}
 	  		break;
 	  	case 'requestMenu':
-	  		if(menuContent == NaN){
+	  		if(menuContent == null){
 	  			Tabletop.init({
 		      		key: menu_google_key,
 		      		simpleSheet: true,
