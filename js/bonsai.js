@@ -67,7 +67,7 @@ $(function(){
 		            	//Send menu to customer
 		      			customerBus.send(event.senderId, JSON.stringify(returnData));
 		                console.log('Get menu from google doc');
-		                //console.log(menuContent);
+		                console.log(menuContent);
 		            }		
 		        });	
 	  		}
@@ -75,7 +75,7 @@ $(function(){
 	  			var returnData = {'HEAD': 'menuList', 'content': menuContent};
             	//Send menu to customer
       			customerBus.send(event.senderId, JSON.stringify(returnData));
-      			console.log('Return meny directly');
+      			console.log('Return menu directly');
 	  		}	      	  	
 	  		break;
 	  	case 'order':
