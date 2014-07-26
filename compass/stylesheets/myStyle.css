@@ -48,6 +48,23 @@ body {
 }
 
 /* line 47, ../sass/myStyle.sass */
+#title-img-left {
+  position: absolute;
+  z-index: 10;
+  height: 90px;
+  left: 30px;
+}
+
+/* line 53, ../sass/myStyle.sass */
+#title-img-right {
+  position: absolute;
+  z-index: 15;
+  height: 95px;
+  right: 180px;
+  top: 15px;
+}
+
+/* line 60, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }
