@@ -6,6 +6,7 @@ var statusName = 'Quick Order Oh!';
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
 var menuContent = null;
+var dishID_dishNameMap = [] // {dishID: dishName,...}
 
 $(function(){
 	//Debugger console
@@ -68,6 +69,13 @@ $(function(){
 		      			customerBus.send(event.senderId, JSON.stringify(returnData));
 		                console.log('Get menu from google doc');
 		                console.log(menuContent);
+		            	//init the dishID_dishNameMap
+		            	if(_.isEmpty(dishID_dishNameMap)){
+			            	for(eachDish in menuContent){
+			            		dishID_dishNameMap[eachDish.dishid] = eachDish.name;
+			            	}
+			            	console.log(dishID_dishNameMap);	
+		            	}
 		            }		
 		        });	
 	  		}
@@ -82,6 +90,7 @@ $(function(){
 	  		break;
 	  	case 'order':
 	  		appendOrderedDish(jsonObj.tableNum, jsonObj.content);
+
 	      	if(typeof orderedList[jsonObj.tableNum] === 'undefined'){
 	      		orderedList[jsonObj.tableNum] = [];
 	      		console.log('New table in, init the orderedList');
@@ -236,7 +245,11 @@ function appendOrderedDish(tableNum, content){
 	console.log(counted_content);
 	for(var dishID in counted_content){
 		var template = _.template($('#orderedQ-template').html(),
-						{tableNum: tableNum, dishID: dishID, count: counted_content[dishID]});
+						{tableNum: tableNum, 
+							dishID: dishID, 
+							dishName: dishID_dishNameMap[dishID], 
+							count: counted_content[dishID]
+						});
 		$('#orderedQ').append(template);
 	}
 }
