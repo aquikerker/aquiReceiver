@@ -1,42 +1,44 @@
-/* line 1, ../sass/myStyle.sass */
+/* line 5, ../sass/myStyle.sass */
 body {
-  background: yellow;
+  background: #c4d7a4;
 }
 
-/* line 4, ../sass/myStyle.sass */
-.info-div {
+/* line 8, ../sass/myStyle.sass */
+#info-div {
   height: 70PX;
   width: 1280PX;
   text-align: center;
   border: 0px solid silver;
   vertical-align: middle;
   color: white;
-  background-color: black;
+  background: #375d3b;
   font-weight: bold;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 60px;
   padding-top: 15px;
   padding-bottom: 20px;
+  -webkit-box-shadow: grey 0px 8px 15px;
+  -moz-box-shadow: grey 0px 8px 15px;
+  box-shadow: grey 0px 8px 15px;
 }
 
-/* line 21, ../sass/myStyle.sass */
-table {
+/* line 35, ../sass/myStyle.sass */
+#row-view-table {
   width: 1280px;
-  background-color: green;
   font-weight: bold;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 45px;
-  text-align: center;
   border: 0px solid silver;
   vertical-align: middle;
-  color: white;
+  text-align: center;
+  color: #183128;
 }
-/* line 34, ../sass/myStyle.sass */
-table th, table td {
+/* line 39, ../sass/myStyle.sass */
+#row-view-table th, #row-view-table td {
   width: 425px;
 }
 
-/* line 37, ../sass/myStyle.sass */
+/* line 42, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }

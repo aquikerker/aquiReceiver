@@ -1,7 +1,11 @@
-body
-	background: yellow
+@import "compass/css3"
 
-.info-div
+
+
+body
+	background: #C4D7A4
+
+#info-div
 	height: 70PX
 	width: 1280PX
 	text-align: center
@@ -9,28 +13,29 @@ body
 	//display: table-cell
 	vertical-align: middle
 	color: #FFFFFF
-	background-color: #000000
+	background: #375D3B
 	font-weight: bold
 	font-family: Verdana, Geneva, sans-serif
 	font-size: 60px
 	padding-top: 15px
 	padding-bottom: 20px
 	//font-size: 1.3em
+	+box-shadow(grey 0px 8px 15px)
 
-
-table
-	//tbody
-	//	width: 1280px
+@mixin table-base()
 	width: 1280px
-	background-color: green
 	font-weight: bold
 	font-family: Verdana, Geneva, sans-serif
 	font-size: 45px
-	text-align: center
 	border: 0px solid silver
-	//display: table-cell
 	vertical-align: middle
-	color: #FFFFFF
+	text-align: center
+
+
+#row-view-table
+	+table-base()
+	//display: table-cell
+	color: #183128
 	th, td
 		width: 425px
 
