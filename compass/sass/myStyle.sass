@@ -7,7 +7,7 @@ body
 
 #info-div
 	height: 70px
-	width: 1280px
+	width: 100%
 	text-align: center
 	border: 0px solid silver
 	//display: table-cell
@@ -23,20 +23,30 @@ body
 	+box-shadow(grey 0px 8px 15px)
 
 @mixin table-base()
-	width: 1280px
+	width: 100%
 	font-weight: bold
 	font-family: Verdana, Geneva, sans-serif
 	font-size: 50px
 	border: 0px solid silver
 	vertical-align: middle
 	text-align: center
+	margin-top: 15px
 
 #row-view-table
+
 	+table-base()
 	//display: table-cell
-	color: #183128
-	th, td
-		width: 425px
+	thead
+		background: #668552
+		color: #DBE61E
+		//color: white
+		+box-shadow(grey 0px 8px 15px)
+
+	tbody
+		th, td
+			width: 425px
+			color: #183128
+
 
 #backround-img
 	position: absolute

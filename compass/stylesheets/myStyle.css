@@ -6,7 +6,7 @@ body {
 /* line 8, ../sass/myStyle.sass */
 #info-div {
   height: 70px;
-  width: 1280px;
+  width: 100%;
   text-align: center;
   border: 0px solid silver;
   vertical-align: middle;
@@ -22,23 +22,32 @@ body {
   box-shadow: grey 0px 8px 15px;
 }
 
-/* line 34, ../sass/myStyle.sass */
+/* line 35, ../sass/myStyle.sass */
 #row-view-table {
-  width: 1280px;
+  width: 100%;
   font-weight: bold;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 50px;
   border: 0px solid silver;
   vertical-align: middle;
   text-align: center;
+  margin-top: 15px;
+}
+/* line 39, ../sass/myStyle.sass */
+#row-view-table thead {
+  background: #668552;
+  color: #dbe61e;
+  -webkit-box-shadow: grey 0px 8px 15px;
+  -moz-box-shadow: grey 0px 8px 15px;
+  box-shadow: grey 0px 8px 15px;
+}
+/* line 46, ../sass/myStyle.sass */
+#row-view-table tbody th, #row-view-table tbody td {
+  width: 425px;
   color: #183128;
 }
-/* line 38, ../sass/myStyle.sass */
-#row-view-table th, #row-view-table td {
-  width: 425px;
-}
 
-/* line 41, ../sass/myStyle.sass */
+/* line 51, ../sass/myStyle.sass */
 #backround-img {
   position: absolute;
   z-index: -10;
@@ -47,7 +56,7 @@ body {
   width: 600px;
 }
 
-/* line 47, ../sass/myStyle.sass */
+/* line 57, ../sass/myStyle.sass */
 #title-img-left {
   position: absolute;
   z-index: 10;
@@ -55,7 +64,7 @@ body {
   left: 60px;
 }
 
-/* line 53, ../sass/myStyle.sass */
+/* line 63, ../sass/myStyle.sass */
 #title-img-right {
   position: absolute;
   z-index: 15;
@@ -64,7 +73,7 @@ body {
   top: 15px;
 }
 
-/* line 60, ../sass/myStyle.sass */
+/* line 70, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }
