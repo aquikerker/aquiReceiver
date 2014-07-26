@@ -5,6 +5,7 @@ var hotTodayList = {};// {dishid: quantity, ...}
 var statusName = 'Quick Order Oh!';
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
+var menuContent = NaN;
 
 $(function(){
 	//Debugger console
@@ -55,17 +56,27 @@ $(function(){
 	  		}
 	  		break;
 	  	case 'requestMenu':
-	      	Tabletop.init({
-	      		key: menu_google_key,
-	      		simpleSheet: true,
-	      		debug: true,
-	            callback: function(data){
-	            	var returnData = {'HEAD': 'menuList', 'content': data};
-	            	//Send menu to customer
-	      			customerBus.send(event.senderId, JSON.stringify(returnData));
-	                console.log(data);
-	            }		
-	        });  	
+	  		if(menuContent === NaN){
+	  			Tabletop.init({
+		      		key: menu_google_key,
+		      		simpleSheet: true,
+		      		debug: true,
+		            callback: function(data){
+		            	menuContent = data;
+		            	var returnData = {'HEAD': 'menuList', 'content': menuContent};
+		            	//Send menu to customer
+		      			customerBus.send(event.senderId, JSON.stringify(returnData));
+		                console.log('Get menu from google doc');
+		                //console.log(menuContent);
+		            }		
+		        });	
+	  		}
+	  		else{
+	  			var returnData = {'HEAD': 'menuList', 'content': menuContent};
+            	//Send menu to customer
+      			customerBus.send(event.senderId, JSON.stringify(returnData));
+      			console.log('Return meny directly');
+	  		}	      	  	
 	  		break;
 	  	case 'order':
 	  		appendOrderedDish(jsonObj.tableNum, jsonObj.content);
