@@ -73,6 +73,7 @@ $(function(){
 		            	if(_.isEmpty(dishID_dishNameMap)){
 			            	for(var i=0; i < menuContent.length; i++){
 			            		var eachDish = menuContent[i];
+			            		console.log(eachDish);
 			            		dishID_dishNameMap[parseInt(eachDish.dishid)] = eachDish.name;
 			            	}
 			            	console.log(dishID_dishNameMap);	
