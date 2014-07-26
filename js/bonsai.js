@@ -76,6 +76,8 @@ $(function(){
             	//Send menu to customer
       			customerBus.send(event.senderId, JSON.stringify(returnData));
       			console.log('Return menu directly');
+		        console.log(menuContent);
+
 	  		}	      	  	
 	  		break;
 	  	case 'order':
