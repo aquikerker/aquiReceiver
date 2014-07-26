@@ -1,3 +1,4 @@
+//var menu_google_key = '';
 var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...],...}
 var hotTodayList = {};// {dishid: quantity, ...}
@@ -40,9 +41,19 @@ $(function(){
 	    console.log(jsonObj);
 		switch(jsonObj.HEAD){
 	  	case 'handShaking':
-	  		customerIDList.push(event.senderId);
-	  		console.log('=== current customerIDList ===');
-	  		console.log(customerIDList);
+			// Kick out the costomer if menu not set		
+	  		if (menu_google_key === ''){
+	  			console.log('There is no menu, plz get out!');
+	  			var returnData = {'HEAD': 'ErrorMsg', 'content': 'noMenu'};
+	      		window.customerBus.send(event.senderId, JSON.stringify(returnData));
+
+	  		}
+	  		// Add the customer ID into list
+	  		else{
+		  		customerIDList.push(event.senderId);
+		  		console.log('=== current customerIDList ===');
+		  		console.log(customerIDList);	
+	  		}
 	  		break;
 	  	case 'requestMenu':
 	      	Tabletop.init({
@@ -125,6 +136,7 @@ $(function(){
 	  		break;	
 	  	default:
 	  		console.warn('[customer]:unknown request HEAD!!');
+	  		break;
 		}     	
     }
 
@@ -158,6 +170,7 @@ $(function(){
     			break;
     		default:
     			console.warn('[admin]:unknown request HEAD!!');
+    			break;
     	}
     }
 
