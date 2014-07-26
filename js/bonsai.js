@@ -71,7 +71,8 @@ $(function(){
 		                console.log(menuContent);
 		            	//init the dishID_dishNameMap
 		            	if(_.isEmpty(dishID_dishNameMap)){
-			            	for(eachDish in menuContent){
+			            	for(var i=0; i < menuContent.length; i++){
+			            		var eachDish = menuContent[i];
 			            		dishID_dishNameMap[parseInt(eachDish.dishid)] = eachDish.name;
 			            	}
 			            	console.log(dishID_dishNameMap);	
