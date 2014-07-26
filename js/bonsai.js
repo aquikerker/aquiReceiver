@@ -1,5 +1,5 @@
-var menu_google_key = '';
-//var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
+//var menu_google_key = '';
+var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...],...}
 var hotTodayList = {};// {dishid: quantity, ...}
 var statusName = 'Quick Order Oh!';
@@ -74,7 +74,7 @@ $(function(){
 			            	for(var i=0; i < menuContent.length; i++){
 			            		var eachDish = menuContent[i];
 			            		console.log(eachDish);
-			            		dishID_dishNameMap[0] = eachDish.name;
+			            		dishID_dishNameMap[parseInt(eachDish.dishid)] = eachDish.name;
 			            	}
 			            	console.log(dishID_dishNameMap);	
 		            	}
