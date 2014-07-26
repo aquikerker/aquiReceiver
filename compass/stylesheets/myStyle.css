@@ -36,18 +36,19 @@ body {
 /* line 39, ../sass/myStyle.sass */
 #row-view-table thead {
   background: #668552;
-  color: #dbe61e;
+  color: white;
+  border-color: white;
   -webkit-box-shadow: grey 0px 8px 15px;
   -moz-box-shadow: grey 0px 8px 15px;
   box-shadow: grey 0px 8px 15px;
 }
-/* line 46, ../sass/myStyle.sass */
+/* line 47, ../sass/myStyle.sass */
 #row-view-table tbody th, #row-view-table tbody td {
   width: 425px;
   color: #183128;
 }
 
-/* line 51, ../sass/myStyle.sass */
+/* line 52, ../sass/myStyle.sass */
 #backround-img {
   position: absolute;
   z-index: -10;
@@ -56,7 +57,7 @@ body {
   width: 600px;
 }
 
-/* line 57, ../sass/myStyle.sass */
+/* line 58, ../sass/myStyle.sass */
 #title-img-left {
   position: absolute;
   z-index: 10;
@@ -64,7 +65,7 @@ body {
   left: 60px;
 }
 
-/* line 63, ../sass/myStyle.sass */
+/* line 64, ../sass/myStyle.sass */
 #title-img-right {
   position: absolute;
   z-index: 15;
@@ -73,7 +74,7 @@ body {
   top: 15px;
 }
 
-/* line 70, ../sass/myStyle.sass */
+/* line 71, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }
