@@ -1,4 +1,9 @@
-/* line 3, ../sass/myStyle.sass */
+/* line 1, ../sass/myStyle.sass */
+body {
+  background: yellow;
+}
+
+/* line 4, ../sass/myStyle.sass */
 .info-div {
   height: 70PX;
   width: 1280PX;
@@ -14,18 +19,17 @@
   padding-bottom: 20px;
 }
 
-/* line 20, ../sass/myStyle.sass */
+/* line 21, ../sass/myStyle.sass */
 table {
   width: 1280px;
-  background-color: black;
+  background-color: green;
   font-weight: bold;
   font-family: Verdana, Geneva, sans-serif;
-  font-size: 40px;
+  font-size: 45px;
   text-align: center;
   border: 0px solid silver;
   vertical-align: middle;
   color: white;
-  background-color: black;
 }
 /* line 34, ../sass/myStyle.sass */
 table th, table td {
