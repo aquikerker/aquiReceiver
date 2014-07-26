@@ -22,23 +22,32 @@ body {
   box-shadow: grey 0px 8px 15px;
 }
 
-/* line 35, ../sass/myStyle.sass */
+/* line 34, ../sass/myStyle.sass */
 #row-view-table {
   width: 1280px;
   font-weight: bold;
   font-family: Verdana, Geneva, sans-serif;
-  font-size: 45px;
+  font-size: 50px;
   border: 0px solid silver;
   vertical-align: middle;
   text-align: center;
   color: #183128;
 }
-/* line 39, ../sass/myStyle.sass */
+/* line 38, ../sass/myStyle.sass */
 #row-view-table th, #row-view-table td {
   width: 425px;
 }
 
-/* line 42, ../sass/myStyle.sass */
+/* line 41, ../sass/myStyle.sass */
+#backround-img {
+  position: absolute;
+  z-index: -10;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=25);
+  opacity: 0.25;
+  width: 600px;
+}
+
+/* line 47, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }
