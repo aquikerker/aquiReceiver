@@ -56,7 +56,7 @@ $(function(){
 	  		}
 	  		break;
 	  	case 'requestMenu':
-	  		if(menuContent === NaN){
+	  		if(menuContent == NaN){
 	  			Tabletop.init({
 		      		key: menu_google_key,
 		      		simpleSheet: true,
