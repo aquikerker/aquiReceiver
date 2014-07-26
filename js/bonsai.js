@@ -11,28 +11,27 @@ $(function(){
     cast.receiver.logger.setLevelValue(0);
 
     //castReceiverMeg obj
-    window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+    var castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
     console.log('Starting Receiver Manager');
 
-  	window.castReceiverManager.setApplicationState('Aqui hahaha！');
+  	castReceiverManager.setApplicationState('Aqui hahaha！');
   
     //@handler for the 'ready' event
     castReceiverManager.onReady = function(event) {
       console.log('Received Ready event: ' + JSON.stringify(event.data));
-      window.castReceiverManager.setApplicationState(statusName);
+      castReceiverManager.setApplicationState(statusName);
     
     };
     
     //@handler for 'senderConnected' event
     castReceiverManager.onSenderConnected = function(event) {
       console.log('Received Sender Connected event: ' + event.data);
-      console.log(window.castReceiverManager.getSender(event.data).userAgent);
+      console.log(castReceiverManager.getSender(event.data).userAgent);
     };
 
    	//@The channel for customer to order
     //@create a CastMessageBus to handle messages for a custom namespace
-    window.customerBus = 
-    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai');
+    var customerBus = castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai');
    
 	//@handler for the CastMessageBus message event [customer]
     customerBus.onMessage = function(event) {
@@ -45,7 +44,7 @@ $(function(){
 	  		if (menu_google_key === ''){
 	  			console.log('There is no menu, plz get out!');
 	  			var returnData = {'HEAD': 'ErrorMsg', 'content': 'noMenu'};
-	      		window.customerBus.send(event.senderId, JSON.stringify(returnData));
+	      		customerBus.send(event.senderId, JSON.stringify(returnData));
 
 	  		}
 	  		// Add the customer ID into list
@@ -63,7 +62,7 @@ $(function(){
 	            callback: function(data){
 	            	var returnData = {'HEAD': 'menuList', 'content': data};
 	            	//Send menu to customer
-	      			window.customerBus.send(event.senderId, JSON.stringify(returnData));
+	      			customerBus.send(event.senderId, JSON.stringify(returnData));
 	                console.log(data);
 	            }		
 	        });  	
@@ -102,7 +101,7 @@ $(function(){
 	  		}); // [{dishid: id, quantity: quantity}...]
 			returnObj.content = returnContent;
 	      	//Send ordered dishes to customer
-	      	window.customerBus.send(event.senderId, JSON.stringify(returnObj));
+	      	customerBus.send(event.senderId, JSON.stringify(returnObj));
 	  		/*
 	  		console.log('===== mergeContent ===========');
 	  		console.log(mergeContent);
@@ -127,7 +126,7 @@ $(function(){
 	  		});
 			returnObj.content = returnContent;
 			//Send today hot list to customer
-			window.customerBus.send(event.senderId, JSON.stringify(returnObj));      		
+			customerBus.send(event.senderId, JSON.stringify(returnObj));      		
 
 	  		/*
 	  		console.log('====== returnContent sorted =========== ');
@@ -142,8 +141,7 @@ $(function(){
 
    	//@The channel for admin
     //@create a CastMessageBus to handle messages for a admin namespace
-    window.adminBus = 
-    	window.castReceiverManager.getCastMessageBus('urn:x-cast:aqui-diarrhea');
+    var adminBus = castReceiverManager.getCastMessageBus('urn:x-cast:aqui-diarrhea');
 
 	//@handler for the CastMessageBus message event [admin]
     adminBus.onMessage = function(event){
@@ -177,7 +175,7 @@ $(function(){
   	//@handler for 'senderDisconnected' event
     castReceiverManager.onSenderDisconnected = function(event) {
       console.log('Received Sender Disconnected event: ' + event.data);
-      if (window.castReceiverManager.getSenders().length == 0) {
+      if (castReceiverManager.getSenders().length == 0) {
 	      window.close();
 	    }
 	  // clear the connected list
@@ -199,7 +197,7 @@ $(function(){
     };
 
 	//initialize the CastReceiverManager with an application status message
-    window.castReceiverManager.start({statusText: "Application is starting"});
+    castReceiverManager.start({statusText: "Application is starting"});
     console.log('Receiver Manager started');
     
 });
