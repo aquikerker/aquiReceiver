@@ -1,10 +1,17 @@
-/* line 5, ../sass/myStyle.sass */
+/* line 3, ../sass/myStyle.sass */
 body {
-  background: #c4d7a4;
+  background: #e5e5a9;
 }
 
-/* line 8, ../sass/myStyle.sass */
+/* line 6, ../sass/myStyle.sass */
+* {
+  font-weight: bold;
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+/* line 10, ../sass/myStyle.sass */
 #info-div {
+  margin-top: 10px;
   height: 70px;
   width: 100%;
   text-align: center;
@@ -12,8 +19,6 @@ body {
   vertical-align: middle;
   color: white;
   background: #375d3b;
-  font-weight: bold;
-  font-family: Verdana, Geneva, sans-serif;
   font-size: 60px;
   padding-top: 15px;
   padding-bottom: 20px;
@@ -22,19 +27,20 @@ body {
   box-shadow: grey 0px 8px 15px;
 }
 
-/* line 38, ../sass/myStyle.sass */
+/* line 41, ../sass/myStyle.sass */
 #row-view-table {
   width: 100%;
-  font-weight: bold;
-  font-family: Verdana, Geneva, sans-serif;
   font-size: 50px;
   border: none;
   vertical-align: middle;
   text-align: center;
   margin-top: 15px;
   border: none;
+  border-left: none;
+  border-right: none;
+  border-collapse: collapse;
 }
-/* line 41, ../sass/myStyle.sass */
+/* line 47, ../sass/myStyle.sass */
 #row-view-table thead {
   background: #668552;
   color: white;
@@ -42,31 +48,40 @@ body {
   -moz-box-shadow: grey 0px 8px 15px;
   box-shadow: grey 0px 8px 15px;
 }
-/* line 45, ../sass/myStyle.sass */
+/* line 51, ../sass/myStyle.sass */
 #row-view-table thead tr {
   height: 70px;
 }
-/* line 49, ../sass/myStyle.sass */
-#row-view-table tbody tr {
-  border-style: solid;
-  border-bottom: thick dotted red;
-}
 /* line 53, ../sass/myStyle.sass */
+#row-view-table tbody {
+  background: rgba(184, 159, 130, 0.6);
+}
+/* line 56, ../sass/myStyle.sass */
+#row-view-table tbody tr {
+  line-height: 70px;
+  border-bottom: 1px solid #8a876d;
+  border-top: 1px solid #8a876d;
+}
+/* line 60, ../sass/myStyle.sass */
 #row-view-table tbody td {
   width: 425px;
   color: #183128;
 }
 
-/* line 58, ../sass/myStyle.sass */
-#backround-img {
-  position: absolute;
+/* line 65, ../sass/myStyle.sass */
+#background-imgs {
+  position: fixed;
   z-index: -10;
+  bottom: 0px;
+}
+/* line 69, ../sass/myStyle.sass */
+#background-imgs img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=15);
   opacity: 0.15;
-  width: 600px;
+  display: inline-block;
 }
 
-/* line 64, ../sass/myStyle.sass */
+/* line 73, ../sass/myStyle.sass */
 #title-img-left {
   position: absolute;
   z-index: 10;
@@ -74,7 +89,7 @@ body {
   left: 60px;
 }
 
-/* line 70, ../sass/myStyle.sass */
+/* line 79, ../sass/myStyle.sass */
 #title-img-right {
   position: absolute;
   z-index: 15;
@@ -83,7 +98,46 @@ body {
   top: 15px;
 }
 
-/* line 77, ../sass/myStyle.sass */
+/* line 86, ../sass/myStyle.sass */
+#nitification-container {
+  position: absolute;
+  z-index: 20;
+  right: 20px;
+  bottom: 20px;
+}
+/* line 91, ../sass/myStyle.sass */
+#nitification-container .notification-window {
+  margin-bottom: 8px;
+  width: 300px;
+  background: #e8f8ff;
+  border: 1px solid #67b8de;
+  font-size: 1.5em;
+  padding: 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+/* line 99, ../sass/myStyle.sass */
+#nitification-container .notification-window .icon-area {
+  width: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+/* line 103, ../sass/myStyle.sass */
+#nitification-container .notification-window .text-area {
+  width: 260px;
+  display: inline-block;
+}
+/* line 106, ../sass/myStyle.sass */
+#nitification-container .notification-window .text-area .text-content {
+  color: #050d2b;
+  font-weight: normal;
+  padding-left: 8px;
+}
+
+/* line 111, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }

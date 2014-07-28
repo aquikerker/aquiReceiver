@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="./compass/stylesheets/myStyle.css">
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript" src="./js/jquery-2.1.0.min.js"></script>
@@ -18,16 +19,60 @@
       <div id="message_admin" class="display-none">[Admin Message Here!!]</div>
     </div>
 
-    <div id="orderedQ-container"></div>
+    <div id="test-btns">
+      <button id="show-alert-btn">Show Alert</button>
+      <button id="show-alert-btn2">Show Alert 2</button>
+      <button id="show-alert-btn3">Show Alert 3</button>
+    </div>
 
-    <img id="backround-img" src="./imgs/rage-omega__.png"></img>
+    <div id="background-imgs">
+      <img src="./imgs/rage-omega__.png" width="400px"></img>
+    </div>
 
-    <table id="row-view-table" cellspacing="0" cellpadding="0">
+    <div id="nitification-container">
+      <div class="notification-window">
+        <span class="icon-area">
+          <i class="fa fa-child"></i>
+        </span>
+        <span class="text-area">
+          <span class="text-content">人客來囉！</span>
+        </span>  
+      </div>
+      <div class="notification-window">
+        <span class="icon-area">
+          <i class="fa fa-bell"></i>
+        </span>
+        <span class="text-area">  
+          <span class="text-content">5號桌需要服務生！</span>
+        </span>
+      </div>
+      <div class="notification-window">
+        <span class="icon-area">
+          <i class="fa fa-tag"></i>
+        </span>
+        <span class="text-area">  
+          <span class="text-content">5號桌點了超級宇宙無敵撒尿牛丸！</span>
+        </span>
+      </div>
+    </div>
+    <!--Template for notification window -->
+    <script id="ntf-window-tmp">
+      <div class="notification-window">
+        <span class="icon-area">
+          <i class="fa <%=iconType%>"></i>
+        </span>
+        <span class="text-area">  
+          <span class="text-content"><%=textContent%></span>
+        </span>
+      </div>
+    </script>
+
+    <table id="row-view-table" class="dwisplay-none">
       <thead>
         <tr>
-          <th>Table No.</th>
-          <th>Dish</th> 
-          <th>Quantity</th>
+          <th>桌號</th>
+          <th>菜名</th> 
+          <th>數量</th>
         </tr>
       </thead>
       <tbody id="orderedQ">
@@ -43,6 +88,7 @@
         </tr>
       </tbody>
     </table>
+    <!--Template for ordered queue -->
     <script id="orderedQ-template">
       <tr>
         <td><%=tableNum%></td>

@@ -9,6 +9,9 @@ var menuContent = null;
 var dishID_dishNameMap = {} // {dishID: dishName,...}
 
 $(function(){
+   //Testing!
+    testFeatures();
+
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);
 
@@ -224,6 +227,8 @@ $(function(){
     castReceiverManager.start({statusText: "Application is starting"});
     console.log('Receiver Manager started');
     
+
+
 });
 
 // utility function to display the text message in the input field
@@ -254,4 +259,32 @@ function appendOrderedDish(tableNum, content){
 						});
 		$('#orderedQ').append(template);
 	}
+}
+
+function testFeatures(){
+	// Testing notification window!
+	var iconType = {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-tag'};
+
+	$('#show-alert-btn').on('click',function(){
+		var tmp = _.template($('#ntf-window-tmp').html(),{
+			iconType: iconType.callWaiter,
+			textContent: '人家想要服務生葛格！'
+		});
+		$(tmp).appendTo('#nitification-container').delay(5000).fadeOut();
+	});
+	$('#show-alert-btn2').on('click',function(){
+		var tmp = _.template($('#ntf-window-tmp').html(),{
+			iconType: iconType.newOrder,
+			textContent: '7號桌點了黯然銷魂飯！'
+		});
+		$(tmp).appendTo('#nitification-container').delay(5000).fadeOut();
+	});
+	$('#show-alert-btn3').on('click',function(){
+		var tmp = _.template($('#ntf-window-tmp').html(),{
+			iconType: iconType.newCustomer,
+			textContent: '狼Ke來啊喲！'
+		})
+		$(tmp).appendTo('#nitification-container').delay(5000).fadeOut();
+
+	});
 }

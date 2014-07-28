@@ -1,21 +1,24 @@
 @import "compass/css3"
 
-
-
 body
-	background: #C4D7A4
+	background: #E5E5A9
+
+*
+	font-weight: bold
+	font-family: Verdana, Geneva, sans-serif
 
 #info-div
+	margin-top: 10px
 	height: 70px
+	//line-height: 80px
 	width: 100%
 	text-align: center
 	border: 0px solid silver
 	//display: table-cell
+	//+myFont()
 	vertical-align: middle
 	color: #FFFFFF
 	background: #375D3B
-	font-weight: bold
-	font-family: Verdana, Geneva, sans-serif
 	font-size: 60px
 	padding-top: 15px
 	padding-bottom: 20px
@@ -24,8 +27,8 @@ body
 
 @mixin table-base()
 	width: 100%
-	font-weight: bold
-	font-family: Verdana, Geneva, sans-serif
+	//font-weight: bold
+	//font-family: Verdana, Geneva, sans-serif
 	font-size: 50px
 	//border: 0px solid silver
 	border: none
@@ -38,28 +41,34 @@ body
 #row-view-table
 	+table-base()
 	//display: table-cell
+	border-left: none
+	border-right: none
+	border-collapse: collapse
 	thead
 		background: #668552
 		color: white
 		+box-shadow(grey 0px 8px 15px)
 		tr
 			height: 70px
-
 	tbody
+		//background: #D4C39B
+		background: rgba(184, 159, 130, 0.6)
 		tr
-			//border-bottom: 5px solid red
-			border-style: solid
-			border-bottom: thick dotted #ff0000
+			line-height: 70px
+			border-bottom: 1px solid #8A876D
+			border-top: 1px solid #8A876D
 		td
 			width: 425px
 			color: #183128
 
 
-#backround-img
-	position: absolute
+#background-imgs
+	position: fixed
 	z-index: -10
-	+opacity(0.15)
-	width: 600px
+	bottom: 0px
+	img	
+		+opacity(0.15)		
+		display: inline-block
 
 #title-img-left
 	position: absolute
@@ -73,6 +82,31 @@ body
 	height: 95px
 	right: 60px
 	top: 15px
+
+#nitification-container
+	position: absolute
+	z-index: 20
+	right: 20px
+	bottom: 20px
+	.notification-window
+		margin-bottom: 8px
+		width: 300px
+		background: #E8F8FF
+		border: 1px solid #67B8DE
+		font-size: 1.5em
+		padding: 15px
+		+border-radius(5px)
+		.icon-area
+			width: 20px
+			display: inline-block
+			vertical-align: top
+		.text-area
+			width: 260px
+			display: inline-block
+			.text-content
+				color: #050D2B
+				font-weight: normal
+				padding-left: 8px
 
 .display-none
 	display: none		
