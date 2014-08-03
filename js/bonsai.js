@@ -359,7 +359,7 @@ var ntfController = {
 			orderedList += dishID_dishNameMap[dishid] + '、';
 		}
 		var tmp = _.template($('#ntf-window-tmp').html(),{
-			iconType: iconType.newOrder,
+			iconType: ntfController.iconType.newOrder,
 			textContent: '<highlight>'+ tableNum +'號桌</highlight>點了'+ orderedStr +'！'
 		});
 		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
