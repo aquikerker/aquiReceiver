@@ -360,7 +360,7 @@ var ntfController = {
 	newOrder: function(tableNum, dishidList){
 		var orderedStr = '';
 		for (dishid in dishidList){
-			var dishid = dishidList[i]
+			//var dishid = dishidList[i]
 			orderedStr += dishID_dishNameMap[dishid] + '、';
 		}
 		var tmp = _.template($('#ntf-window-tmp').html(),{
