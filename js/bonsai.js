@@ -166,7 +166,7 @@ $(function(){
 	  			if( TNum > totalAvaTable || TNum <= 0){ // Input Error
 	      			customerBus.send(event.senderId, JSON.stringify({
 	      				'HEAD': 'ErrorMsg',
-	      				'msg': 'tableNumberError'})
+	      				'content': 'tableNumberError'})
 	      			);	  				
 	  			}
 	  			else{ // Success
