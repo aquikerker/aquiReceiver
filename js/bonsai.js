@@ -196,10 +196,10 @@ $(function(){
    		  	case 'scrollPage':
    		  		var currentY = $(window).scrollTop();
 				if(jsonObj.direction === 'up'){
-    				$("html, body").animate({ scrollTop: y - 400 }, 500);
+    				$("html, body").animate({ scrollTop: currentY - 400 }, 500);
 				}
 				else if(jsonObj.direction === 'down'){
-    				$("html, body").animate({ scrollTop: y + 400 }, 500);
+    				$("html, body").animate({ scrollTop: currentY + 400 }, 500);
 				}
 	  			break;	
     		default:
@@ -267,6 +267,33 @@ function appendOrderedDish(tableNum, content){
 							count: counted_content[dishID]
 						});
 		$('#orderedQ').append(template);
+	}
+}
+
+var changeView = function(){
+	tableStatusView: function(){
+		$('#row-view-table').hide();
+		$('#table-view-container').show();
+		$('#view-title-container.view-title').each(function(i,el){
+			if( $(this).attr('_data') === 'tableStatus' ){
+				$(this).addClass('selected');
+			}
+			else{
+				$(this).removeClass('selected')l
+			}
+		});
+	},
+	orderedListView: function(){
+		$('#table-view-container').hide();
+		$('#row-view-table').show();
+		$('#view-title-container.view-title').each(function(i,el){
+			if( $(this).attr('_data') === 'orderedList' ){
+				$(this).addClass('selected');
+			}
+			else{
+				$(this).removeClass('selected')l
+			}
+		});
 	}
 }
 
