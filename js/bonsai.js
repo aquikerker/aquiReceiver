@@ -358,6 +358,9 @@ var ntfController = {
 						.fadeOut(function(){$(this).remove()});		
 	},
 	newOrder: function(tableNum, dishidList){
+		console.log('======= ntfController ========');
+		console.log(dishidList);
+		console.log('==============================');
 		var orderedStr = '';
 		for (var i = 0 ; i < dishidList.length ; i++){
 			var dishid = dishidList[i]
