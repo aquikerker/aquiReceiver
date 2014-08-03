@@ -263,28 +263,44 @@ function appendOrderedDish(tableNum, content){
 
 function testFeatures(){
 	// Testing notification window!
-	var iconType = {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-tag'};
+	var iconType = {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt'};
 
 	$('#show-alert-btn').on('click',function(){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: iconType.callWaiter,
-			textContent: '人家想要服務生葛格！'
+			textContent: '<highlight>7號桌</highlight>呼叫服務生！'
 		});
-		$(tmp).appendTo('#nitification-container').delay(5000).fadeOut();
+		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
 	});
 	$('#show-alert-btn2').on('click',function(){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: iconType.newOrder,
-			textContent: '7號桌點了黯然銷魂飯！'
+			textContent: '<highlight>7號桌</highlight>點了黯然銷魂飯！'
 		});
-		$(tmp).appendTo('#nitification-container').delay(5000).fadeOut();
+		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
 	});
 	$('#show-alert-btn3').on('click',function(){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: iconType.newCustomer,
-			textContent: '狼Ke來啊喲！'
+			textContent: '人客來囉！'
 		})
-		$(tmp).appendTo('#nitification-container').delay(5000).fadeOut();
+		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
 
 	});
+
+	/*
+	var counter = new Date(0);
+	$(".flipclock-container").flipcountdown({
+	  size:"sm",
+	  tick:function(){
+      	return counter.setSeconds(counter.getSeconds() + 1);
+      }
+	});*/
+	var clock = $('.flipclock-container').FlipClock({
+		clockFace: 'MinuteCounter'
+	});	
+	var clock2 = $('.flipclock-container2').FlipClock({
+		clockFace: 'MinuteCounter'
+	});	
+
 }

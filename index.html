@@ -2,9 +2,13 @@
 <html>
   <head>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link type="text/css" rel="stylesheet" href="./css/jquery.flipcountdown.css">-->
+    <link type="text/css" rel="stylesheet" href="./css/flipclock_modify_small.css">
     <link type="text/css" rel="stylesheet" href="./compass/stylesheets/myStyle.css">
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript" src="./js/jquery-2.1.0.min.js"></script>
+    <!--<script type="text/javascript" src="./js/jquery.flipcountdown.js"></script>-->
+    <script type="text/javascript" src="./js/flipclock.js"></script>
     <script type="text/javascript" src="./js/underscore-min.js"></script>
     <script type="text/javascript" src="./js/tabletop.js"></script>
     <script type="text/javascript" src="./js/bonsai.js"></script>  
@@ -18,18 +22,26 @@
       <div id="message_customer" class="display-none">[Customer Message Here!!]</div>
       <div id="message_admin" class="display-none">[Admin Message Here!!]</div>
     </div>
+    </br></br></br></br></br></br></br>
 
-    <div id="test-btns">
+    <div id="test-btns" class="displady-none">
       <button id="show-alert-btn">Show Alert</button>
       <button id="show-alert-btn2">Show Alert 2</button>
       <button id="show-alert-btn3">Show Alert 3</button>
+      <button id="apd-clock-btn">Append clock</button>
     </div>
 
     <div id="background-imgs">
       <img src="./imgs/rage-omega__.png" width="400px"></img>
     </div>
 
-    <div id="nitification-container">
+    <div id="view-title-container" class="display-none2">
+      <span class="view-title"> 點菜清單 </span><!--
+      --><span class="view-title selected"> 各桌用餐狀態 </span>
+    </div>
+
+    <!-- notification container -->
+    <div id="notification-container" class="displday-none">
       <div class="notification-window">
         <span class="icon-area">
           <i class="fa fa-child"></i>
@@ -43,18 +55,20 @@
           <i class="fa fa-bell"></i>
         </span>
         <span class="text-area">  
-          <span class="text-content">5號桌需要服務生！</span>
+          <span class="text-content"><highlight>5號桌</highlight>需要服務生！</span>
         </span>
       </div>
       <div class="notification-window">
         <span class="icon-area">
-          <i class="fa fa-tag"></i>
+          <i class="fa fa-list-alt"></i>
         </span>
         <span class="text-area">  
-          <span class="text-content">5號桌點了超級宇宙無敵撒尿牛丸！</span>
+          <span class="text-content"><highlight>5號桌</highlight>點了<highlight>超級宇宙無敵撒尿牛丸</highlight>！</span>
         </span>
       </div>
     </div>
+    <!-- End of notification container -->
+
     <!--Template for notification window -->
     <script id="ntf-window-tmp">
       <div class="notification-window">
@@ -66,8 +80,10 @@
         </span>
       </div>
     </script>
+    <!-- End of template -->
 
-    <table id="row-view-table" class="dwisplay-none">
+    <!-- row view table container -->
+    <table id="row-view-table" class="disjplay-none">
       <thead>
         <tr>
           <th>桌號</th>
@@ -88,6 +104,8 @@
         </tr>
       </tbody>
     </table>
+    <!-- End of row table view container -->
+
     <!--Template for ordered queue -->
     <script id="orderedQ-template">
       <tr>
@@ -96,5 +114,40 @@
         <td><%=count%></td>
       </tr>
     </script>
+    <!-- End of ordered queue template -->
+
+    <div id="table-view-container">
+
+      <div class="each-table">
+        <div class="ntf-status">
+          <i class="fa fa-bell heightlight"></i>
+          <i class="fa fa-list-alt"></i>
+          <i class="fa fa-clock-o"></i>
+        </div>
+        <div class="table-area">
+          <div class="table-shape">
+            <div class="table-num">1</div>
+          </div>
+        </div>
+        <div class="flipclock-container"></div>
+      </div>
+
+      <div class="each-table">
+        <div class="un-occupy-mask"></div>
+        <div class="ntf-status">
+          <i class="fa fa-bell heightlight"></i>
+          <i class="fa fa-list-alt"></i>
+          <i class="fa fa-clock-o"></i>
+        </div>
+        <div class="table-area">
+          <div class="table-shape">
+            <div class="table-num">2</div>
+          </div>
+        </div>
+        <div class="flipclock-container2"></div>
+      </div>
+
+    </div>
+
   </body>
 </html>
