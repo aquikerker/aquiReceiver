@@ -323,11 +323,29 @@ body {
 }
 
 /* line 209, ../sass/myStyle.sass */
+#debug-msg {
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  height: 80px;
+  line-height: 40px;
+  width: 60%;
+  margin: auto;
+  bottom: 50px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+/* line 222, ../sass/myStyle.sass */
 #test-btns {
   position: fixed;
 }
 
-/* line 212, ../sass/myStyle.sass */
+/* line 225, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }

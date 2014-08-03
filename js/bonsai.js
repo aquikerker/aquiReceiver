@@ -201,7 +201,15 @@ $(function(){
 				else if(jsonObj.direction === 'down'){
     				$("html, body").animate({ scrollTop: currentY + 400 }, 500);
 				}
-	  			break;	
+	  			break;
+	  		case 'changeView':
+	  			if(jsonObj.content === 'orderList'){
+    				changeView.orderedListView();
+	  			}
+	  			else if(jsonObj.content === 'tableStatus'){
+    				changeView.tableStatusView();
+	  			}
+	  			break;
     		default:
     			console.warn('[admin]:unknown request HEAD!!');
     			break;
