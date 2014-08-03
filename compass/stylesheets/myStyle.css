@@ -231,7 +231,7 @@ body {
   background: rgba(150, 232, 161, 0.6);
   width: 100%;
   padding-top: 10px;
-  height: 150px;
+  height: 160px;
 }
 /* line 162, ../sass/myStyle.sass */
 #table-view-container .each-table .table-area .table-shape {
@@ -261,35 +261,21 @@ body {
   -webkit-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
   background: #d9d9cc;
-  width: 100%;
-  height: 55px;
+  width: 95%;
+  height: 45px;
   border: 0px;
   margin-top: -41px;
-  font-size: 1.2em;
-  color: #404040;
-}
-/* line 182, ../sass/myStyle.sass */
-#table-view-container .each-table .flipclock-container2 {
-  -moz-border-radius-bottomleft: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomright: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  background: #d9d9cc;
-  width: 100%;
-  height: 55px;
-  border: 0px;
-  margin-top: -41px;
+  padding-right: 5%;
+  text-align: right;
   font-size: 1.2em;
   color: #404040;
 }
 
-/* line 192, ../sass/myStyle.sass */
+/* line 185, ../sass/myStyle.sass */
 #view-title-container {
   margin-left: 1.5%;
 }
-/* line 194, ../sass/myStyle.sass */
+/* line 187, ../sass/myStyle.sass */
 #view-title-container .view-title {
   font-size: 1.5em;
   margin: 0;
@@ -298,12 +284,12 @@ body {
   background: #0f2625;
   color: #4f4d4d;
 }
-/* line 201, ../sass/myStyle.sass */
+/* line 194, ../sass/myStyle.sass */
 #view-title-container .selected {
   background: green;
   color: white;
 }
-/* line 204, ../sass/myStyle.sass */
+/* line 197, ../sass/myStyle.sass */
 #view-title-container .view-title:first-child {
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -312,7 +298,7 @@ body {
   -webkit-border-bottom-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
-/* line 206, ../sass/myStyle.sass */
+/* line 199, ../sass/myStyle.sass */
 #view-title-container .view-title:last-child {
   -moz-border-radius-topright: 3px;
   -webkit-border-top-right-radius: 3px;
@@ -322,7 +308,7 @@ body {
   border-bottom-right-radius: 3px;
 }
 
-/* line 209, ../sass/myStyle.sass */
+/* line 202, ../sass/myStyle.sass */
 #debug-msg {
   background: rgba(0, 0, 0, 0.75);
   color: white;
@@ -340,12 +326,12 @@ body {
   font-size: 1.5em;
 }
 
-/* line 222, ../sass/myStyle.sass */
+/* line 215, ../sass/myStyle.sass */
 #test-btns {
   position: fixed;
 }
 
-/* line 225, ../sass/myStyle.sass */
+/* line 218, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }

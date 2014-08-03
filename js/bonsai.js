@@ -428,10 +428,10 @@ function testFeatures(){
 	/*var clock2 = $('.flipclock-container2').FlipClock({
 		clockFace: 'MinuteCounter'
 	});*/
-	var clock2 = $('.flipclock-container2').countdown({since: new Date(), 
-    format: 'MS'});
-    var clock1 = $('.flipclock-container').countdown({since: new Date(), 
-    format: 'MS'});
+	var clock2 = $('#table-view-container #2 .flipclock-container').countdown({since: new Date(), 
+    format: 'MS',compact: true, timeSeparator: ':'});
+    var clock1 = $('#table-view-container #1 .flipclock-container').countdown({since: new Date(), 
+    format: 'MS',compact: true, timeSeparator: ':'});
 
     $('#scroll-up-btn').on('click',function(){
     	var y = $(window).scrollTop();
