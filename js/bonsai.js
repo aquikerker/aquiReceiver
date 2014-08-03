@@ -225,7 +225,7 @@ $(function(){
     				changeView.tableStatusView();
 	  			}
 	  			break;
-	  		case 'setTableNum':
+	  		case 'TableAmount':
 	  			totalAvaTable = parseInt(jsonObj.content);
 	  			break;
     		default:
