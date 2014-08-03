@@ -353,8 +353,17 @@ var ntfController = {
 		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
 						.fadeOut(function(){$(this).remove()});		
 	},
-	newOrder: function(tableNum, dishid){
-
+	newOrder: function(tableNum, dishidList){
+		var orderedStr = '';
+		for (dishid in dishidList){
+			orderedList += dishID_dishNameMap[dishid] + '、';
+		}
+		var tmp = _.template($('#ntf-window-tmp').html(),{
+			iconType: iconType.newOrder,
+			textContent: '<highlight>'+ tableNum +'號桌</highlight>點了'+ orderedStr +'！'
+		});
+		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
+						.fadeOut(function(){$(this).remove()});
 	},
 	callWaiter: function(tableNum){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
