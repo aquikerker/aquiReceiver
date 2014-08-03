@@ -6,7 +6,7 @@ var statusName = 'Quick Order Oh!';
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
 var menuContent = null;
-var dishID_dishNameMap = {} // {dishID: dishName,...}
+var dishID_dishNameMap = {1: '黯然銷魂飯(Test)'} // {dishID: dishName,...}
 var totalAvaTable = null;
 var occupiedTable = [];
 
@@ -359,8 +359,8 @@ var ntfController = {
 	},
 	newOrder: function(tableNum, dishidList){
 		var orderedStr = '';
-		for (dishid in dishidList){
-			//var dishid = dishidList[i]
+		for (var i = 0 ; i < dishidList.length ; i++){
+			var dishid = dishidList[i]
 			orderedStr += dishID_dishNameMap[parseInt(dishid)] + '、';
 		}
 		var tmp = _.template($('#ntf-window-tmp').html(),{
@@ -392,11 +392,14 @@ function testFeatures(){
 		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
 	});
 	$('#show-alert-btn2').on('click',function(){
+		ntfController.newOrder(5,[1]);
+		/*
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: iconType.newOrder,
 			textContent: '<highlight>7號桌</highlight>點了黯然銷魂飯！'
 		});
 		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
+		*/
 	});
 	$('#show-alert-btn3').on('click',function(){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
