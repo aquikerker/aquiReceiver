@@ -361,7 +361,7 @@ var ntfController = {
 		var orderedStr = '';
 		for (dishid in dishidList){
 			//var dishid = dishidList[i]
-			orderedStr += dishID_dishNameMap[dishid] + '、';
+			orderedStr += dishID_dishNameMap[parseInt(dishid)] + '、';
 		}
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: ntfController.iconType.newOrder,
