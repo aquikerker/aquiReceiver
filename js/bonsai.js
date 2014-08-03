@@ -6,7 +6,8 @@ var statusName = 'Quick Order Oh!';
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
 var menuContent = null;
-var dishID_dishNameMap = {} // {dishID: dishName,...}
+//var dishID_dishNameMap = {} // {dishID: dishName,...}
+var dishID_dishNameMap = {1: '黯然銷魂飯', 2: '新竹米粉攤'} // For testing
 var totalAvaTable = null;
 var occupiedTable = [];
 
@@ -366,9 +367,10 @@ var ntfController = {
 			var dishid = dishidList[i]
 			orderedStr += dishID_dishNameMap[parseInt(dishid)] + '、';
 		}
+		orderedStr = orderedStr.substring(0, orderedStr.length-1);
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: ntfController.iconType.newOrder,
-			textContent: '<highlight>'+ tableNum +'號桌</highlight>點了'+ orderedStr +'！'
+			textContent: '<highlight>'+ tableNum +'號桌</highlight>點了<highlight>'+ orderedStr +'</highlight>！'
 		});
 		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
 						.fadeOut(function(){$(this).remove()});
@@ -383,34 +385,39 @@ var ntfController = {
 	}
 }
 
+var tableStatusController = {
+	occupyTable: function(tableID){
+
+	},
+	clearTable: function(tableID){
+
+	},
+	turnOnLight: function(tableID,lightType){
+
+	},
+	turnOffLight: function(tableID,lightType){
+
+	},
+	startTimeCounter: function(tableID){
+
+	},
+	resetTimeCounter: function(tableID){
+
+	}
+}
+
 function testFeatures(){
 	// Testing notification window!
 	var iconType = {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt'};
 
 	$('#show-alert-btn').on('click',function(){
-		var tmp = _.template($('#ntf-window-tmp').html(),{
-			iconType: iconType.callWaiter,
-			textContent: '<highlight>7號桌</highlight>呼叫服務生！'
-		});
-		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
+		ntfController.callWaiter(5);
 	});
 	$('#show-alert-btn2').on('click',function(){
-		ntfController.newOrder(5,[1]);
-		/*
-		var tmp = _.template($('#ntf-window-tmp').html(),{
-			iconType: iconType.newOrder,
-			textContent: '<highlight>7號桌</highlight>點了黯然銷魂飯！'
-		});
-		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
-		*/
+		ntfController.newOrder(5,[1,2]);
 	});
 	$('#show-alert-btn3').on('click',function(){
-		var tmp = _.template($('#ntf-window-tmp').html(),{
-			iconType: iconType.newCustomer,
-			textContent: '人客來囉！'
-		})
-		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
-
+		ntfController.newCustomer();
 	});
 
 	/*
@@ -422,9 +429,9 @@ function testFeatures(){
 		clockFace: 'MinuteCounter'
 	});*/
 	var clock2 = $('.flipclock-container2').countdown({since: new Date(), 
-    format: 'HMS'});
+    format: 'MS'});
     var clock1 = $('.flipclock-container').countdown({since: new Date(), 
-    format: 'HMS'});
+    format: 'MS'});
 
     $('#scroll-up-btn').on('click',function(){
     	var y = $(window).scrollTop();

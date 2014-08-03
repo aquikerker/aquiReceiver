@@ -247,10 +247,10 @@ body {
 }
 /* line 168, ../sass/myStyle.sass */
 #table-view-container .each-table .table-area .table-shape .table-num {
-  font-size: 4.5em;
+  font-size: 3.5em;
   text-align: center;
   width: 100%;
-  padding-top: 5px;
+  padding-top: 18px;
 }
 /* line 173, ../sass/myStyle.sass */
 #table-view-container .each-table .flipclock-container {
