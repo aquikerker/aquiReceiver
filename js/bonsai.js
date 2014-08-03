@@ -6,7 +6,7 @@ var statusName = 'Quick Order Oh!';
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
 var menuContent = null;
-var dishID_dishNameMap = {1: '黯然銷魂飯(Test)'} // {dishID: dishName,...}
+var dishID_dishNameMap = {} // {dishID: dishName,...}
 var totalAvaTable = null;
 var occupiedTable = [];
 
