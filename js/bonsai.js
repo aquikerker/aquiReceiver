@@ -335,9 +335,11 @@ var changeView = {
 }
 
 var ntfController = {
+	iconType: {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt'};
+
 	newCustomer: function(){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
-			iconType: iconType.newCustomer,
+			iconType: ntfController.iconType.newCustomer,
 			textContent: '人客來囉！'
 		})
 		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});		
@@ -347,7 +349,7 @@ var ntfController = {
 	},
 	callWaiter: function(tableNum){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
-			iconType: iconType.callWaiter,
+			iconType: ntfController.iconType.callWaiter,
 			textContent: '<highlight>' + tableNum +'號桌</highlight>呼叫服務生！'
 		});
 		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
