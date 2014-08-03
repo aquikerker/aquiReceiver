@@ -270,28 +270,29 @@ function appendOrderedDish(tableNum, content){
 	}
 }
 
-var changeView = function(){
+var changeView = {
 	tableStatusView: function(){
-		$('#row-view-table').hide();
+		$('#orderedList-view-container').hide();
 		$('#table-view-container').show();
-		$('#view-title-container.view-title').each(function(i,el){
+		$('#view-title-container .view-title').each(function(i,el){
+			console.log(this);
 			if( $(this).attr('_data') === 'tableStatus' ){
 				$(this).addClass('selected');
 			}
 			else{
-				$(this).removeClass('selected')l
+				$(this).removeClass('selected');
 			}
 		});
 	},
 	orderedListView: function(){
 		$('#table-view-container').hide();
-		$('#row-view-table').show();
-		$('#view-title-container.view-title').each(function(i,el){
+		$('#orderedList-view-container').show();
+		$('#view-title-container .view-title').each(function(i,el){
 			if( $(this).attr('_data') === 'orderedList' ){
 				$(this).addClass('selected');
 			}
 			else{
-				$(this).removeClass('selected')l
+				$(this).removeClass('selected');
 			}
 		});
 	}
@@ -342,4 +343,10 @@ function testFeatures(){
     	$("html, body").animate({ scrollTop: y - 300 }, 600);
     });
 
+    $('#change-tablStatus-btn').on('click',function(){
+    	changeView.tableStatusView();
+    });
+    $('#change-orderedList-btn').on('click',function(){
+    	changeView.orderedListView();
+    })
 }

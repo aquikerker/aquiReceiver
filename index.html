@@ -22,8 +22,8 @@
       <img id="title-img-left" src="./imgs/rage-2__.png"></img>
       <img id="title-img-right" src="./imgs/rage-1_.png"></img>
       <div >Order Management Guru</div>
-      <div id="message_customer" class="displfay-none">[Customer Message Here!!]</div>
-      <div id="message_admin" class="displafy-none">[Admin Message Here!!]</div>
+      <div id="message_customer" class="display-none">[Customer Message Here!!]</div>
+      <div id="message_admin" class="display-none">[Admin Message Here!!]</div>
     </div>
     </br></br></br></br></br></br></br>
 
@@ -34,6 +34,8 @@
       <button id="apd-clock-btn">Append clock</button>
       <button id="scroll-up-btn">Up</button>
       <button id="scroll-up-btn">Down</button>
+      <button id="change-tablStatus-btn">tableSatus</button>
+      <button id="change-orderedList-btn">orderList</button>
     </div>
 
     <div id="background-imgs">
@@ -41,7 +43,7 @@
     </div>
 
     <div id="view-title-container" class="display-none2">
-      <span class="view-title" _data="orderList"> 點菜清單 </span><!--
+      <span class="view-title" _data="orderedList"> 點菜清單 </span><!--
       --><span class="view-title selected" _data="tableStatus"> 各桌用餐狀態 </span>
     </div>
 
@@ -88,27 +90,29 @@
     <!-- End of template -->
 
     <!-- row view table container -->
-    <table id="row-view-table" class="disjplay-none">
-      <thead>
-        <tr>
-          <th>桌號</th>
-          <th>菜名</th> 
-          <th>數量</th>
-        </tr>
-      </thead>
-      <tbody id="orderedQ">
-        <tr>
-          <td>123</td>
-          <td>頂級仨尿牛丸</td>
-          <td>444</td>
-        </tr>
-         <tr>
-          <td>123</td>
-          <td>頂級仨尿豬丸</td>
-          <td>444</td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="orderedList-view-container">
+      <table id="row-view-table" class="disjplay-none">
+        <thead>
+          <tr>
+            <th>桌號</th>
+            <th>菜名</th> 
+            <th>數量</th>
+          </tr>
+        </thead>
+        <tbody id="orderedQ">
+          <tr>
+            <td>123</td>
+            <td>頂級仨尿牛丸</td>
+            <td>444</td>
+          </tr>
+           <tr>
+            <td>123</td>
+            <td>頂級仨尿豬丸</td>
+            <td>444</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!-- End of row table view container -->
 
     <!--Template for ordered queue -->
