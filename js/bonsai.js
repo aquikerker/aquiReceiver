@@ -165,7 +165,8 @@ $(function(){
 	  			var TNum = parseInt(jsonObj.content);
 	  			if( TNum > totalAvaTable || TNum <= 0){ // Input Error
 	      			customerBus.send(event.senderId, JSON.stringify({
-	      				'ErrorMsg': 'tableNumberError'})
+	      				'HEAD': 'ErrorMsg',
+	      				'msg': 'tableNumberError'})
 	      			);	  				
 	  			}
 	  			else{ // Success
@@ -335,7 +336,11 @@ var ntfController = {
 
 	},
 	callWaiter: function(tableNum){
-		
+		var tmp = _.template($('#ntf-window-tmp').html(),{
+			iconType: iconType.callWaiter,
+			textContent: '<highlight>' + tableNum +'號桌</highlight>呼叫服務生！'
+		});
+		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
 	}
 }
 
