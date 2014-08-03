@@ -159,7 +159,7 @@ $(function(){
 	  		console.log('====== returnContent sorted =========== ');
 	  		console.log(returnContent);
 			*/
-	  		break;	
+	  		break;
 	  	default:
 	  		console.warn('[customer]:unknown request HEAD!!');
 	  		break;
@@ -193,6 +193,15 @@ $(function(){
     		case 'clearOrderOneRow':
     			$("#orderedQ").find('tr:nth-child(1)').remove();
     			break;
+   		  	case 'scrollPage':
+   		  		var currentY = $(window).scrollTop();
+				if(jsonObj.direction === 'up'){
+    				$("html, body").animate({ scrollTop: y - 400 }, 500);
+				}
+				else if(jsonObj.direction === 'down'){
+    				$("html, body").animate({ scrollTop: y + 400 }, 500);
+				}
+	  			break;	
     		default:
     			console.warn('[admin]:unknown request HEAD!!');
     			break;
@@ -290,17 +299,20 @@ function testFeatures(){
 
 	/*
 	var counter = new Date(0);
-	$(".flipclock-container").flipcountdown({
-	  size:"sm",
-	  tick:function(){
-      	return counter.setSeconds(counter.getSeconds() + 1);
-      }
-	});*/
 	var clock = $('.flipclock-container').FlipClock({
 		clockFace: 'MinuteCounter'
 	});	
-	var clock2 = $('.flipclock-container2').FlipClock({
+	/*var clock2 = $('.flipclock-container2').FlipClock({
 		clockFace: 'MinuteCounter'
-	});	
+	});*/
+	var clock2 = $('.flipclock-container2').countdown({since: new Date(), 
+    format: 'HMS'});
+    var clock1 = $('.flipclock-container').countdown({since: new Date(), 
+    format: 'HMS'});
+
+    $('#scroll-up-btn').on('click',function(){
+    	var y = $(window).scrollTop();
+    	$("html, body").animate({ scrollTop: y - 300 }, 600);
+    });
 
 }

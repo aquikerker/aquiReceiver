@@ -3,12 +3,15 @@
   <head>
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <!--<link type="text/css" rel="stylesheet" href="./css/jquery.flipcountdown.css">-->
-    <link type="text/css" rel="stylesheet" href="./css/flipclock_modify_small.css">
+    <!--<link type="text/css" rel="stylesheet" href="./css/flipclock_modify_small.css">-->
+    <link type="text/css" rel="stylesheet" href="./css/jquery.countdown.css">
     <link type="text/css" rel="stylesheet" href="./compass/stylesheets/myStyle.css">
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript" src="./js/jquery-2.1.0.min.js"></script>
     <!--<script type="text/javascript" src="./js/jquery.flipcountdown.js"></script>-->
-    <script type="text/javascript" src="./js/flipclock.js"></script>
+    <script type="text/javascript" src="./js/jquery.plugin.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.countdown.min.js"></script>
+    <!--<script type="text/javascript" src="./js/flipclock.js"></script>-->
     <script type="text/javascript" src="./js/underscore-min.js"></script>
     <script type="text/javascript" src="./js/tabletop.js"></script>
     <script type="text/javascript" src="./js/bonsai.js"></script>  
@@ -24,11 +27,13 @@
     </div>
     </br></br></br></br></br></br></br>
 
-    <div id="test-btns" class="displady-none">
+    <div id="test-btns" class="displady-none1">
       <button id="show-alert-btn">Show Alert</button>
       <button id="show-alert-btn2">Show Alert 2</button>
       <button id="show-alert-btn3">Show Alert 3</button>
       <button id="apd-clock-btn">Append clock</button>
+      <button id="scroll-up-btn">Up</button>
+      <button id="scroll-up-btn">Down</button>
     </div>
 
     <div id="background-imgs">
@@ -133,7 +138,7 @@
       </div>
 
       <div class="each-table">
-        <div class="un-occupy-mask"></div>
+        <div class="un-occupy-masck"></div>
         <div class="ntf-status">
           <i class="fa fa-bell heightlight"></i>
           <i class="fa fa-list-alt"></i>

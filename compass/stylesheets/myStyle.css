@@ -256,12 +256,15 @@ body {
   -moz-border-radius-bottomright: 5px;
   -webkit-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  background: grey;
+  background: #d9d9cc;
   width: 100%;
-  top: -50px;
-  left: -11px;
+  height: 55px;
+  border: 0px;
+  margin-top: -39px;
+  font-size: 1.2em;
+  color: #404040;
 }
-/* line 178, ../sass/myStyle.sass */
+/* line 181, ../sass/myStyle.sass */
 #table-view-container .each-table .flipclock-container2 {
   -moz-border-radius-bottomleft: 5px;
   -webkit-border-bottom-left-radius: 5px;
@@ -269,17 +272,20 @@ body {
   -moz-border-radius-bottomright: 5px;
   -webkit-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  background: grey;
+  background: #d9d9cc;
   width: 100%;
-  top: -50px;
-  left: -11px;
+  height: 55px;
+  border: 0px;
+  margin-top: -39px;
+  font-size: 1.2em;
+  color: #404040;
 }
 
-/* line 185, ../sass/myStyle.sass */
+/* line 191, ../sass/myStyle.sass */
 #view-title-container {
   margin-left: 1.5%;
 }
-/* line 187, ../sass/myStyle.sass */
+/* line 193, ../sass/myStyle.sass */
 #view-title-container .view-title {
   font-size: 1.5em;
   margin: 0;
@@ -288,12 +294,12 @@ body {
   background: #0f2625;
   color: #4f4d4d;
 }
-/* line 198, ../sass/myStyle.sass */
+/* line 200, ../sass/myStyle.sass */
 #view-title-container .selected {
   background: green;
   color: white;
 }
-/* line 201, ../sass/myStyle.sass */
+/* line 203, ../sass/myStyle.sass */
 #view-title-container .view-title:first-child {
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -302,7 +308,7 @@ body {
   -webkit-border-bottom-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
-/* line 203, ../sass/myStyle.sass */
+/* line 205, ../sass/myStyle.sass */
 #view-title-container .view-title:last-child {
   -moz-border-radius-topright: 3px;
   -webkit-border-top-right-radius: 3px;
@@ -312,7 +318,12 @@ body {
   border-bottom-right-radius: 3px;
 }
 
-/* line 207, ../sass/myStyle.sass */
+/* line 208, ../sass/myStyle.sass */
+#test-btns {
+  position: fixed;
+}
+
+/* line 211, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }
