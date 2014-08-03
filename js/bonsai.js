@@ -335,7 +335,7 @@ var changeView = {
 }
 
 var ntfController = {
-	iconType: {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt'};
+	iconType: {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt'},
 
 	newCustomer: function(){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
