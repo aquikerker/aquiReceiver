@@ -7,6 +7,7 @@ var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
 var menuContent = null;
 var dishID_dishNameMap = {} // {dishID: dishName,...}
+var totalAvaTable = null;
 
 $(function(){
    //Testing!
@@ -160,6 +161,19 @@ $(function(){
 	  		console.log(returnContent);
 			*/
 	  		break;
+	  	case 'setTableNum':
+	  			var TNum = parseInt(jsonObj.content);
+	  			if( TNum > totalAvaTable || TNum <= 0){ // Input Error
+	      			customerBus.send(event.senderId, JSON.stringify({
+	      				'ErrorMsg': 'tableNumberError'})
+	      			);	  				
+	  			}
+	  			else{ // Success
+				  	customerBus.send(event.senderId, JSON.stringify({
+	      				'HEAD': 'tableNumOK'})
+	      			);			
+	  			}
+	  		break;
 	  	default:
 	  		console.warn('[customer]:unknown request HEAD!!');
 	  		break;
@@ -209,6 +223,9 @@ $(function(){
 	  			else if(jsonObj.content === 'tableStatus'){
     				changeView.tableStatusView();
 	  			}
+	  			break;
+	  		case 'setTableNum':
+	  			totalAvaTable = parseInt(jsonObj.content);
 	  			break;
     		default:
     			console.warn('[admin]:unknown request HEAD!!');
@@ -303,6 +320,22 @@ var changeView = {
 				$(this).removeClass('selected');
 			}
 		});
+	}
+}
+
+var ntfController = {
+	newCustomer: function(){
+		var tmp = _.template($('#ntf-window-tmp').html(),{
+			iconType: iconType.newCustomer,
+			textContent: '人客來囉！'
+		})
+		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});		
+	},
+	newOrder: function(tableNum, dishid){
+
+	},
+	callWaiter: function(tableNum){
+		
 	}
 }
 
