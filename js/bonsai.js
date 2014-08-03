@@ -99,14 +99,18 @@ $(function(){
 	  	case 'order':
 	  		appendOrderedDish(jsonObj.tableNum, jsonObj.content);
 
+	  		// Store ordered list
+	  		/*
 	      	if(typeof orderedList[jsonObj.tableNum] === 'undefined'){
 	      		orderedList[jsonObj.tableNum] = [];
 	      		console.log('New table in, init the orderedList');
 	      	}
 	      	//append ordered dishes into orderedList
-	      	orderedList[jsonObj.tableNum].push.apply(orderedList[jsonObj.tableNum], jsonObj.content);
+	      	//orderedList[jsonObj.tableNum].push.apply(orderedList[jsonObj.tableNum], jsonObj.content);
+	      	orderedList[jsonObj.tableNum].push(orderedList[jsonObj.tableNum], jsonObj.content);
+	      	
 	      	console.log(orderedList[jsonObj.tableNum]);
-
+			*/
 	      	//append ordered dishes into hotTodayList
 	      	var counted_content = _.countBy(jsonObj.content,function(num){
 	      		return num;
