@@ -8,6 +8,8 @@ var customerIDList = []; // connecting customer ID list
 var menuContent = null;
 var dishID_dishNameMap = {} // {dishID: dishName,...}
 var totalAvaTable = null;
+var occupiedTable = [];
+
 
 $(function(){
    //Testing!
@@ -163,7 +165,13 @@ $(function(){
 	  		break;
 	  	case 'setTableNum':
 	  			var TNum = parseInt(jsonObj.content);
-	  			if( TNum > totalAvaTable || TNum <= 0){ // Input Error
+	  			if (totalAvaTable === null){
+	  				customerBus.send(event.senderId, JSON.stringify({ // Admin haven't set
+	      				'HEAD': 'ErrorMsg',
+	      				'content': 'noTableAmount'})
+	      			);
+	  			}
+	  			else if( TNum > totalAvaTable || TNum <= 0){ // Input Error
 	      			customerBus.send(event.senderId, JSON.stringify({
 	      				'HEAD': 'ErrorMsg',
 	      				'content': 'tableNumberError'})
@@ -172,7 +180,9 @@ $(function(){
 	  			else{ // Success
 				  	customerBus.send(event.senderId, JSON.stringify({
 	      				'HEAD': 'tableNumOK'})
-	      			);			
+	      			);
+	      			occupiedTable.push(TNum);
+	      			ntfController.newCustomer();		
 	  			}
 	  		break;
 	  	default:
