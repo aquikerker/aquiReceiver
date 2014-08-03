@@ -119,6 +119,8 @@ $(function(){
 					hotTodayList[dishID] = counted_content[dishID];					
 				}
 			}
+			ntfController.newOrder(jsonObj.tableNum, jsonObj.content);
+
 	  		break;
 	  	case 'requestOrdered':
 	  		var returnObj = {'HEAD': 'responseOrdered', 'content': []};
@@ -164,26 +166,26 @@ $(function(){
 			*/
 	  		break;
 	  	case 'setTableNum':
-	  			var TNum = parseInt(jsonObj.content);
-	  			if (totalAvaTable === null){
-	  				customerBus.send(event.senderId, JSON.stringify({ // Admin haven't set
-	      				'HEAD': 'ErrorMsg',
-	      				'content': 'noTableAmount'})
-	      			);
-	  			}
-	  			else if( TNum > totalAvaTable || TNum <= 0){ // Input Error
-	      			customerBus.send(event.senderId, JSON.stringify({
-	      				'HEAD': 'ErrorMsg',
-	      				'content': 'tableNumberError'})
-	      			);	  				
-	  			}
-	  			else{ // Success
-				  	customerBus.send(event.senderId, JSON.stringify({
-	      				'HEAD': 'tableNumOK'})
-	      			);
-	      			occupiedTable.push(TNum);
-	      			ntfController.newCustomer();		
-	  			}
+  			var TNum = parseInt(jsonObj.content);
+  			if (totalAvaTable === null){
+  				customerBus.send(event.senderId, JSON.stringify({ // Admin haven't set
+      				'HEAD': 'ErrorMsg',
+      				'content': 'noTableAmount'})
+      			);
+  			}
+  			else if( TNum > totalAvaTable || TNum <= 0){ // Input Error
+      			customerBus.send(event.senderId, JSON.stringify({
+      				'HEAD': 'ErrorMsg',
+      				'content': 'tableNumberError'})
+      			);	  				
+  			}
+  			else{ // Success
+			  	customerBus.send(event.senderId, JSON.stringify({
+      				'HEAD': 'tableNumOK'})
+      			);
+      			occupiedTable.push(TNum);
+      			ntfController.newCustomer();		
+  			}
 	  		break;
 	  	default:
 	  		console.warn('[customer]:unknown request HEAD!!');
@@ -238,6 +240,12 @@ $(function(){
 	  		case 'TableAmount':
 	  			totalAvaTable = parseInt(jsonObj.content);
 	  			break;
+	  		case 'requestOccupiedTable':
+	  			adminBus.send(event.senderId, JSON.stringify({
+	      				'HEAD': 'occupiedTable',
+	      				'content': occupiedTable})
+	      		);
+	  			break;	
     		default:
     			console.warn('[admin]:unknown request HEAD!!');
     			break;
@@ -336,13 +344,14 @@ var changeView = {
 
 var ntfController = {
 	iconType: {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt'},
-
+	delayTime: 10000,
 	newCustomer: function(){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: ntfController.iconType.newCustomer,
 			textContent: '人客來囉！'
 		})
-		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});		
+		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
+						.fadeOut(function(){$(this).remove()});		
 	},
 	newOrder: function(tableNum, dishid){
 
@@ -352,7 +361,8 @@ var ntfController = {
 			iconType: ntfController.iconType.callWaiter,
 			textContent: '<highlight>' + tableNum +'號桌</highlight>呼叫服務生！'
 		});
-		$(tmp).appendTo('#notification-container').delay(5000).fadeOut(function(){$(this).remove()});
+		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
+						.fadeOut(function(){$(this).remove()});
 	}
 }
 
