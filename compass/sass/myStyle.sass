@@ -6,7 +6,7 @@ html
 
 body
 	background: #E5E5A9
-	height: 100%
+	height: 200%
 	width: 100%
 	margin: 0
 *
@@ -95,6 +95,7 @@ body
 	z-index: 20
 	right: 20px
 	bottom: 20px
+	z-index: 100
 	.notification-window
 		margin-bottom: 8px
 		width: 300px
@@ -120,11 +121,13 @@ body
 
 #table-view-container
 	width: 97%
-	height: 90%
+	//height: 100%
 	background: rgba(216, 216, 216, 0.35)
 	border: 2px solid #BFBFBF
 	margin: auto
 	margin-top: 10px
+	padding-bottom: 20px
+	padding-top: 20px
 	+border-radius(5px)
 
 	.each-table
@@ -181,6 +184,9 @@ body
 			text-align: right
 			font-size: 1.2em
 			color: #404040
+			mytime
+				font-size: 2em
+				margin-right: 2px
 
 #view-title-container
 	margin-left: 1.5%
@@ -213,7 +219,25 @@ body
 	font-size: 1.5em
 
 #test-btns
+	z-index: 200
 	position: fixed
+	background: rgba(165,213,120, 0.9)
+	width: 150px
+	right: 20px
+	padding: 10px
+	top: 10px
+	+border-radius(5px)
+	button
+		width: 100%
+		height: 30px
+	input
+		height: 25px	
+	.test-group
+		width: 100%
+		input
+			width: 20%
+		button
+			width: 70%	
 
 .display-none
 	display: none		

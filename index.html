@@ -35,10 +35,34 @@
       <button id="show-alert-btn2">Show Alert 2</button>
       <button id="show-alert-btn3">Show Alert 3</button>
       <button id="apd-clock-btn">Append clock</button>
-      <button id="scroll-up-btn">Up</button>
-      <button id="scroll-up-btn">Down</button>
       <button id="change-tablStatus-btn">tableSatus</button>
       <button id="change-orderedList-btn">orderList</button>
+      <button id="generate-table-btn">generate Table</button>
+      <button id="zoom-in-btn">Zoom In</button>
+      <button id="zoom-out-btn">Zoom Out</button>
+      <div class="test-group">
+        <input  id="occupy-table-tableID" placeholder="tID"></input>
+        <button id="occupy-table-btn">occupy Table</button>
+      </div>
+      <div class="test-group">
+        <input  id="clear-table-tableID" placeholder="tID"></input>
+        <button id="clear-table-btn">clear Table</button>
+      </div>
+      <div class="test-group">
+        <input  id="counter-start-tableID" placeholder="tID"></input>
+        <button id="start-counter-btn">Start Count</button>
+      </div>
+      <div class="test-group">
+        <input  id="counter-end-tableID" placeholder="tID"></input>
+        <button id="reset-counter-btn">Destroy Count</button>
+      </div>
+      <div class="test-group">
+        <input  id="get-counterTime-tableID" placeholder="tID"></input>
+        <button id="get-counterTime-btn">Get Time</button>
+      </div>
+      <input type="checkbox" id="callWaiter-ntfLight-btn">callWaiter</input></br>
+      <input type="checkbox" id="waitLong-ntfLight-btn">waitLong</input></br>
+      <input type="checkbox" id="newOrder-ntfLight-btn">newOrder</input>
     </div>
 
     <div id="background-imgs">
@@ -128,6 +152,7 @@
     </script>
     <!-- End of ordered queue template -->
 
+    <!-- table status view container -->    
     <div id="table-view-container">
       <div class="each-table" id="1">
         <div class="un-occupy-mask display-none"></div>
@@ -156,10 +181,28 @@
             <div class="table-num">12</div>
           </div>
         </div>
-        <div class="flipclock-container"></div>
+        <div class="flipclock-container"><mytime>00:00</mytime></div>
       </div>
-
+      <div style="clear: both"></div>
     </div>
+    <!-- End of status view container -->    
+
+    <script id="tableStatus-template">
+      <div class="each-table" id="<%=tableID%>">
+        <div class="un-occupy-mask"></div>
+        <div class="ntf-status">
+          <i class="fa fa-bell"></i>
+          <i class="fa fa-list-alt"></i>
+          <i class="fa fa-clock-o"></i>
+        </div>
+        <div class="table-area">
+          <div class="table-shape">
+            <div class="table-num"><%=tableID%></div>
+          </div>
+        </div>
+        <div class="flipclock-container"><mytime>00:00</mytime></div>
+      </div>
+    </script>
 
   </body>
 </html>

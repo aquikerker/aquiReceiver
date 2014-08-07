@@ -6,9 +6,10 @@ var statusName = 'Quick Order Oh!';
 var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
 var menuContent = null;
-//var dishID_dishNameMap = {} // {dishID: dishName,...}
-var dishID_dishNameMap = {1: '黯然銷魂飯', 2: '新竹米粉攤'} // For testing
-var totalAvaTable = null;
+var dishID_dishNameMap = {} // {dishID: dishName,...}
+//var dishID_dishNameMap = {1: '黯然銷魂飯', 2: '新竹米粉攤'} // For testing
+//var totalAvaTable = null;
+var totalAvaTable = 20; // For testing
 var occupiedTable = [];
 
 
@@ -226,13 +227,7 @@ $(function(){
     			$("#orderedQ").find('tr:nth-child(1)').remove();
     			break;
    		  	case 'scrollPage':
-   		  		var currentY = $(window).scrollTop();
-				if(jsonObj.direction === 'up'){
-    				$("html, body").animate({ scrollTop: currentY - 400 }, 500);
-				}
-				else if(jsonObj.direction === 'down'){
-    				$("html, body").animate({ scrollTop: currentY + 400 }, 500);
-				}
+				pageController.scroll(jsonObj.direction);
 	  			break;
 	  		case 'changeView':
 	  			if(jsonObj.content === 'orderList'){
@@ -347,6 +342,29 @@ var changeView = {
 	}
 }
 
+var pageController = {
+	scroll: function(direction){
+   		var currentY = $(window).scrollTop();
+   		if (direction === 'up')
+    		$("html, body").animate({ scrollTop: currentY - 400 }, 500);
+    	else if(direction === 'down')
+			$("html, body").animate({ scrollTop: currentY + 400 }, 500);
+	},
+	currentZoom: 1, // default as 1
+	zoom: function(in_or_out){
+		if (in_or_out === 'in'){
+			if(pageController.currentZoom <= 1.2)
+				pageController.currentZoom += 0.1;
+			document.body.style.zoom = pageController.currentZoom;
+		}
+		else if (in_or_out === 'out'){
+			if(pageController.currentZoom > 0.8)
+				pageController.currentZoom -= 0.1;
+			document.body.style.zoom = pageController.currentZoom;
+		}
+	}
+}
+
 var ntfController = {
 	iconType: {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt'},
 	delayTime: 10000,
@@ -386,23 +404,65 @@ var ntfController = {
 }
 
 var tableStatusController = {
-	occupyTable: function(tableID){
+	ok_waitingTime: 5,
+	ntfLightType: {'callWaiter': 'fa-bell', 'waitLongTime': 'fa-clock-o', 'newOrder': 'fa-list-alt'},
+	generateTable: function(tableAmount){
+		$('#table-view-container').empty();
+		for (var i = 1 ; i <= totalAvaTable ; i++){
+			var tmp = _.template($('#tableStatus-template').html(),{tableID: i});
+			$('#table-view-container').append(tmp);
 
+		}
+		//Add clear el for float DOM
+		$('#table-view-container').append('<div style="clear: both"></div>'); 
+	},
+	occupyTable: function(tableID){
+		$('#table-view-container').find('#'+ tableID).find('.un-occupy-mask').addClass('display-none');
 	},
 	clearTable: function(tableID){
-
+		$('#table-view-container').find('#'+ tableID).find('.un-occupy-mask').removeClass('display-none');
 	},
+	// lightType: ['callWaiter', 'waitLongTime', 'newOrder']
 	turnOnLight: function(tableID,lightType){
-
+		$('#table-view-container').find('#'+ tableID).find('.ntf-status')
+		.find('.'+tableStatusController.ntfLightType[lightType]).addClass('heightlight');
 	},
 	turnOffLight: function(tableID,lightType){
-
+		$('#table-view-container').find('#'+ tableID).find('.ntf-status')
+		.find('.'+tableStatusController.ntfLightType[lightType]).removeClass('heightlight');
 	},
 	startTimeCounter: function(tableID){
-
+		$('#table-view-container').find('#'+ tableID).find('.flipclock-container')
+			.countdown({since: 0,
+						format: 'MS',
+						compact: true, 
+						timeSeparator: ':',
+						onTick: tableStatusController.invokeWaitingLight});		
 	},
 	resetTimeCounter: function(tableID){
-
+		$('#table-view-container').find('#'+ tableID).find('.flipclock-container')
+			.countdown('destroy')
+			.empty()
+			.append('<mytime>00:00</mytime>');
+	},
+	getCounterTime: function(tableID){
+		var t = $('#table-view-container').find('#'+ tableID).find('.flipclock-container')
+				.countdown('getTimes');
+		console.log(t);
+		
+	},
+	invokeWaitingLight: function(period){
+		//console.log(period);
+		if(period[6] == tableStatusController.ok_waitingTime){
+			var tid = $(this).parent().prop('id');
+			tableStatusController.turnOnLight(tid,'waitLongTime');
+			console.log('Table ' + tid + ' Wait too long!');
+			return
+		}
+		else{
+			//console.log('Expired!!!!!')
+			return
+		}
 	}
 }
 
@@ -420,28 +480,83 @@ function testFeatures(){
 		ntfController.newCustomer();
 	});
 
-	/*
-	var counter = new Date(0);
-	var clock = $('.flipclock-container').FlipClock({
-		clockFace: 'MinuteCounter'
-	});	
-	/*var clock2 = $('.flipclock-container2').FlipClock({
-		clockFace: 'MinuteCounter'
-	});*/
-	var clock2 = $('#table-view-container #2 .flipclock-container').countdown({since: new Date(), 
-    format: 'MS',compact: true, timeSeparator: ':'});
-    var clock1 = $('#table-view-container #1 .flipclock-container').countdown({since: new Date(), 
-    format: 'MS',compact: true, timeSeparator: ':'});
-
-    $('#scroll-up-btn').on('click',function(){
-    	var y = $(window).scrollTop();
-    	$("html, body").animate({ scrollTop: y - 300 }, 600);
-    });
-
     $('#change-tablStatus-btn').on('click',function(){
     	changeView.tableStatusView();
     });
     $('#change-orderedList-btn').on('click',function(){
     	changeView.orderedListView();
+    });
+
+	$('#generate-table-btn').on('click',function(){
+		tableStatusController.generateTable(10);
+	});
+
+
+
+    $('#occupy-table-btn').on('click',function(){
+    	var tid = $('#occupy-table-tableID').val();
+    	if (tid === '')
+    		tableStatusController.occupyTable(1);
+    	else
+    		tableStatusController.occupyTable(tid);
+    });
+    $('#clear-table-btn').on('click',function(){
+    	var tid = $('#clear-table-tableID').val();
+    	if (tid === '')
+    		tableStatusController.clearTable(1);
+    	else
+    		tableStatusController.clearTable(tid);
+    });
+
+    $('#start-counter-btn').on('click',function(){
+    	var tid = $('#counter-start-tableID').val();
+    	if (tid === '')
+    		tableStatusController.startTimeCounter(1);
+    	else
+    		tableStatusController.startTimeCounter(tid);
+
+    });
+    $('#reset-counter-btn').on('click',function(){
+    	var tid = $('#counter-end-tableID').val();
+    	if (tid === '')
+    		tableStatusController.resetTimeCounter(1);
+    	else
+    		tableStatusController.resetTimeCounter(tid);
+
+    });
+
+    $('#get-counterTime-btn').on('click',function(){
+    	var tid = $('#get-counterTime-tableID').val();
+    	if(tid === '')
+    		tableStatusController.getCounterTime(1);
+    	else
+    		tableStatusController.getCounterTime(tid);
+    });
+
+
+    $('#callWaiter-ntfLight-btn').on('change',function(){
+    	if($(this).prop('checked') === true)
+    		tableStatusController.turnOnLight(1,'callWaiter');
+    	else
+    		tableStatusController.turnOffLight(1,'callWaiter');
+    }); 
+
+    $('#waitLong-ntfLight-btn').on('change',function(){
+		if($(this).prop('checked') === true)
+    		tableStatusController.turnOnLight(1,'waitLongTime');
+    	else
+    		tableStatusController.turnOffLight(1,'waitLongTime');
+    });
+    $('#newOrder-ntfLight-btn').on('change',function(){
+		if($(this).prop('checked') === true)
+    		tableStatusController.turnOnLight(1,'newOrder');
+    	else
+    		tableStatusController.turnOffLight(1,'newOrder');
+    });
+    $('#zoom-in-btn').on('click',function(){
+    	pageController.zoom('in');
+    });
+    $('#zoom-out-btn').on('click',function(){
+    	pageController.zoom('out');
     })
 }
