@@ -90,7 +90,7 @@ $(function(){
 			            		var eachDish = menuContent[i];
 			            		console.log(eachDish);
 			            		dishID_dishNameMap[parseInt(eachDish.dishid)] = eachDish.name;
-			            		dishID_priceMap[parseInt(eachDish.dishid)] = eachDish.price;
+			            		dishID_priceMap[parseInt(eachDish.dishid)] = parseInt(eachDish.price);
 			            	}
 			            	console.log(dishID_dishNameMap);	
 			            	console.log(dishID_priceMap);	
