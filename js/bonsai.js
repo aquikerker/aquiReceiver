@@ -323,11 +323,11 @@ $(function(){
 	  				// Add table mask
     				tableStatusController.clearTable(tableID);
 
+					// Show Bill
+    				ntfController.showBill(tableID);
+
     				// Remove Orderlist
     				delete orderedList[tableID];
-
-    				// Show Bill
-    				ntfController.showBill(tableID);
 	  			}
 	  			else{
 	  				adminBus.send(event.senderId, JSON.stringify({
