@@ -1,5 +1,5 @@
-//var menu_google_key = '';
-var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
+var menu_google_key = '';
+//var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...],...}
 var orderedList_pendingCount = {}; // {tableNum: Count,...}
 var hotTodayList = {};// {dishid: quantity, ...}
@@ -225,6 +225,14 @@ $(function(){
 	  	case 'CallWaiter':
     		tableStatusController.turnOnLight(jsonObj.tableID,'callWaiter');
 			ntfController.callWaiter(jsonObj.tableID);
+			// Send waiter call to admin immediately
+  			for(var i=0; i< adminIDList.length; i++){
+  				console.log('====== newCustomer , resend occupiedTable!!! ======');
+  				adminBus.send(adminIDList[i], JSON.stringify({
+      				'HEAD': 'newWaiterCall',
+      				'tableID': jsonObj.tableID})
+      			);
+  			}
 	  		break	
 	  	default:
 	  		console.warn('[customer]:unknown request HEAD!!');
@@ -438,7 +446,7 @@ var pageController = {
 }
 
 var ntfController = {
-	iconType: {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt'},
+	iconType: {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt', money: 'fa-money'},
 	delayTime: 10000,
 	newCustomer: function(){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
@@ -469,6 +477,15 @@ var ntfController = {
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: ntfController.iconType.callWaiter,
 			textContent: '<highlight>' + tableID +'號桌</highlight>呼叫服務生！'
+		});
+		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
+						.fadeOut(function(){$(this).remove()});
+	},
+	showBill: function(tableID){
+		var totalDollar;
+		var tmp = _.template($('#ntf-window-tmp').html(),{
+			iconType: ntfController.iconType.callWaiter,
+			textContent: '<highlight>' + tableID +'號桌</highlight>結賬總金額共<highlight>'+ totalDollar +'</highlight>元！'
 		});
 		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
 						.fadeOut(function(){$(this).remove()});
