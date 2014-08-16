@@ -322,9 +322,14 @@ $(function(){
 
 	  				// Add table mask
     				tableStatusController.clearTable(tableID);
-
 					// Show Bill
     				ntfController.showBill(tableID);
+    				// Clear timer
+    				tableStatusController.resetTimeCounter(tableID);
+    				// Clear table status light
+    				tableStatusController.turnOffLight(tableID,'callWaiter');
+		    		tableStatusController.turnOffLight(tableID,'newOrder');
+    				tableStatusController.turnOffLight(tableID,'waitLongTime');
 
     				// Remove Orderlist
     				delete orderedList[tableID];
@@ -497,9 +502,8 @@ var ntfController = {
 		console.log(orderedList[tableID]);
 		console.log(thisOrderList);
 		for (var i = 0 ; i < thisOrderList.length; i++){
-			var quantity = thisOrderList[i].quantity;
-			var dishID = thisOrderList[i].dishid;
-			totalDollar += quantity* dishID_priceMap[dishID];
+			var dishID = parseInt(thisOrderList[i]);
+			totalDollar += dishID_priceMap[dishID];
 		}
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: ntfController.iconType.callWaiter,
@@ -647,7 +651,6 @@ function testFeatures(){
     	else
     		tableStatusController.turnOffLight(1,'callWaiter');
     }); 
-
     $('#waitLong-ntfLight-btn').on('change',function(){
 		if($(this).prop('checked') === true)
     		tableStatusController.turnOnLight(1,'waitLongTime');
