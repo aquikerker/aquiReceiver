@@ -245,7 +245,11 @@ $(function(){
 	      				'HEAD': 'occupiedTable',
 	      				'content': occupiedTable})
 	      		);
-	  			break;	
+	  			break;
+	  		case 'clearTable':
+	  			var tableID = parseInt(jsonObj.tableID);
+	  			console.log(orderedList[tableID]);
+	  			break;		
     		default:
     			console.warn('[admin]:unknown request HEAD!!');
     			break;
