@@ -163,7 +163,7 @@ body {
 
 /* line 123, ../sass/myStyle.sass */
 #table-view-container {
-  width: 80%;
+  width: 90%;
   background: rgba(216, 216, 216, 0.35);
   border: 2px solid #bfbfbf;
   margin: auto;
@@ -179,7 +179,7 @@ body {
 /* line 134, ../sass/myStyle.sass */
 #table-view-container .each-table {
   float: left;
-  margin: 5px;
+  margin: 10px;
   width: 225px;
   height: 215px;
   border: 2px solid #375d3b;
