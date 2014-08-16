@@ -107,9 +107,8 @@ $(function(){
 	      		console.log('New table in, init the orderedList');
 	      	}
 	      	//append ordered dishes into orderedList
-	      	//orderedList[jsonObj.tableNum].push.apply(orderedList[jsonObj.tableNum], jsonObj.content);
+	      	orderedList[jsonObj.tableNum].push.apply(orderedList[jsonObj.tableNum], jsonObj.content);
 	      	orderedList[jsonObj.tableNum].push(orderedList[jsonObj.tableNum], jsonObj.content);
-	      	
 	      	console.log(orderedList[jsonObj.tableNum]);
 			
 	      	//append ordered dishes into hotTodayList
