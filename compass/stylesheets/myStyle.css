@@ -40,9 +40,8 @@ body {
 /* line 44, ../sass/myStyle.sass */
 #orderedList-view-container {
   margin-top: 10px;
-  padding-left: 5%;
 }
-/* line 48, ../sass/myStyle.sass */
+/* line 47, ../sass/myStyle.sass */
 #orderedList-view-container #row-view-table {
   width: 100%;
   font-size: 40px;
@@ -57,7 +56,7 @@ body {
   width: 90%;
   margin: auto;
 }
-/* line 56, ../sass/myStyle.sass */
+/* line 55, ../sass/myStyle.sass */
 #orderedList-view-container #row-view-table thead {
   background: #668552;
   color: white;
@@ -65,40 +64,40 @@ body {
   -moz-box-shadow: grey 0px 8px 15px;
   box-shadow: grey 0px 8px 15px;
 }
-/* line 60, ../sass/myStyle.sass */
+/* line 59, ../sass/myStyle.sass */
 #orderedList-view-container #row-view-table thead tr {
   height: 60px;
 }
-/* line 62, ../sass/myStyle.sass */
+/* line 61, ../sass/myStyle.sass */
 #orderedList-view-container #row-view-table tbody {
   background: rgba(184, 159, 130, 0.6);
 }
-/* line 65, ../sass/myStyle.sass */
+/* line 64, ../sass/myStyle.sass */
 #orderedList-view-container #row-view-table tbody tr {
   line-height: 60px;
   border-bottom: 1px solid #8a876d;
   border-top: 1px solid #8a876d;
 }
-/* line 69, ../sass/myStyle.sass */
+/* line 68, ../sass/myStyle.sass */
 #orderedList-view-container #row-view-table tbody td {
   width: 425px;
   color: #183128;
 }
 
-/* line 74, ../sass/myStyle.sass */
+/* line 73, ../sass/myStyle.sass */
 #background-imgs {
   position: fixed;
   z-index: -10;
   bottom: 0px;
 }
-/* line 78, ../sass/myStyle.sass */
+/* line 77, ../sass/myStyle.sass */
 #background-imgs img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=15);
   opacity: 0.15;
   display: inline-block;
 }
 
-/* line 82, ../sass/myStyle.sass */
+/* line 81, ../sass/myStyle.sass */
 #title-img-left {
   position: absolute;
   z-index: 10;
@@ -106,7 +105,7 @@ body {
   left: 60px;
 }
 
-/* line 88, ../sass/myStyle.sass */
+/* line 87, ../sass/myStyle.sass */
 #title-img-right {
   position: absolute;
   z-index: 15;
@@ -115,7 +114,7 @@ body {
   top: 10px;
 }
 
-/* line 95, ../sass/myStyle.sass */
+/* line 94, ../sass/myStyle.sass */
 #notification-container {
   position: fixed;
   z-index: 20;
@@ -123,7 +122,7 @@ body {
   bottom: 20px;
   z-index: 100;
 }
-/* line 101, ../sass/myStyle.sass */
+/* line 100, ../sass/myStyle.sass */
 #notification-container .notification-window {
   margin-bottom: 8px;
   width: 300px;
@@ -140,29 +139,29 @@ body {
   -moz-box-shadow: grey 2px 2px 5px;
   box-shadow: grey 2px 2px 5px;
 }
-/* line 110, ../sass/myStyle.sass */
+/* line 109, ../sass/myStyle.sass */
 #notification-container .notification-window .icon-area {
   width: 20px;
   display: inline-block;
   vertical-align: top;
 }
-/* line 114, ../sass/myStyle.sass */
+/* line 113, ../sass/myStyle.sass */
 #notification-container .notification-window .text-area {
   width: 260px;
   display: inline-block;
 }
-/* line 117, ../sass/myStyle.sass */
+/* line 116, ../sass/myStyle.sass */
 #notification-container .notification-window .text-area .text-content {
   color: #050d2b;
   font-weight: normal;
   padding-left: 8px;
 }
-/* line 121, ../sass/myStyle.sass */
+/* line 120, ../sass/myStyle.sass */
 #notification-container .notification-window .text-area .text-content highlight {
   color: #c14954;
 }
 
-/* line 124, ../sass/myStyle.sass */
+/* line 123, ../sass/myStyle.sass */
 #table-view-container {
   width: 80%;
   background: rgba(216, 216, 216, 0.35);
@@ -177,7 +176,7 @@ body {
   -o-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 135, ../sass/myStyle.sass */
+/* line 134, ../sass/myStyle.sass */
 #table-view-container .each-table {
   float: left;
   margin: 5px;
@@ -193,7 +192,7 @@ body {
   -moz-box-shadow: grey 2px 2px 3px;
   box-shadow: grey 2px 2px 3px;
 }
-/* line 143, ../sass/myStyle.sass */
+/* line 142, ../sass/myStyle.sass */
 #table-view-container .each-table .un-occupy-mask {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -208,7 +207,7 @@ body {
   z-index: 99;
   background: black;
 }
-/* line 151, ../sass/myStyle.sass */
+/* line 150, ../sass/myStyle.sass */
 #table-view-container .each-table .ntf-status {
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -221,22 +220,22 @@ body {
   font-size: 2em;
   color: #007828;
 }
-/* line 158, ../sass/myStyle.sass */
+/* line 157, ../sass/myStyle.sass */
 #table-view-container .each-table .ntf-status i:first-child {
   margin-left: 10px;
 }
-/* line 160, ../sass/myStyle.sass */
+/* line 159, ../sass/myStyle.sass */
 #table-view-container .each-table .ntf-status .heightlight {
   color: #c14954;
 }
-/* line 162, ../sass/myStyle.sass */
+/* line 161, ../sass/myStyle.sass */
 #table-view-container .each-table .table-area {
   background: rgba(150, 232, 161, 0.6);
   width: 100%;
   padding-top: 10px;
   height: 160px;
 }
-/* line 167, ../sass/myStyle.sass */
+/* line 166, ../sass/myStyle.sass */
 #table-view-container .each-table .table-area .table-shape {
   width: 100px;
   height: 100px;
@@ -248,14 +247,14 @@ body {
   border-radius: 50px;
   margin: auto;
 }
-/* line 173, ../sass/myStyle.sass */
+/* line 172, ../sass/myStyle.sass */
 #table-view-container .each-table .table-area .table-shape .table-num {
   font-size: 3.5em;
   text-align: center;
   width: 100%;
   padding-top: 18px;
 }
-/* line 178, ../sass/myStyle.sass */
+/* line 177, ../sass/myStyle.sass */
 #table-view-container .each-table .flipclock-container {
   -moz-border-radius-bottomleft: 5px;
   -webkit-border-bottom-left-radius: 5px;
@@ -273,17 +272,17 @@ body {
   font-size: 1.2em;
   color: #404040;
 }
-/* line 189, ../sass/myStyle.sass */
+/* line 188, ../sass/myStyle.sass */
 #table-view-container .each-table .flipclock-container mytime {
   font-size: 2em;
   margin-right: 2px;
 }
 
-/* line 193, ../sass/myStyle.sass */
+/* line 192, ../sass/myStyle.sass */
 #view-title-container {
   margin-left: 5%;
 }
-/* line 195, ../sass/myStyle.sass */
+/* line 194, ../sass/myStyle.sass */
 #view-title-container .view-title {
   font-size: 1.5em;
   margin: 0;
@@ -292,12 +291,12 @@ body {
   background: #0f2625;
   color: #4f4d4d;
 }
-/* line 202, ../sass/myStyle.sass */
+/* line 201, ../sass/myStyle.sass */
 #view-title-container .selected {
   background: green;
   color: white;
 }
-/* line 205, ../sass/myStyle.sass */
+/* line 204, ../sass/myStyle.sass */
 #view-title-container .view-title:first-child {
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -306,7 +305,7 @@ body {
   -webkit-border-bottom-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
-/* line 207, ../sass/myStyle.sass */
+/* line 206, ../sass/myStyle.sass */
 #view-title-container .view-title:last-child {
   -moz-border-radius-topright: 3px;
   -webkit-border-top-right-radius: 3px;
@@ -316,7 +315,7 @@ body {
   border-bottom-right-radius: 3px;
 }
 
-/* line 210, ../sass/myStyle.sass */
+/* line 209, ../sass/myStyle.sass */
 #debug-msg {
   background: rgba(0, 0, 0, 0.75);
   color: white;
@@ -334,7 +333,7 @@ body {
   font-size: 1.5em;
 }
 
-/* line 223, ../sass/myStyle.sass */
+/* line 222, ../sass/myStyle.sass */
 #test-btns {
   z-index: 200;
   position: fixed;
@@ -349,29 +348,29 @@ body {
   -o-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 232, ../sass/myStyle.sass */
+/* line 231, ../sass/myStyle.sass */
 #test-btns button {
   width: 100%;
   height: 30px;
 }
-/* line 235, ../sass/myStyle.sass */
+/* line 234, ../sass/myStyle.sass */
 #test-btns input {
   height: 25px;
 }
-/* line 237, ../sass/myStyle.sass */
+/* line 236, ../sass/myStyle.sass */
 #test-btns .test-group {
   width: 100%;
 }
-/* line 239, ../sass/myStyle.sass */
+/* line 238, ../sass/myStyle.sass */
 #test-btns .test-group input {
   width: 20%;
 }
-/* line 241, ../sass/myStyle.sass */
+/* line 240, ../sass/myStyle.sass */
 #test-btns .test-group button {
   width: 70%;
 }
 
-/* line 244, ../sass/myStyle.sass */
+/* line 243, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }
