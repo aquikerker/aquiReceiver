@@ -53,7 +53,7 @@ body {
   border-left: none;
   border-right: none;
   border-collapse: collapse;
-  width: 97%;
+  width: 90%;
   margin: auto;
 }
 /* line 54, ../sass/myStyle.sass */
@@ -163,7 +163,7 @@ body {
 
 /* line 122, ../sass/myStyle.sass */
 #table-view-container {
-  width: 97%;
+  width: 90%;
   background: rgba(216, 216, 216, 0.35);
   border: 2px solid #bfbfbf;
   margin: auto;
@@ -280,7 +280,7 @@ body {
 
 /* line 191, ../sass/myStyle.sass */
 #view-title-container {
-  margin-left: 1.5%;
+  margin-left: 5%;
 }
 /* line 193, ../sass/myStyle.sass */
 #view-title-container .view-title {
