@@ -114,6 +114,8 @@ $(function(){
 	      	// Add ordered items to orderedList_pendingCount
 	      	if(typeof orderedList_pendingCount[tableID] === 'undefined'){
 	      		orderedList_pendingCount[tableID] = 0;
+    			tableStatusController.turnOnLight(tableID,'newOrder');
+    			tableStatusController.startTimeCounter(tableID);
 	      	}
 	      	orderedList_pendingCount[tableID] += jsonObj.content.length;
 	      	console.log('orderedList_pendingCount, tableID = '+ tableID+ ' Count: ' + orderedList_pendingCount[tableID]);
@@ -195,7 +197,8 @@ $(function(){
       				'HEAD': 'tableNumOK'})
       			);
       			occupiedTable.push(TNum);
-      			ntfController.newCustomer();		
+      			ntfController.newCustomer();
+      			tableStatusController.occupyTable(TNum);	
   			}
 	  		break;
 	  	case 'CallWaiter':
@@ -241,10 +244,13 @@ $(function(){
     			//update orderedList_pendingCount
     			orderedList_pendingCount[thisRow_tabelID] -= thisRow_count;
 
-    			//turn off table ordered light when count = 0
+    			//turn off table newOrder & waitLongTime light when count = 0
     			if(orderedList_pendingCount[thisRow_tabelID] === 0){
     				console.log('tableID: ' + thisRow_tabelID + ' turnOffLight!!')
     				tableStatusController.turnOffLight(thisRow_tabelID,'newOrder');
+    				tableStatusController.turnOffLight(thisRow_tabelID,'waitLongTime');
+    				tableStatusController.resetTimeCounter(thisRow_tabelID);
+    				delete orderedList_pendingCount[thisRow_tabelID];
     			}
     			//Remove row from view
     			$firstRow.remove();
@@ -262,6 +268,8 @@ $(function(){
 	  			break;
 	  		case 'TableAmount':
 	  			totalAvaTable = parseInt(jsonObj.content);
+				tableStatusController.generateTable(totalAvaTable);
+
 	  			break;
 	  		case 'requestOccupiedTable':
 	  			adminBus.send(event.senderId, JSON.stringify({
