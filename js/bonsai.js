@@ -116,7 +116,7 @@ $(function(){
 	      		orderedList_pendingCount[tableID] = 0;
 	      	}
 	      	orderedList_pendingCount[tableID] += jsonObj.content.length;
-	      	console.log('orderedList_pendingCount, tableID = '+ tableID+ ' Count: ' + orderedList_pending[tableID]);
+	      	console.log('orderedList_pendingCount, tableID = '+ tableID+ ' Count: ' + orderedList_pendingCount[tableID]);
 
 	      	//append ordered dishes into hotTodayList
 	      	var counted_content = _.countBy(jsonObj.content,function(num){
