@@ -307,7 +307,7 @@ $(function(){
 	  			else{
 	  				adminBus.send(event.senderId, JSON.stringify({
 	      				'HEAD': 'ErrorMsg',
-	      				'content': 'notOccupiedTable'});
+	      				'content': 'notOccupiedTable'})
 	      			);
 	  			}
 	  			break;
