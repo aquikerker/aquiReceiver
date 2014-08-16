@@ -325,6 +325,9 @@ $(function(){
 
     				// Remove Orderlist
     				delete orderedList[tableID];
+
+    				// Show Bill
+    				ntfController.showBill(tableID);
 	  			}
 	  			else{
 	  				adminBus.send(event.senderId, JSON.stringify({
