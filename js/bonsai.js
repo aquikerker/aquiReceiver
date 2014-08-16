@@ -314,12 +314,17 @@ $(function(){
 	  			//Remove tableID from occupiedTable
 	  			var index = occupiedTable.indexOf(tableID);
 	  			if (index > -1){
-	  				console.log('Remove tableID: ' + tableID + ' from occupiedTable');
+	  				// Remove tableID from occupiedTable
 	  				occupiedTable.splice(index,1);
+	  				console.log('Remove tableID: ' + tableID + ' from occupiedTable');
 	  				console.log('occupiedTable: ' + occupiedTable);
 	  				console.log('orderedList: '+ orderedList[tableID]);
+
+	  				// Add table mask
     				tableStatusController.clearTable(tableID);
 
+    				// Remove Orderlist
+    				delete orderedList[tableID];
 	  			}
 	  			else{
 	  				adminBus.send(event.senderId, JSON.stringify({
@@ -484,7 +489,13 @@ var ntfController = {
 						.fadeOut(function(){$(this).remove()});
 	},
 	showBill: function(tableID){
-		var totalDollar;
+		var totalDollar = 0;
+		var thisOrderList = orderedList[tableID];
+		for (var i = 0 ; i < thisOrderList.length; i++){
+			var quantity = thisOrderList[i].quantity;
+			var dishID = thisOrderList[i].dishid;
+			totalDollar += quantity* dishID_priceMap[dishID];
+		}
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: ntfController.iconType.callWaiter,
 			textContent: '<highlight>' + tableID +'號桌</highlight>結賬總金額共<highlight>'+ totalDollar +'</highlight>元！'
