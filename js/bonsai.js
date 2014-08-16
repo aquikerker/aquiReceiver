@@ -1,6 +1,7 @@
 //var menu_google_key = '';
 var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
 var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...],...}
+var orderedList_pendingCount = {}; // {tableNum: Count,...}
 var hotTodayList = {};// {dishid: quantity, ...}
 var statusName = 'Quick Order Oh!';
 var adminIDList = []; // connecting admin ID list
@@ -99,18 +100,24 @@ $(function(){
 	  		}	      	  	
 	  		break;
 	  	case 'order':
-	  		appendOrderedDish(jsonObj.tableNum, jsonObj.content);
+	  		var tableID = jsonObj.tableNum;
+	  		appendOrderedDish(tableID, jsonObj.content);
 
-	  		// Store ordered list
-	      	if(typeof orderedList[jsonObj.tableNum] === 'undefined'){
-	      		orderedList[jsonObj.tableNum] = [];
+	  		// Add ordered item to orderedList
+	      	if(typeof orderedList[tableID] === 'undefined'){
+	      		orderedList[tableID] = [];
 	      		console.log('New table in, init the orderedList');
 	      	}
-	      	//append ordered dishes into orderedList
-	      	orderedList[jsonObj.tableNum].push.apply(orderedList[jsonObj.tableNum], jsonObj.content);
-	      	//orderedList[jsonObj.tableNum].push(orderedList[jsonObj.tableNum], jsonObj.content);
-	      	console.log(orderedList[jsonObj.tableNum]);
+	      	orderedList[tableID].push.apply(orderedList[tableID], jsonObj.content);
+	      	console.log(orderedList[tableID]);
 			
+	      	// Add ordered items to orderedList_pendingCount
+	      	if(typeof orderedList_pendingCount[tableID] === 'undefined'){
+	      		orderedList_pendingCount[tableID] = 0;
+	      	}
+	      	orderedList_pendingCount[tableID] += jsonObj.content.length;
+	      	console.log('orderedList_pendingCount, tableID = '+ tableID+ ' Count: ' + orderedList_pending[tableID]);
+
 	      	//append ordered dishes into hotTodayList
 	      	var counted_content = _.countBy(jsonObj.content,function(num){
 	      		return num;
@@ -123,7 +130,7 @@ $(function(){
 					hotTodayList[dishID] = counted_content[dishID];					
 				}
 			}
-			ntfController.newOrder(jsonObj.tableNum, jsonObj.content);
+			ntfController.newOrder(tableID, jsonObj.content);
 
 	  		break;
 	  	case 'requestOrdered':
@@ -191,6 +198,10 @@ $(function(){
       			ntfController.newCustomer();		
   			}
 	  		break;
+	  	case 'CallWaiter':
+    		tableStatusController.turnOnLight(jsonObj.tableID,'callWaiter');
+			ntfController.callWaiter(jsonObj.tableID);
+	  		break	
 	  	default:
 	  		console.warn('[customer]:unknown request HEAD!!');
 	  		break;
@@ -222,7 +233,20 @@ $(function(){
 		        });*/
     			break;
     		case 'clearOrderOneRow':
-    			$("#orderedQ").find('tr:nth-child(1)').remove();
+    			var $firstRow = $("#orderedQ").find('tr:nth-child(1)');
+    			var thisRow_tabelID = parseInt($firstRow.attr('_tableID'));
+    			var thisRow_count = parseInt($firstRow.attr('_count'));
+    			console.log('thisRow_tabelID: ' + thisRow_tabelID + 'thisRow_count: ' + thisRow_count);
+    			
+    			//update orderedList_pendingCount
+    			orderedList_pendingCount[thisRow_tabelID] -= thisRow_count;
+
+    			//turn off table ordered light when count = 0
+    			if(orderedList_pending[thisRow_tabelID] === 0){
+    				tableStatusController.turnOffLight(thisRow_tabelID,'newOrder');
+    			}
+    			//Remove row from view
+    			$firstRow.remove();
     			break;
    		  	case 'scrollPage':
 				pageController.scroll(jsonObj.direction);
@@ -244,10 +268,14 @@ $(function(){
 	      				'content': occupiedTable})
 	      		);
 	  			break;
+	  		case 'clearWaiterCall':
+    			tableStatusController.turnOffLight(jsonObj.tableID,'callWaiter');
+    			break;
 	  		case 'clearTable':
 	  			var tableID = parseInt(jsonObj.tableID);
 	  			console.log(orderedList[tableID]);
-	  			break;		
+	  			break;
+
     		default:
     			console.warn('[admin]:unknown request HEAD!!');
     			break;
@@ -378,7 +406,7 @@ var ntfController = {
 		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
 						.fadeOut(function(){$(this).remove()});		
 	},
-	newOrder: function(tableNum, dishidList){
+	newOrder: function(tableID, dishidList){
 		console.log('======= ntfController ========');
 		console.log(dishidList);
 		console.log('==============================');
@@ -390,15 +418,15 @@ var ntfController = {
 		orderedStr = orderedStr.substring(0, orderedStr.length-1);
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: ntfController.iconType.newOrder,
-			textContent: '<highlight>'+ tableNum +'號桌</highlight>點了<highlight>'+ orderedStr +'</highlight>！'
+			textContent: '<highlight>'+ tableID +'號桌</highlight>點了<highlight>'+ orderedStr +'</highlight>！'
 		});
 		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
 						.fadeOut(function(){$(this).remove()});
 	},
-	callWaiter: function(tableNum){
+	callWaiter: function(tableID){
 		var tmp = _.template($('#ntf-window-tmp').html(),{
 			iconType: ntfController.iconType.callWaiter,
-			textContent: '<highlight>' + tableNum +'號桌</highlight>呼叫服務生！'
+			textContent: '<highlight>' + tableID +'號桌</highlight>呼叫服務生！'
 		});
 		$(tmp).appendTo('#notification-container').delay(ntfController.delayTime)
 						.fadeOut(function(){$(this).remove()});
