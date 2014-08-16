@@ -8,6 +8,7 @@ var adminIDList = []; // connecting admin ID list
 var customerIDList = []; // connecting customer ID list
 var menuContent = null;
 var dishID_dishNameMap = {} // {dishID: dishName,...}
+var dishID_priceMap = {} // {dishID: dollars,...}
 //var dishID_dishNameMap = {1: '黯然銷魂飯', 2: '新竹米粉攤'} // For testing
 //var totalAvaTable = null;
 var totalAvaTable = 20; // For testing
@@ -83,14 +84,16 @@ $(function(){
 		      			customerBus.send(event.senderId, JSON.stringify(returnData));
 		                console.log('Get menu from google doc');
 		                console.log(menuContent);
-		            	//init the dishID_dishNameMap
-		            	if(_.isEmpty(dishID_dishNameMap)){
+		            	//init the dishID_dishNameMap & dishID_priceMap
+		            	if(_.isEmpty(dishID_dishNameMap) || _.isEmpty(dishID_priceMap)){
 			            	for(var i=0; i < menuContent.length; i++){
 			            		var eachDish = menuContent[i];
 			            		console.log(eachDish);
 			            		dishID_dishNameMap[parseInt(eachDish.dishid)] = eachDish.name;
+			            		dishID_priceMap[parseInt(eachDish.dishid)] = eachDish.price;
 			            	}
 			            	console.log(dishID_dishNameMap);	
+			            	console.log(dishID_priceMap);	
 		            	}
 		            }		
 		        });	
@@ -199,10 +202,9 @@ $(function(){
       				'content': 'tableNumberError'})
       			);	  				
   			}
-  			else if( occupiedTable.indexOf(TNum) >= 0 ){ // TNum duplicated
+  			else if( occupiedTable.indexOf(TNum) >= 0 ){ // TNum duplicated => others in the same table
   				customerBus.send(event.senderId, JSON.stringify({
-      				'HEAD': 'ErrorMsg',
-      				'content': 'tableNumberDup'})
+      				'HEAD': 'tableNumOK'})
       			);
   			}
   			else{ // Success
