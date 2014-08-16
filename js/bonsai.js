@@ -211,10 +211,12 @@ $(function(){
       			);
       			occupiedTable.push(TNum);
       			// Resend occupiedTable
-      			adminBus.send(event.senderId, JSON.stringify({
+      			for(var i=0; i< adminIDList.length; i++){
+      				adminBus.send(adminIDList[i], JSON.stringify({
 	      				'HEAD': 'occupiedTable',
 	      				'content': [TNum]})
-	      		);
+	      			);
+      			}
       			ntfController.newCustomer();
       			tableStatusController.occupyTable(TNum);	
   			}
