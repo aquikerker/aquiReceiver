@@ -242,7 +242,7 @@ $(function(){
     			orderedList_pendingCount[thisRow_tabelID] -= thisRow_count;
 
     			//turn off table ordered light when count = 0
-    			if(orderedList_pending[thisRow_tabelID] === 0){
+    			if(orderedList_pendingCount[thisRow_tabelID] === 0){
     				tableStatusController.turnOffLight(thisRow_tabelID,'newOrder');
     			}
     			//Remove row from view
