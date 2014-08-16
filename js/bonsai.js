@@ -212,6 +212,7 @@ $(function(){
       			occupiedTable.push(TNum);
       			// Resend occupiedTable
       			for(var i=0; i< adminIDList.length; i++){
+      				console.log('====== newCustomer , resend occupiedTable!!! ======');
       				adminBus.send(adminIDList[i], JSON.stringify({
 	      				'HEAD': 'occupiedTable',
 	      				'content': [TNum]})
