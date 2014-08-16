@@ -1,6 +1,6 @@
 var menu_google_key = '';
 //var menu_google_key = '1W0sGR3uKt5Qc6D79ksnB33swJzbP_eaq-6gDgCrbxLs';
-var orderedList = {}; // {tableNum: [{dishid: id, quantity: n}, ...],...}
+var orderedList = {}; // {tableNum: [dishid,],...}
 var orderedList_pendingCount = {}; // {tableNum: Count,...}
 var hotTodayList = {};// {dishid: quantity, ...}
 var statusName = 'Quick Order Oh!';
@@ -494,6 +494,8 @@ var ntfController = {
 	showBill: function(tableID){
 		var totalDollar = 0;
 		var thisOrderList = orderedList[tableID];
+		console.log(orderedList[tableID]);
+		console.log(thisOrderList);
 		for (var i = 0 ; i < thisOrderList.length; i++){
 			var quantity = thisOrderList[i].quantity;
 			var dishID = thisOrderList[i].dishid;
