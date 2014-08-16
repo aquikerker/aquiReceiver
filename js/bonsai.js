@@ -101,39 +101,41 @@ $(function(){
 	  		break;
 	  	case 'order':
 	  		var tableID = jsonObj.tableNum;
-	  		appendOrderedDish(tableID, jsonObj.content);
+	  		if(jsonObj.content.length > 0){ //prevent empty order
+	  			appendOrderedDish(tableID, jsonObj.content);
 
-	  		// Add ordered item to orderedList
-	      	if(typeof orderedList[tableID] === 'undefined'){
-	      		orderedList[tableID] = [];
-	      		console.log('New table in, init the orderedList');
-	      	}
-	      	orderedList[tableID].push.apply(orderedList[tableID], jsonObj.content);
-	      	console.log(orderedList[tableID]);
-			
-	      	// Add ordered items to orderedList_pendingCount
-	      	if(typeof orderedList_pendingCount[tableID] === 'undefined'){
-	      		orderedList_pendingCount[tableID] = 0;
-    			tableStatusController.turnOnLight(tableID,'newOrder');
-    			tableStatusController.startTimeCounter(tableID);
-	      	}
-	      	orderedList_pendingCount[tableID] += jsonObj.content.length;
-	      	console.log('orderedList_pendingCount, tableID = '+ tableID+ ' Count: ' + orderedList_pendingCount[tableID]);
+		  		// Add ordered item to orderedList
+		      	if(typeof orderedList[tableID] === 'undefined'){
+		      		orderedList[tableID] = [];
+		      		console.log('New table in, init the orderedList');
+		      	}
+		      	orderedList[tableID].push.apply(orderedList[tableID], jsonObj.content);
+		      	console.log(orderedList[tableID]);
+				
+		      	// Add ordered items to orderedList_pendingCount
+		      	if(typeof orderedList_pendingCount[tableID] === 'undefined'){
+		      		orderedList_pendingCount[tableID] = 0;
+	    			tableStatusController.turnOnLight(tableID,'newOrder');
+	    			tableStatusController.startTimeCounter(tableID);
+		      	}
+		      	orderedList_pendingCount[tableID] += jsonObj.content.length;
+		      	console.log('orderedList_pendingCount, tableID = '+ tableID+ ' Count: ' + orderedList_pendingCount[tableID]);
 
-	      	//append ordered dishes into hotTodayList
-	      	var counted_content = _.countBy(jsonObj.content,function(num){
-	      		return num;
-	      	});// {dishid: quantity ...}
-			for(var dishID in counted_content){
-				if(typeof hotTodayList[dishID] !== 'undefined'){
-					hotTodayList[dishID] += counted_content[dishID];
+		      	//append ordered dishes into hotTodayList
+		      	var counted_content = _.countBy(jsonObj.content,function(num){
+		      		return num;
+		      	});// {dishid: quantity ...}
+				for(var dishID in counted_content){
+					if(typeof hotTodayList[dishID] !== 'undefined'){
+						hotTodayList[dishID] += counted_content[dishID];
+					}
+					else{
+						hotTodayList[dishID] = counted_content[dishID];					
+					}
 				}
-				else{
-					hotTodayList[dishID] = counted_content[dishID];					
-				}
-			}
-			ntfController.newOrder(tableID, jsonObj.content);
-
+				ntfController.newOrder(tableID, jsonObj.content);
+	  		}
+	  		
 	  		break;
 	  	case 'requestOrdered':
 	  		var returnObj = {'HEAD': 'responseOrdered', 'content': []};
@@ -192,11 +194,22 @@ $(function(){
       				'content': 'tableNumberError'})
       			);	  				
   			}
+  			else if( occupiedTable.indexOf(TNum) >= 0 ){ // TNum duplicated
+  				customerBus.send(event.senderId, JSON.stringify({
+      				'HEAD': 'ErrorMsg',
+      				'content': 'tableNumberDup'})
+      			);
+  			}
   			else{ // Success
 			  	customerBus.send(event.senderId, JSON.stringify({
       				'HEAD': 'tableNumOK'})
       			);
       			occupiedTable.push(TNum);
+      			// Resend occupiedTable
+      			adminBus.send(event.senderId, JSON.stringify({
+	      				'HEAD': 'occupiedTable',
+	      				'content': [TNum]})
+	      		);
       			ntfController.newCustomer();
       			tableStatusController.occupyTable(TNum);	
   			}
@@ -282,9 +295,22 @@ $(function(){
     			break;
 	  		case 'clearTable':
 	  			var tableID = parseInt(jsonObj.tableID);
-	  			console.log(orderedList[tableID]);
-	  			break;
+	  			//Remove tableID from occupiedTable
+	  			var index = occupiedTable.indexOf(tableID);
+	  			if (index > -1){
+	  				console.log('Remove tableID: ' + tableID + ' from occupiedTable');
+	  				occupiedTable.splice(index,1);
+	  				console.log('occupiedTable: ' + occupiedTable);
+	  				console.log('orderedList: '+ orderedList[tableID]);
 
+	  			}
+	  			else{
+	  				adminBus.send(event.senderId, JSON.stringify({
+	      				'HEAD': 'ErrorMsg',
+	      				'content': 'notOccupiedTable'});
+	      			);
+	  			}
+	  			break;
     		default:
     			console.warn('[admin]:unknown request HEAD!!');
     			break;

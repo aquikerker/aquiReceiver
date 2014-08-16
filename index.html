@@ -70,8 +70,9 @@
     </div>
 
     <div id="view-title-container" class="display-none2">
-      <span class="view-title" _data="orderedList"> 點菜清單 </span><!--
-      --><span class="view-title selected" _data="tableStatus"> 各桌用餐狀態 </span>
+      <span class="view-title selected" _data="orderedList"> 點菜清單 </span><!--
+      --><span class="view-title" _data="tableStatus"> 各桌用餐狀態 </span><!--
+      --><span class="view-title" _data="tableBill"> 賬單 </span>
     </div>
 
     <!-- notification container -->
@@ -137,8 +138,10 @@
             <td>頂級仨尿豬丸</td>
             <td>444</td>
           </tr>
-        </tbody>
+        </tbody>        
       </table>
+      <div id="no-pending-order-msg">所有餐點皆已完成！</div> 
+
     </div>
     <!-- End of row table view container -->
 
@@ -187,6 +190,7 @@
     </div>
     <!-- End of status view container -->    
 
+    <!-- Table status view template -->
     <script id="tableStatus-template">
       <div class="each-table" id="<%=tableID%>">
         <div class="un-occupy-mask"></div>
@@ -203,6 +207,11 @@
         <div class="flipclock-container"><mytime>00:00</mytime></div>
       </div>
     </script>
+    <!-- End of template -->
+
+    <div id="footer-div" class="display-none">
+      <center>©OMG, 2014</center>
+    </div>
 
   </body>
 </html>
