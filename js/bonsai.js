@@ -236,13 +236,14 @@ $(function(){
     			var $firstRow = $("#orderedQ").find('tr:nth-child(1)');
     			var thisRow_tabelID = parseInt($firstRow.attr('_tableID'));
     			var thisRow_count = parseInt($firstRow.attr('_count'));
-    			console.log('thisRow_tabelID: ' + thisRow_tabelID + 'thisRow_count: ' + thisRow_count);
+    			console.log('thisRow_tabelID: ' + thisRow_tabelID + ' thisRow_count: ' + thisRow_count);
     			
     			//update orderedList_pendingCount
     			orderedList_pendingCount[thisRow_tabelID] -= thisRow_count;
 
     			//turn off table ordered light when count = 0
     			if(orderedList_pendingCount[thisRow_tabelID] === 0){
+    				console.log('tableID: ' + thisRow_tabelID + ' turnOffLight!!')
     				tableStatusController.turnOffLight(thisRow_tabelID,'newOrder');
     			}
     			//Remove row from view
