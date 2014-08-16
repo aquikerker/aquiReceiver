@@ -43,6 +43,11 @@ $(function(){
    	//@The channel for customer to order
     //@create a CastMessageBus to handle messages for a custom namespace
     var customerBus = castReceiverManager.getCastMessageBus('urn:x-cast:aqui-bonsai');
+
+   	//@The channel for admin
+    //@create a CastMessageBus to handle messages for a admin namespace
+    var adminBus = castReceiverManager.getCastMessageBus('urn:x-cast:aqui-diarrhea');
+
    
 	//@handler for the CastMessageBus message event [customer]
     customerBus.onMessage = function(event) {
@@ -224,9 +229,7 @@ $(function(){
 		}     	
     }
 
-   	//@The channel for admin
-    //@create a CastMessageBus to handle messages for a admin namespace
-    var adminBus = castReceiverManager.getCastMessageBus('urn:x-cast:aqui-diarrhea');
+
 
 	//@handler for the CastMessageBus message event [admin]
     adminBus.onMessage = function(event){
@@ -302,6 +305,7 @@ $(function(){
 	  				occupiedTable.splice(index,1);
 	  				console.log('occupiedTable: ' + occupiedTable);
 	  				console.log('orderedList: '+ orderedList[tableID]);
+    				tableStatusController.clearTable(tableID);
 
 	  			}
 	  			else{
