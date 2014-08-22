@@ -111,7 +111,7 @@ $(function(){
 	  		var tableID = jsonObj.tableNum;
 	  		if(jsonObj.content.length > 0){ //prevent empty order
 	  			//appendOrderedDish(tableID, jsonObj.content);
-	  			orderedListController.appendOrderedDish(tableIDj jsonObj.content);
+	  			orderedListController.appendOrderedDish(tableID, jsonObj.content);
 
 		  		// Add ordered item to orderedList
 		      	if(typeof orderedList[tableID] === 'undefined'){
