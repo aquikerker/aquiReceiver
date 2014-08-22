@@ -331,10 +331,12 @@ body {
 #debug-msg {
   background: rgba(0, 0, 0, 0.75);
   color: white;
+  position: fixed;
+  z-index: 10;
   height: 80px;
   line-height: 40px;
   width: 60%;
-  margin: auto;
+  left: 15%;
   bottom: 50px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -345,7 +347,7 @@ body {
   font-size: 1.5em;
 }
 
-/* line 251, ../sass/myStyle.sass */
+/* line 254, ../sass/myStyle.sass */
 #test-btns {
   z-index: 200;
   position: fixed;
@@ -360,29 +362,29 @@ body {
   -o-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 260, ../sass/myStyle.sass */
+/* line 263, ../sass/myStyle.sass */
 #test-btns button {
   width: 100%;
   height: 30px;
 }
-/* line 263, ../sass/myStyle.sass */
+/* line 266, ../sass/myStyle.sass */
 #test-btns input {
   height: 25px;
 }
-/* line 265, ../sass/myStyle.sass */
+/* line 268, ../sass/myStyle.sass */
 #test-btns .test-group {
   width: 100%;
 }
-/* line 267, ../sass/myStyle.sass */
+/* line 270, ../sass/myStyle.sass */
 #test-btns .test-group input {
   width: 20%;
 }
-/* line 269, ../sass/myStyle.sass */
+/* line 272, ../sass/myStyle.sass */
 #test-btns .test-group button {
   width: 70%;
 }
 
-/* line 271, ../sass/myStyle.sass */
+/* line 274, ../sass/myStyle.sass */
 #footer-div {
   background: green;
   color: white;
@@ -390,12 +392,10 @@ body {
   width: 100%;
   padding: 15px;
   font-weight: normal;
-  position: relative;
   bottom: 0;
-  margin-top: -100px;
 }
 
-/* line 282, ../sass/myStyle.sass */
+/* line 284, ../sass/myStyle.sass */
 #loading-gif-container {
   background: #191f26;
   position: fixed;
@@ -403,12 +403,12 @@ body {
   width: 100%;
   height: 100%;
 }
-/* line 289, ../sass/myStyle.sass */
+/* line 291, ../sass/myStyle.sass */
 #loading-gif-container img {
   margin-top: 150px;
 }
 
-/* line 292, ../sass/myStyle.sass */
+/* line 294, ../sass/myStyle.sass */
 .display-none {
   display: none;
 }

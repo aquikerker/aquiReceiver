@@ -468,6 +468,74 @@ var pageController = {
 	}
 }
 
+var orderedListController = {
+	appendOrderedDish: function(tableNum,content){
+		var counted_content = _.countBy(content, function(num) {
+		  return num;
+		});	
+		console.log(counted_content);
+		for(var dishID in counted_content){
+			var template = _.template($('#orderedQ-template').html(),
+							{tableNum: tableNum, 
+								dishID: dishID, 
+								dishName: dishID_dishNameMap[dishID], 
+								count: counted_content[dishID]
+							});
+			$('#orderedQ').append(template);
+		}
+		orderedListController._showEmptyMsg();
+	},
+	deleteDish: function(){
+		var $firstRow = $("#orderedQ").find('tr:nth-child(1)');
+		var thisRow_tabelID = parseInt($firstRow.attr('_tableID'));
+		var thisRow_count = parseInt($firstRow.attr('_count'));
+		console.log('thisRow_tabelID: ' + thisRow_tabelID + ' thisRow_count: ' + thisRow_count);
+		
+		//update orderedList_pendingCount
+		orderedList_pendingCount[thisRow_tabelID] -= thisRow_count;
+
+		//turn off table newOrder & waitLongTime light when count = 0
+		if(orderedList_pendingCount[thisRow_tabelID] === 0){
+			console.log('tableID: ' + thisRow_tabelID + ' turnOffLight!!')
+			tableStatusController.turnOffLight(thisRow_tabelID,'newOrder');
+			tableStatusController.turnOffLight(thisRow_tabelID,'waitLongTime');
+			tableStatusController.resetTimeCounter(thisRow_tabelID);
+			delete orderedList_pendingCount[thisRow_tabelID];
+		}
+		//Remove row from view
+		$firstRow.remove();
+		orderedListController._showEmptyMsg();
+
+	},
+	_showEmptyMsg: function(){ // show empty msg when no pending dish
+		var childNum = $('#orderedQ').children().length;
+		if(childNum === 0){
+			$('#no-pending-order-msg').show();
+		}
+		else{
+			$('#no-pending-order-msg').hide();
+		}
+	}
+}
+
+function appendOrderedDish(tableNum, content){
+	//Contert content into {dishID: count...}
+	var counted_content = _.countBy(content, function(num) {
+	  return num;
+	});	
+	console.log(counted_content);
+	for(var dishID in counted_content){
+		var template = _.template($('#orderedQ-template').html(),
+						{tableNum: tableNum, 
+							dishID: dishID, 
+							dishName: dishID_dishNameMap[dishID], 
+							count: counted_content[dishID]
+						});
+		$('#orderedQ').append(template);
+	}
+}
+
+
 var ntfController = {
 	iconType: {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt', money: 'fa-money'},
 	delayTime: 10000,
@@ -594,6 +662,10 @@ function testFeatures(debug_mode){
 
 	$('#close-loading-btn').on('click',function(){
 		pageController.closeLoading();
+	});
+
+	$('#delete-order-btn').on('click',function(){
+		orderedListController.deleteDish();
 	});
 
 	// Testing notification window!
