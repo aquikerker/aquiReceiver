@@ -17,7 +17,7 @@ var occupiedTable = [];
 
 $(function(){
    //Testing!
-    testFeatures(false);
+    testFeatures(true);
 
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);
@@ -526,14 +526,14 @@ var tableStatusController = {
 	ok_waitingTime: 5,
 	ntfLightType: {'callWaiter': 'fa-bell', 'waitLongTime': 'fa-clock-o', 'newOrder': 'fa-list-alt'},
 	generateTable: function(tableAmount){
-		$('#table-view-container').empty();
+		$('#table-view-wrap').empty();
 		for (var i = 1 ; i <= totalAvaTable ; i++){
 			var tmp = _.template($('#tableStatus-template').html(),{tableID: i});
-			$('#table-view-container').append(tmp);
+			$('#table-view-wrap').append(tmp);
 
 		}
 		//Add clear el for float DOM
-		$('#table-view-container').append('<div style="clear: both"></div>'); 
+		$('#table-view-wrap').append('<div style="clear: both"></div>'); 
 	},
 	occupyTable: function(tableID){
 		$('#table-view-container').find('#'+ tableID).find('.un-occupy-mask').addClass('display-none');

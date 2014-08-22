@@ -75,8 +75,8 @@
   
     <div id="view-title-container">
       <div class="title-wrap">
-        <div class="view-title selected" _data="tableStatus"> 各桌用餐狀態 </div>
         <div class="view-title" _data="orderedList"> 點菜清單 </div>
+        <div class="view-title selected" _data="tableStatus"> 各桌用餐狀態 </div>
         <div class="float-clear"></div>
       </div>
     </div>
@@ -162,36 +162,38 @@
 
     <!-- table status view container -->    
     <div id="table-view-container">
-      <div class="each-table debug_dom display-none" id="1">
-        <div class="un-occupy-mask display-none"></div>
-        <div class="ntf-status">
-          <i class="fa fa-bell heightlight"></i>
-          <i class="fa fa-list-alt"></i>
-          <i class="fa fa-clock-o"></i>
-        </div>
-        <div class="table-area">
-          <div class="table-shape">
-            <div class="table-num">1</div>
+      <div id="table-view-wrap">
+        <div class="each-table debug_dom display-none" id="1">
+          <div class="un-occupy-mask display-none"></div>
+          <div class="ntf-status">
+            <i class="fa fa-bell heightlight"></i>
+            <i class="fa fa-list-alt"></i>
+            <i class="fa fa-clock-o"></i>
           </div>
+          <div class="table-area">
+            <div class="table-shape">
+              <div class="table-num">1</div>
+            </div>
+          </div>
+          <div class="flipclock-container"></div>
         </div>
-        <div class="flipclock-container"></div>
-      </div>
 
-      <div class="each-table debug_dom display-none" id="2">
-        <div class="un-occupy-mask displays-none"></div>
-        <div class="ntf-status">
-          <i class="fa fa-bell heightlight"></i>
-          <i class="fa fa-list-alt"></i>
-          <i class="fa fa-clock-o"></i>
-        </div>
-        <div class="table-area">
-          <div class="table-shape">
-            <div class="table-num">12</div>
+        <div class="each-table debug_dom display-none" id="2">
+          <div class="un-occupy-mask displays-none"></div>
+          <div class="ntf-status">
+            <i class="fa fa-bell heightlight"></i>
+            <i class="fa fa-list-alt"></i>
+            <i class="fa fa-clock-o"></i>
           </div>
+          <div class="table-area">
+            <div class="table-shape">
+              <div class="table-num">12</div>
+            </div>
+          </div>
+          <div class="flipclock-container"><mytime>00:00</mytime></div>
         </div>
-        <div class="flipclock-container"><mytime>00:00</mytime></div>
+        <div style="clear: both"></div>
       </div>
-      <div style="clear: both"></div>
     </div>
     <!-- End of status view container -->    
 
