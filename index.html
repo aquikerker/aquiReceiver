@@ -21,16 +21,19 @@
     <div id="info-div">
       <img id="title-img-left" src="./imgs/rage-2__.png"></img>
       <img id="title-img-right" src="./imgs/rage-1_.png"></img>
-      <div >Order Management Guru</div>
-     
+      <div >Order Management Guru</div>  
     </div>
+    <div id="loading-gif-container" >
+      <center><img src="./imgs/loading.gif"></img></center>
+    </div>    
     </br></br></br></br></br></br></br>
 
-    <div id="debug-msg">
+    <div id="debug-msg" class="debug_dom display-none">
       <div id="message_customer" >[Customer Message Here!!]</div>
       <div id="message_admin">[Admin Message Here!!]</div>    
     </div>
-    <div id="test-btns" class="displady-none1">
+    <div id="test-btns" class="debug_dom display-none">
+      <button id="close-loading-btn">Close loading</button>
       <button id="show-alert-btn">Show Alert</button>
       <button id="show-alert-btn2">Show Alert 2</button>
       <button id="show-alert-btn3">Show Alert 3</button>
@@ -69,15 +72,18 @@
       <img src="./imgs/rage-omega__.png" width="400px"></img>
     </div>
 
-    <div id="view-title-container" class="display-none2">
-      <span class="view-title selected" _data="orderedList"> 點菜清單 </span><!--
-      --><span class="view-title" _data="tableStatus"> 各桌用餐狀態 </span><!--
-      --><span class="view-title" _data="tableBill"> 賬單 </span>
+  
+    <div id="view-title-container">
+      <div class="title-wrap">
+        <div class="view-title selected" _data="tableStatus"> 各桌用餐狀態 </div>
+        <div class="view-title" _data="orderedList"> 點菜清單 </div>
+        <div class="float-clear"></div>
+      </div>
     </div>
 
     <!-- notification container -->
-    <div id="notification-container" class="displday-none">
-      <div class="notification-window">
+    <div id="notification-container">
+      <div class="notification-window debug_dom display-none">
         <span class="icon-area">
           <i class="fa fa-child"></i>
         </span>
@@ -85,7 +91,7 @@
           <span class="text-content">人客來囉！</span>
         </span>  
       </div>
-      <div class="notification-window">
+      <div class="notification-window debug_dom display-none">
         <span class="icon-area">
           <i class="fa fa-bell"></i>
         </span>
@@ -93,7 +99,7 @@
           <span class="text-content"><highlight>5號桌</highlight>需要服務生！</span>
         </span>
       </div>
-      <div class="notification-window">
+      <div class="notification-window debug_dom display-none">
         <span class="icon-area">
           <i class="fa fa-list-alt"></i>
         </span>
@@ -118,8 +124,8 @@
     <!-- End of template -->
 
     <!-- row view table container -->
-    <div id="orderedList-view-container">
-      <table id="row-view-table" class="disjplay-none">
+    <div id="orderedList-view-container" class="display-none">
+      <table id="row-view-table">
         <thead>
           <tr>
             <th>桌號</th>
@@ -127,13 +133,13 @@
             <th>數量</th>
           </tr>
         </thead>
-        <tbody id="orderedQ">
-          <tr>
+        <tbody id="orderedQ" >
+          <tr class="debug_dom display-none">
             <td>123</td>
             <td>頂級仨尿牛丸</td>
             <td>444</td>
           </tr>
-           <tr>
+           <tr class="debug_dom display-none">
             <td>123</td>
             <td>頂級仨尿豬丸</td>
             <td>444</td>
@@ -141,7 +147,6 @@
         </tbody>        
       </table>
       <div id="no-pending-order-msg">所有餐點皆已完成！</div> 
-
     </div>
     <!-- End of row table view container -->
 
@@ -157,7 +162,7 @@
 
     <!-- table status view container -->    
     <div id="table-view-container">
-      <div class="each-table" id="1">
+      <div class="each-table debug_dom display-none" id="1">
         <div class="un-occupy-mask display-none"></div>
         <div class="ntf-status">
           <i class="fa fa-bell heightlight"></i>
@@ -172,7 +177,7 @@
         <div class="flipclock-container"></div>
       </div>
 
-      <div class="each-table" id="2">
+      <div class="each-table debug_dom display-none" id="2">
         <div class="un-occupy-mask displays-none"></div>
         <div class="ntf-status">
           <i class="fa fa-bell heightlight"></i>

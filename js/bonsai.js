@@ -17,7 +17,7 @@ var occupiedTable = [];
 
 $(function(){
    //Testing!
-    testFeatures();
+    testFeatures(true);
 
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);
@@ -298,7 +298,7 @@ $(function(){
 	  		case 'TableAmount':
 	  			totalAvaTable = parseInt(jsonObj.content);
 				tableStatusController.generateTable(totalAvaTable);
-
+				pageController.closeLoading();
 	  			break;
 	  		case 'requestOccupiedTable':
 	  			adminBus.send(event.senderId, JSON.stringify({
@@ -422,6 +422,7 @@ var changeView = {
 				$(this).removeClass('selected');
 			}
 		});
+    	pageController.scroll_toTop();
 	},
 	orderedListView: function(){
 		$('#table-view-container').hide();
@@ -434,16 +435,23 @@ var changeView = {
 				$(this).removeClass('selected');
 			}
 		});
+    	pageController.scroll_toTop();
 	}
 }
 
 var pageController = {
+	closeLoading: function(){
+		$('#loading-gif-container').fadeOut();
+	},
 	scroll: function(direction){
    		var currentY = $(window).scrollTop();
    		if (direction === 'up')
     		$("html, body").animate({ scrollTop: currentY - 400 }, 500);
     	else if(direction === 'down')
 			$("html, body").animate({ scrollTop: currentY + 400 }, 500);
+	},
+	scroll_toTop: function(){
+    	$("html, body").animate({ scrollTop: 0 }, 500);
 	},
 	currentZoom: 1, // default as 1
 	zoom: function(in_or_out){
@@ -577,7 +585,16 @@ var tableStatusController = {
 	}
 }
 
-function testFeatures(){
+function testFeatures(debug_mode){
+	if (debug_mode === true){
+		$('.debug_dom').removeClass('display-none');
+		$('#loading-gif-container').fadeOut(1500);		
+	}
+
+	$('#close-loading-btn').on('click',function(){
+		pageController.closeLoading();
+	});
+
 	// Testing notification window!
 	var iconType = {callWaiter: 'fa-bell', newCustomer: 'fa-child', newOrder: 'fa-list-alt'};
 
