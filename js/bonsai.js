@@ -17,7 +17,7 @@ var occupiedTable = [];
 
 $(function(){
    //Testing!
-    testFeatures(false);
+    testFeatures(true);
 
 	//Debugger console
     cast.receiver.logger.setLevelValue(0);

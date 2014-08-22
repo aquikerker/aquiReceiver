@@ -201,8 +201,8 @@ body {
 /* line 152, ../sass/myStyle.sass */
 #table-view-container .each-table {
   float: left;
-  margin: 0.5%;
-  width: 19%;
+  margin: 1.5%;
+  width: 17%;
   height: 215px;
   -webkit-box-shadow: grey 2px 2px 3px;
   -moz-box-shadow: grey 2px 2px 3px;
@@ -217,7 +217,7 @@ body {
   border-radius: 3px;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
-  width: 17.1%;
+  width: 15.5%;
   height: inherit;
   position: absolute;
   z-index: 80;
