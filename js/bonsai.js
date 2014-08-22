@@ -483,6 +483,7 @@ var ntfController = {
 		console.log('======= ntfController ========');
 		console.log(dishidList);
 		console.log('==============================');
+		dishidList = _.uniq(dishidList); // prevent duplicate dish name
 		var orderedStr = '';
 		for (var i = 0 ; i < dishidList.length ; i++){
 			var dishid = dishidList[i]
