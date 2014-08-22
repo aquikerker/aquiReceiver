@@ -110,7 +110,8 @@ $(function(){
 	  	case 'order':
 	  		var tableID = jsonObj.tableNum;
 	  		if(jsonObj.content.length > 0){ //prevent empty order
-	  			appendOrderedDish(tableID, jsonObj.content);
+	  			//appendOrderedDish(tableID, jsonObj.content);
+	  			orderedListController.appendOrderedDish(tableIDj jsonObj.content);
 
 		  		// Add ordered item to orderedList
 		      	if(typeof orderedList[tableID] === 'undefined'){
@@ -265,6 +266,8 @@ $(function(){
 		        });*/
     			break;
     		case 'clearOrderOneRow':
+    			orderedListController.deleteDish();
+    			/*
     			var $firstRow = $("#orderedQ").find('tr:nth-child(1)');
     			var thisRow_tabelID = parseInt($firstRow.attr('_tableID'));
     			var thisRow_count = parseInt($firstRow.attr('_count'));
@@ -282,7 +285,7 @@ $(function(){
     				delete orderedList_pendingCount[thisRow_tabelID];
     			}
     			//Remove row from view
-    			$firstRow.remove();
+    			$firstRow.remove();*/
     			break;
    		  	case 'scrollPage':
 				pageController.scroll(jsonObj.direction);
